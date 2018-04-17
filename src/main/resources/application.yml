@@ -1,0 +1,51 @@
+mybatis:
+  mapperLocations: com/zl/project/sys/dao/mapper/*/*.xml
+  configLocation: classpath:mybatis-config.xml
+
+spring:
+  datasource:
+#    druid:
+    url: jdbc:mysql://localhost:3306/dlz_chengzhang?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+    username: chengzhang
+    password: chengzhang@dlz123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initial-size: 5
+    max-active: 10
+    min-idle: 1
+    max-wait: 5
+    pool-prepared-statements: false
+    max-pool-prepared-statement-per-connection-size: -1
+    max-open-prepared-statements: 0
+    validation-query: SELECT 1
+    validation-query-timeout: 2
+    test-on-borrow: false
+    test-on-return: false
+    test-while-idle: true
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 30000
+    max-evictable-idle-time-millis: 80000
+    filters: stat,wall
+    web-stat-filter.enabled: true
+    web-stat-filter.url-pattern: /*
+    web-stat-filter.exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+    web-stat-filter.session-stat-enable: true
+    web-stat-filter.session-stat-max-count: 1000
+    web-stat-filter.principal-session-name: druid.user.session
+    web-stat-filter.principal-cookie-name: druid.user.cookie
+    web-stat-filter.profile-enable: true
+    stat-view-servlet.enabled: true
+    stat-view-servlet.url-pattern: /druid/*
+    stat-view-servlet.reset-enable: true
+    stat-view-servlet.login-username: admin
+    stat-view-servlet.login-password: admin
+    stat-view-servlet.allow: 127.0.0.1
+    stat-view-servlet.deny: 192.168.1.1
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+logging:
+  config: classpath:logBack.xml

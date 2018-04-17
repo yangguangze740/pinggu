@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+<div class="footer" th:fragment="bottomFooter">
+    <!-- Mainly scripts -->
+    <script th:src="@{/template/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/plugins/popper/popper.min.js}"></script>
+    <script th:src="@{/template/js/bootstrap.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js}"></script>
+    <script th:src="@{/template/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/template/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+    <script th:src="@{/template/js/plugins/dataTables/datatables.min.js}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script th:src="@{/template/js/inspinia.js}"></script>
+    <script th:src="@{/template/js/plugins/pace/pace.min.js}"></script>
+
+    <script th:src="@{/template/js/plugins/toastr/toastr.min.js}"></script>
+
+    <div class="pull-right">
+        10GB of <strong>250GB</strong> Free.
+    </div>
+    <div>
+        <strong>Copyright</strong> 大连竹林科技有限公司 &copy; 2017-2018
+    </div>
+</div>
+</body>
+</html>

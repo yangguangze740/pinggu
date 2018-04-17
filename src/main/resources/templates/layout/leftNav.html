@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+<nav class="navbar-default navbar-static-side" role="navigation" th:fragment="leftNav">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" th:src="${session.loginUser.userAvatar}" />
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold" th:text="${'当前用户 : ' + session.loginUser.username}"></strong>
+                            </span>
+                            <!--<span class="text-muted text-xs block">工作</span>-->
+                        </span>
+                    </a>
+                </div>
+                <div class="logo-element" th:text="${application.ui.navTitle}">
+                </div>
+            </li>
+            <li>
+                <a th:href="${'/admin/type'}">
+                    <i class="fa fa-bookmark"></i>
+                    <span class="nav-label">基础信息管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a th:href="${'/admin/type'}">办公用品类型</a></li>
+                    <li><a th:href="${'/admin/supply'}">办公用品</a></li>
+                    <li><a th:href="${'/admin/office'}">办公用品领用科室</a></li>
+                    <li><a th:href="${'/admin/useUser'}">办公用品领用人</a></li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="${'/admin/input'}"><i class="fa fa-bookmark"></i> <span class="nav-label">出/入库</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a th:href="${'/admin/input'}">入库管理</a></li>
+                    <li><a th:href="${'/admin/use'}">领用管理</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head"></head>
+
+<link th:href="@{/template/css/plugins/bootstrap-iconpicker/bootstrap-iconpicker.min.css}" rel="stylesheet">
+<link th:href="@{/template/css/plugins/bootstrap-iconpicker/bootstrap-iconpicker.min.css}" rel="stylesheet">
+<link th:href="@{/template/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css}" rel="stylesheet">
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="layout/leftNav :: leftNav"></div>
+
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/index'}, typeUrl=${'/admin/menu/'}">
+        <div th:replace="layout/topHeader :: topHeader"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>系统配置管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a th:href="${homeUrl}">首页</a>
+                    </li>
+                    <li>
+                        <a th:href="${typeUrl}">菜单管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>菜单数据列表</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>系统菜单icon编辑</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content" th:with=" actionUrl='/admin/menu/edit'">
+                            <form method="post" class="form-horizontal" th:action="${actionUrl}">
+                                <input type="hidden" name="menuId" th:value="${menu.menuId}" />
+                                <input type="hidden" name="oldIcon" th:value="${menu.icon}" />
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">菜单名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" th:value="${menu.menuName}" name="menuName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">原来的图标</label>
+                                    <div class="col-sm-8">
+                                        <i th:class="${menu.icon}"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">新图标</label>
+                                    <div class="col-sm-8">
+                                        <div data-search="true" data-search-text="查询..."
+                                             data-rows="5" data-cols="10"
+                                             role="iconpicker"
+                                             data-iconset="fontawesome"
+                                             data-icon="fas fa-book" name="icon"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">分组名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" th:value="${menu.menuGroupName}" name="menuGroupName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">分组值</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" th:value="${menu.menuGroupValue}" name="menuGroupValue" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">现在子菜单</label>
+                                    <div class="col-sm-8">
+                                        <div>
+                                            <ul class="tag-list" style="padding: 0">
+                                                <li th:each="childMenu:${menu.childMenus}">
+                                                    <a th:text="${childMenu.menuName}"><i th:class="${childMenu.icon}"></i></a>
+                                                    <input type="hidden" name="oldChildMenuIds" th:value="${childMenu.menuId}" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">重新选择子菜单</label>
+                                    <div class="col-sm-8">
+                                        <div th:each="menuMap:${menusMap}">
+                                            <p th:text="${menuMap.key}"></p>
+                                            <div class="checkbox checkbox-inline" th:each="menu:${menuMap.value}">
+                                                <input type="checkbox" id="newChildMenu" th:value="${menu.menuId}" name="childMenuIds">
+                                                <label for="newChildMenu" th:text="${menu.menuName}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <button class="btn btn-white" type="button">返回</button>
+                                        <button class="btn btn-primary pull-right" type="submit">保存</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/bottomFooter :: bottomFooter"></div>
+
+    </div>
+</div>
+
+<script th:src="@{/template/js/plugins/bootstrap-iconpicker/bootstrap-iconpicker-iconset-all.min.js}"></script>
+<script th:src="@{/template/js/plugins/bootstrap-iconpicker/bootstrap-iconpicker.min.js}"></script>
+
+</body>
+
+</html>
