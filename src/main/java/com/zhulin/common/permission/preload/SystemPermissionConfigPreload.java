@@ -19,10 +19,7 @@ import org.springframework.util.ClassUtils;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 通过扫描指定包下面的类的指定的permission相关的注解获取系统中所有的权限
@@ -97,9 +94,25 @@ public class SystemPermissionConfigPreload {
                 classRoleVO.setMenuValue(classRole.menuValue());
 
                 Method[] methods = clazz.getMethods();
+
+                List<Method> methodList = Arrays.asList(methods);
+
+                List<Method> resultMethods = new ArrayList<>();
+
+                Map<String, String> map = new HashMap<>();
+
+                for (Method tmpMethod : methodList) {
+                    String key = tmpMethod.getName();
+
+                    if (!map.containsKey(key)) {
+                        resultMethods.add(tmpMethod);
+                        map.put(key, key);
+                    }
+                }
+
                 List<MethodPermission> tmpMethodPermissionVOs = new ArrayList<>();
 
-                for (Method method : methods) {
+                for (Method method : resultMethods) {
                     MethodRolePermission methodPermission = method.getAnnotation(MethodRolePermission.class);
 
                     if (methodPermission != null) {

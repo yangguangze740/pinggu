@@ -42,7 +42,7 @@ public class GeneralUserServiceImpl implements GeneralUserServiceI {
     @MethodRolePermission(group = "generalUser", name = "普通用户删除", value = "generalUser:md", groupName = "普通用户组")
     @Transactional
     @Override
-    public boolean appDelete(String id) {
+        public boolean appDelete(String id) {
         return generalUserMapper.delete(id);
     }
 
