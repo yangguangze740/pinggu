@@ -166,11 +166,13 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
                 && (deleteUserRoleNum >= 1);
     }
 
+    @Transactional
     @Override
     @MethodRolePermission(group = "user", name = "用户角色更新", value = "user:uru", groupName = "用户组")
     public boolean updateUserRoles(SystemUser user) {
         List<String> roleIds = user.getRoleIds();
         String userId = user.getUserId();
+        int oldRoleNums = user.getOldRoleIds() == null ? 0 : user.getOldRoleIds().size();
 
         if (null != roleIds && (!roleIds.isEmpty())) {
             // 1. 删除原来的用户角色
@@ -191,7 +193,7 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
             int insertUserRoleNum = roleMapper.insertUserRoles(userRoles);
 
             return (insertUserRoleNum == roleIds.size())
-                    && (deleteUserRoleNum == user.getOldRoleIds().size());
+                    && (deleteUserRoleNum == oldRoleNums);
         }
 
         return false;
