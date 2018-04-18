@@ -37,7 +37,7 @@ public class MenuAndRoleAndPermissionDataInitController {
         MenuURLLoad menuLoad = new MenuURLLoad(
                 Arrays.asList("com.zhulin.bus.controller", "com.zhulin.sys.controller"), ClassMenuURL.class);
         SystemPermissionConfigPreload configPreload = new SystemPermissionConfigPreload(
-                Arrays.asList("com.zhulin.sys.service"), MethodRolePermission.class, ClassRolePermission.class);
+                Arrays.asList("com.zhulin.sys.service", "com.zhulin.bus.service"), MethodRolePermission.class, ClassRolePermission.class);
 
         boolean isMenuInit = false;
 

@@ -1,7 +1,8 @@
-package com.zhulin.bus.controller.user;
+package com.zhulin.bus.controller.user.general;
 
 import com.zhulin.bus.bean.User;
-import com.zhulin.bus.service.user.UserServiceI;
+import com.zhulin.bus.service.user.general.GeneralUserServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/users")
-public class UserController extends ArcController<User>{
+@RequestMapping("/admin/user/general")
+@ClassMenuURL(value = "/admin/user/general", group = "frontUser", name = "普通用户管理", groupName = "前台用户")
+public class GeneralUserController extends ArcController<User>{
     @Autowired
-    private UserServiceI userService;
+    private GeneralUserServiceI userService;
 
     @RequestMapping(value = "" , method = RequestMethod.GET )
     @Override

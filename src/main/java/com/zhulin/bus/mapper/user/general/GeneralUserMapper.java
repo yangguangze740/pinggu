@@ -1,4 +1,4 @@
-package com.zhulin.bus.mapper.user;
+package com.zhulin.bus.mapper.user.general;
 
 
 import com.zhulin.bus.bean.User;
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public interface UserMapper extends ArcMapper<User>{
+public interface GeneralUserMapper extends ArcMapper<User>{
 
     @Select("SELECT userId,departmentName,userName,userPassword,userAccount,U.lockFlag,U.deleteFlag FROM pinggu_general_user U LEFT JOIN pinggu_department D ON U.departmentId = D.departmentId where U.deleteFlag = 0")
     @Results({

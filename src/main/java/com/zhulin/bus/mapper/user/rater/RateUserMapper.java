@@ -1,4 +1,4 @@
-package com.zhulin.bus.mapper.rateUser;
+package com.zhulin.bus.mapper.user.rater;
 
 
 import com.zhulin.bus.bean.RateUser;

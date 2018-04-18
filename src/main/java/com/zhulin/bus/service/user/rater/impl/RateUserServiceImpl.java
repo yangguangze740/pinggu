@@ -1,9 +1,9 @@
-package com.zhulin.bus.service.rateUser.impl;
+package com.zhulin.bus.service.user.rater.impl;
 
 
 import com.zhulin.bus.bean.RateUser;
-import com.zhulin.bus.mapper.rateUser.RateUserMapper;
-import com.zhulin.bus.service.rateUser.RateUserServiceI;
+import com.zhulin.bus.mapper.user.rater.RateUserMapper;
+import com.zhulin.bus.service.user.rater.RateUserServiceI;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
