@@ -1,6 +1,6 @@
 package com.zhulin.sys.service.user;
 
-import com.zhulin.pojo.SystemUser;
+import com.zhulin.sys.pojo.SystemUser;
 
 import java.util.List;
 

@@ -2,11 +2,10 @@ package com.zhulin.common.permission.preload;
 
 import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
-import com.zhulin.pojo.ClassRole;
-import com.zhulin.pojo.MethodPermission;
+import com.zhulin.sys.pojo.ClassRole;
+import com.zhulin.sys.pojo.MethodPermission;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -95,6 +94,7 @@ public class SystemPermissionConfigPreload {
                 classRoleVO.setName(classRole.name());
                 classRoleVO.setGroup(classRole.group());
                 classRoleVO.setValue(classRole.value());
+                classRoleVO.setMenuValue(classRole.menuValue());
 
                 Method[] methods = clazz.getMethods();
                 List<MethodPermission> tmpMethodPermissionVOs = new ArrayList<>();

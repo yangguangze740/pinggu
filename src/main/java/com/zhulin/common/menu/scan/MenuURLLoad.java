@@ -1,7 +1,7 @@
 package com.zhulin.common.menu.scan;
 
 import com.zhulin.common.annotation.menu.ClassMenuURL;
-import com.zhulin.pojo.Menu;
+import com.zhulin.sys.pojo.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;

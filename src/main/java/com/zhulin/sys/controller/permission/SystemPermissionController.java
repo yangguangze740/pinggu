@@ -1,7 +1,7 @@
 package com.zhulin.sys.controller.permission;
 
 import com.zhulin.common.annotation.menu.ClassMenuURL;
-import com.zhulin.pojo.SystemPermission;
+import com.zhulin.sys.pojo.SystemPermission;
 import com.zhulin.sys.service.permission.SystemPermissionServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

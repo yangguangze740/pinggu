@@ -1,6 +1,6 @@
 package com.zhulin.sys.service.permission;
 
-import com.zhulin.pojo.SystemPermission;
+import com.zhulin.sys.pojo.SystemPermission;
 
 import java.util.List;
 import java.util.Map;

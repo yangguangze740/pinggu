@@ -24,28 +24,25 @@
                 <div class="logo-element" th:text="${application.ui.navTitle}">
                 </div>
             </li>
-            <li>
-                <a th:href="${'/admin/type'}">
-                    <i class="fa fa-bookmark"></i>
-                    <span class="nav-label">基础信息管理</span>
+            <li th:each="menuMap, mapStat:${session.userMenu}">
+                <a>
+                    <i th:class="${menuMap.key.icon}"></i>
+                    <span class="nav-label" th:text="${menuMap.key.menuName}"></span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a th:href="${'/admin/type'}">办公用品类型</a></li>
-                    <li><a th:href="${'/admin/supply'}">办公用品</a></li>
-                    <li><a th:href="${'/admin/office'}">办公用品领用科室</a></li>
-                    <li><a th:href="${'/admin/useUser'}">办公用品领用人</a></li>
+                    <li th:each="menu, menuStat:${menuMap.value}">
+                        <a th:href="${menu.menuURL}" th:text="${menu.menuName}"></a>
+                    </li>
                 </ul>
             </li>
-            <li>
-                <a th:href="${'/admin/input'}"><i class="fa fa-bookmark"></i> <span class="nav-label">出/入库</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a th:href="${'/admin/input'}">入库管理</a></li>
-                    <li><a th:href="${'/admin/use'}">领用管理</a></li>
-                </ul>
+            <li th:each="menu:${session.userMenuLevel1}">
+                <a th:href="${menu.menuURL}">
+                    <i th:class="${menu.icon}"></i>
+                    <span class="nav-label" th:text="${menu.menuName}"></span>
+                </a>
             </li>
         </ul>
-
     </div>
 </nav>
 </body>

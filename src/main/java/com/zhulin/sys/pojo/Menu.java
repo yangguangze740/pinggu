@@ -1,4 +1,4 @@
-package com.zhulin.pojo;
+package com.zhulin.sys.pojo;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -156,5 +156,17 @@ public class Menu {
 
     public void setOrderNum(int orderNum) {
         this.orderNum = orderNum;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getMenuId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        Menu menu = (Menu) object;
+
+        return this.getMenuId().equals(menu.getMenuId());
     }
 }

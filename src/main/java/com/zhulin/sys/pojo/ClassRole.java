@@ -1,4 +1,4 @@
-package com.zhulin.pojo;
+package com.zhulin.sys.pojo;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -10,8 +10,17 @@ public class ClassRole {
     private String value;
     private String remark = "";
     private int version;
+    private String menuValue;
     private Timestamp createTime;
     private List<MethodPermission> methodPermissions;
+
+    public String getMenuValue() {
+        return menuValue;
+    }
+
+    public void setMenuValue(String menuValue) {
+        this.menuValue = menuValue;
+    }
 
     public Timestamp getCreateTime() {
         return createTime;

@@ -5,7 +5,7 @@ import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.common.file.FileSaveResult;
 import com.zhulin.common.file.FileStoreUtil;
-import com.zhulin.pojo.SystemUIConfig;
+import com.zhulin.sys.pojo.SystemUIConfig;
 import com.zhulin.sys.service.config.ui.SystemUIConfigServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.FileNotFoundException;
 
 @Controller

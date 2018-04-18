@@ -1,8 +1,8 @@
 package com.zhulin.sys.controller.user;
 
 import com.zhulin.common.def.Constants;
-import com.zhulin.pojo.SystemRole;
-import com.zhulin.pojo.SystemUser;
+import com.zhulin.sys.pojo.SystemRole;
+import com.zhulin.sys.pojo.SystemUser;
 import com.zhulin.sys.service.role.SystemRoleServiceI;
 import com.zhulin.sys.service.user.SystemUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;

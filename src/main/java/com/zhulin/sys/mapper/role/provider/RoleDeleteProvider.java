@@ -1,6 +1,7 @@
 package com.zhulin.sys.mapper.role.provider;
 
-import com.zhulin.pojo.ClassRole;
+import com.zhulin.sys.pojo.ClassRole;
+import com.zhulin.sys.pojo.SystemUserRole;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -34,7 +35,7 @@ public class RoleDeleteProvider {
         List<ClassRole> cleanRolePermissions = (List<ClassRole>) map.get("list");
 
         StringBuilder builder = new StringBuilder();
-        builder.append("DELETE FROM system_role_permission WHERE roleId IN");
+        builder.append("DELETE FROM system_role_permission WHERE roleId IN (");
 
         StringBuilder valueFormatBuilder = new StringBuilder();
         valueFormatBuilder.append("#'{'list[{0}].roleId}");
@@ -67,6 +68,29 @@ public class RoleDeleteProvider {
             builder.append(mf.format(new Object[]{i}));
 
             if (i < (roleIds.size() - 1)) {
+                builder.append(",");
+            }
+        }
+
+        builder.append(")");
+
+        return builder.toString();
+    }
+
+    public String deleteAllUserRoles(Map map) {
+        List<SystemUserRole> userRoles = (List<SystemUserRole>) map.get("list");
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("DELETE FROM system_user_role WHERE roleId IN (");
+
+        StringBuilder valueFormatBuilder = new StringBuilder();
+        valueFormatBuilder.append("#'{'list[{0}].roleId}");
+
+        MessageFormat mf = new MessageFormat(valueFormatBuilder.toString());
+        for (int i = 0; i < userRoles.size(); i++) {
+            builder.append(mf.format(new Object[]{i}));
+
+            if (i < (userRoles.size() - 1)) {
                 builder.append(",");
             }
         }

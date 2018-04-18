@@ -1,4 +1,4 @@
-package com.zhulin.pojo;
+package com.zhulin.sys.pojo;
 
 import java.sql.Timestamp;
 import java.util.List;

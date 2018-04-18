@@ -1,7 +1,7 @@
 package com.zhulin.sys.service.menu;
 
-import com.zhulin.pojo.ClassRole;
-import com.zhulin.pojo.Menu;
+import com.zhulin.sys.pojo.ClassRole;
+import com.zhulin.sys.pojo.Menu;
 
 import java.util.List;
 import java.util.Map;
@@ -19,4 +19,5 @@ public interface SystemMenuServiceI {
     Map<String,List<Menu>> readAllChildMenus();
     Map<String, List<Menu>> readListGroupByParent();
     List<Menu> readRoleMenuList(String id);
+    Map<Menu, List<Menu>> readUserMenus(String userId);
 }

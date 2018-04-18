@@ -1,9 +1,10 @@
 package com.zhulin.sys.mapper.menu;
 
-import com.zhulin.pojo.Menu;
+import com.zhulin.sys.pojo.Menu;
 import com.zhulin.sys.mapper.menu.provider.SystemMenuDeleteProvider;
 import com.zhulin.sys.mapper.menu.provider.SystemMenuInsertProvider;
 import com.zhulin.sys.mapper.menu.provider.SystemMenuUpdateProvider;
+import com.zhulin.sys.pojo.SystemRoleMenu;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
@@ -143,11 +144,23 @@ public interface SystemMenuMapper {
     })
     List<Menu> selectAllChildMenus();
 
-    @Select("SELECT menuId, menuName, icon FROM system_menu WHERE menuId IN (SELECT menuId FROM system_role_menu WHERE roleId = #{value})")
+    @Select("SELECT menuId, menuName, icon, parentId, menuURL FROM system_menu WHERE menuId IN (SELECT menuId FROM system_role_menu WHERE roleId = #{value})")
     @Results({
             @Result(id = true, column = "menuId", property = "menuId"),
             @Result(id = true, column = "menuName", property = "menuName"),
-            @Result(column = "icon", property = "icon")
+            @Result(column = "icon", property = "icon"),
+            @Result(column = "parentId", property = "parentId"),
+            @Result(column = "menuURL", property = "menuURL")
     })
     List<Menu> selectRoleMenuList(String id);
+
+    @DeleteProvider(type = SystemMenuDeleteProvider.class, method = "deleteAllRoleMenus")
+    int deleteAllRoleMenus(@Param("list") List<SystemRoleMenu> allRoleMenus);
+
+    @Select("SELECT roleId, menuId FROM system_role_menu")
+    @Results({
+            @Result(id = true, column = "roleId", property = "roleId"),
+            @Result(id = true, column = "menuId", property = "menuId")
+    })
+    List<SystemRoleMenu> selectDBAllRoleMenus();
 }

@@ -1,29 +1,28 @@
 package com.zhulin.sys.service.user.impl;
 
+import com.zhulin.common.annotation.permission.ClassRolePermission;
+import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import com.zhulin.common.shiro.ShiroUtils;
-import com.zhulin.pojo.SystemRole;
-import com.zhulin.pojo.SystemUser;
-import com.zhulin.pojo.SystemUserInfo;
-import com.zhulin.pojo.SystemUserRole;
+import com.zhulin.sys.pojo.SystemRole;
+import com.zhulin.sys.pojo.SystemUser;
+import com.zhulin.sys.pojo.SystemUserInfo;
+import com.zhulin.sys.pojo.SystemUserRole;
 import com.zhulin.sys.mapper.role.SystemRoleMapper;
 import com.zhulin.sys.mapper.user.SystemUserMapper;
 import com.zhulin.sys.mapper.userinfo.SystemUserInfoMapper;
 import com.zhulin.sys.service.user.SystemUserServiceI;
-import org.apache.ibatis.reflection.ReflectionException;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@ClassRolePermission(group = "system", name = "用户管理角色", value = "user:m", menuValue = "/admin/user")
 public class SystemUserServiceImpl implements SystemUserServiceI {
 
     @Autowired
@@ -39,12 +38,14 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
     }
 
     @Override
+    @MethodRolePermission(group = "user", name = "用户查询", value = "user:ur", groupName = "用户组")
     public List<SystemUser> readList() {
         return userMapper.selectList();
     }
 
     @Transactional
     @Override
+    @MethodRolePermission(group = "user", name = "用户添加", value = "user:ua", groupName = "用户组")
     public boolean createNewUser(SystemUser user) {
         // 保存登陆用户信息
         String salt = ShiroUtils.getSalt();
@@ -87,6 +88,7 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
     }
 
     @Override
+    @MethodRolePermission(group = "user", name = "用户详细", value = "user:ud", groupName = "用户组")
     public SystemUser readUserDetail(String id) {
         // 1. 查询登陆用户信息system_user
         SystemUser userDetail = userMapper.selectUserDetail(id);
@@ -108,6 +110,7 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
 
     @Transactional
     @Override
+    @MethodRolePermission(group = "user", name = "用户更新", value = "user:uu", groupName = "用户组")
     public boolean update(SystemUser user) {
         // 1. 更新用户 system_user
         int updateUserNum = userMapper.update(user);
@@ -149,6 +152,7 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
 
     @Transactional
     @Override
+    @MethodRolePermission(group = "user", name = "用户删除", value = "user:ud", groupName = "用户组")
     public boolean delete(String id) {
         // 1. 逻辑删除用户 system_user
         int deleteUserNum = userMapper.updateDeleteUser(id);
@@ -163,6 +167,7 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
     }
 
     @Override
+    @MethodRolePermission(group = "user", name = "用户角色更新", value = "user:uru", groupName = "用户组")
     public boolean updateUserRoles(SystemUser user) {
         List<String> roleIds = user.getRoleIds();
         String userId = user.getUserId();
@@ -192,6 +197,7 @@ public class SystemUserServiceImpl implements SystemUserServiceI {
         return false;
     }
 
+    @Transactional
     @Override
     public boolean updateUserPass(SystemUser user) {
         String pass = user.getPassword();

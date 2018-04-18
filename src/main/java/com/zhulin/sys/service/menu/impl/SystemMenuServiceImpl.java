@@ -6,10 +6,7 @@ import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import com.zhulin.common.def.Constants;
-import com.zhulin.pojo.ClassRole;
-import com.zhulin.pojo.Menu;
-import com.zhulin.pojo.MethodPermission;
-import com.zhulin.pojo.RolePermission;
+import com.zhulin.sys.pojo.*;
 import com.zhulin.sys.mapper.menu.SystemMenuMapper;
 import com.zhulin.sys.mapper.permission.SystemPermissionMapper;
 import com.zhulin.sys.mapper.role.SystemRoleMapper;
@@ -26,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ClassRolePermission(group = "system", name = "菜单管理角色", value = "menu:m")
+@ClassRolePermission(group = "system", name = "菜单管理角色", value = "menu:m", menuValue = "/admin/menu")
 @Service
 public class SystemMenuServiceImpl implements SystemMenuServiceI {
 
@@ -252,6 +249,34 @@ public class SystemMenuServiceImpl implements SystemMenuServiceI {
         // 3.3 添加新的角色
         int newRolesNumber = systemRoleMapper.insertNewRolesToRoleTable(roles);
 
+        // 3.4 添加角色关联菜单
+        List<SystemRoleMenu> roleMenus = new ArrayList<>();
+
+        for (ClassRole role : roles) {
+            String menuValue = role.getMenuValue();
+            String roleId = role.getRoleId();
+
+            SystemRoleMenu roleMenu = new SystemRoleMenu();
+            roleMenu.setRoleId(roleId);
+
+            for (Menu menu : menus) {
+                if (menu.getMenuURL().equals(menuValue)) {
+                    roleMenu.setMenuId(menu.getMenuId());
+                }
+            }
+
+            if (!Strings.isNullOrEmpty(roleMenu.getMenuId())) {
+                roleMenus.add(roleMenu);
+            }
+        }
+
+        // 删除角色菜单
+        List<SystemRoleMenu> allRoleMenus = systemMenuMapper.selectDBAllRoleMenus();
+        int deleteAllRoleMenuNum = systemMenuMapper.deleteAllRoleMenus(allRoleMenus);
+
+        // 插入角色对应的菜单
+        int insertRoleMenus = systemRoleMapper.insertRoleMenus(roleMenus);
+
         // 4. 备份当前版本权限
         List<MethodPermission> oldPermissions = systemPermissionMapper.selectDBAllPermissionRecords();
         if (!oldPermissions.isEmpty()) {
@@ -284,6 +309,25 @@ public class SystemMenuServiceImpl implements SystemMenuServiceI {
         }
 
         int insertNewRolePermissionNum = systemRoleMapper.insertNewRolePermissionsToRolePermissionTable(rolePermissions);
+
+        // ***************************************************************************************************************
+        // 6. 初始化超级管理员的角色关系
+        List<SystemUserRole> adminRoles = new ArrayList<>();
+
+        for (ClassRole role : roles) {
+            SystemUserRole userRole = new SystemUserRole();
+
+            userRole.setUserId(Constants.SUPER_ADMIN_USER_ID);
+            userRole.setRoleId(role.getRoleId());
+
+            adminRoles.add(userRole);
+        }
+
+        // 删除超级管理员角色
+        List<SystemUserRole> oldUserRoles = systemRoleMapper.selectAllUserRoles();
+        int deleteAllUserRoleNum = systemRoleMapper.deleteAllUserRoles(oldUserRoles);
+
+        int insertAdminRoles = systemRoleMapper.insertUserRoles(adminRoles);
 
         return true;
     }
@@ -389,5 +433,55 @@ public class SystemMenuServiceImpl implements SystemMenuServiceI {
     @Override
     public List<Menu> readRoleMenuList(String id) {
         return systemMenuMapper.selectRoleMenuList(id);
+    }
+
+    @Override
+    public Map<Menu, List<Menu>> readUserMenus(String userId) {
+        // 1. 获得用户关联的所有角色
+        List<SystemRole> roles = systemRoleMapper.selectUserRolesByUserId(userId);
+
+        // 2. 获得角色关联的所有菜单
+        List<Menu> menus = new ArrayList<>();
+
+        for (SystemRole role : roles) {
+            String roleId = role.getRoleId();
+
+            List<Menu> roleMenus = systemMenuMapper.selectRoleMenuList(roleId);
+
+            menus.addAll(roleMenus);
+        }
+
+        Menu noParentMenuMapKey = new Menu();
+        noParentMenuMapKey.setMenuId(Constants.IS_NOT_PARENT_MENU_DEFAULT_PARENT_ID);
+
+        List<Menu> noParentMenus = new ArrayList<>();
+
+        // 3. 构建菜单父子结构
+        Map<Menu, List<Menu>> map = new HashMap<>();
+        for (Menu menu : menus) {
+            String parentId = menu.getParentId();
+
+            if (parentId.equals(Constants.IS_NOT_PARENT_MENU_DEFAULT_PARENT_ID)) {
+                noParentMenus.add(menu);
+
+                continue;
+            }
+
+            Menu parentMenuInfo = systemMenuMapper.selectMenuDetail(parentId);
+            parentMenuInfo.setIcon(Constants.MENU_ICON_PREFIX + parentMenuInfo.getIcon());
+
+            if (!map.containsKey(parentMenuInfo)) {
+                List<Menu> mapValue = new ArrayList<>();
+                mapValue.add(menu);
+
+                map.put(parentMenuInfo, mapValue);
+            } else {
+                map.get(parentMenuInfo).add(menu);
+            }
+        }
+
+        map.put(noParentMenuMapKey, noParentMenus);
+
+        return map;
     }
 }

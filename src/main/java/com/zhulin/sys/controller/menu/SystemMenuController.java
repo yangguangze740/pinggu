@@ -3,7 +3,7 @@ package com.zhulin.sys.controller.menu;
 import com.google.common.base.Optional;
 import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
-import com.zhulin.pojo.Menu;
+import com.zhulin.sys.pojo.Menu;
 import com.zhulin.sys.service.menu.SystemMenuServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
 package com.zhulin.sys.service.config.ui;
 
-import com.zhulin.pojo.SystemUIConfig;
+import com.zhulin.sys.pojo.SystemUIConfig;
 
 public interface SystemUIConfigServiceI {
     SystemUIConfig readNowUIConfig(String uiConfigId);

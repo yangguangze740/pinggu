@@ -1,6 +1,6 @@
 package com.zhulin.sys.mapper.token;
 
-import com.zhulin.pojo.SystemUserToken;
+import com.zhulin.sys.pojo.SystemUserToken;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 

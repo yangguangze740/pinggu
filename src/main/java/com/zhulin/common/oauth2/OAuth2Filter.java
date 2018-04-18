@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.zhulin.common.def.Constants;
 import com.zhulin.common.shiro.ShiroUtils;
-import com.zhulin.pojo.SystemUserToken;
+import com.zhulin.sys.pojo.SystemUserToken;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.util.WebUtils;

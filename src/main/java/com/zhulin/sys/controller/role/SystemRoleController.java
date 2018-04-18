@@ -2,9 +2,9 @@ package com.zhulin.sys.controller.role;
 
 import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
-import com.zhulin.pojo.Menu;
-import com.zhulin.pojo.SystemPermission;
-import com.zhulin.pojo.SystemRole;
+import com.zhulin.sys.pojo.Menu;
+import com.zhulin.sys.pojo.SystemPermission;
+import com.zhulin.sys.pojo.SystemRole;
 import com.zhulin.sys.service.menu.SystemMenuServiceI;
 import com.zhulin.sys.service.permission.SystemPermissionServiceI;
 import com.zhulin.sys.service.role.SystemRoleServiceI;

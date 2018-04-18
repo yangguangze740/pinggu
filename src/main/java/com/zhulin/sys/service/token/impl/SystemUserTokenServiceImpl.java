@@ -1,7 +1,7 @@
 package com.zhulin.sys.service.token.impl;
 
 import com.zhulin.common.token.TokenGenerator;
-import com.zhulin.pojo.SystemUserToken;
+import com.zhulin.sys.pojo.SystemUserToken;
 import com.zhulin.sys.mapper.token.SystemUserTokenMapper;
 import com.zhulin.sys.service.token.SystemUserTokenServiceI;
 import org.springframework.beans.factory.annotation.Autowired;

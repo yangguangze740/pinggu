@@ -1,7 +1,7 @@
 package com.zhulin.sys.mapper.permission;
 
-import com.zhulin.pojo.MethodPermission;
-import com.zhulin.pojo.SystemPermission;
+import com.zhulin.sys.pojo.MethodPermission;
+import com.zhulin.sys.pojo.SystemPermission;
 import com.zhulin.sys.mapper.permission.provider.PermissionDeleteProvider;
 import com.zhulin.sys.mapper.permission.provider.PermissionInsertProvider;
 import org.apache.ibatis.annotations.*;

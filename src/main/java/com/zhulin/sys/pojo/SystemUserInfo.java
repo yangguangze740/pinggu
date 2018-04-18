@@ -1,6 +1,5 @@
-package com.zhulin.pojo;
+package com.zhulin.sys.pojo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class SystemUserInfo {

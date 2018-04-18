@@ -1,4 +1,4 @@
-package com.zhulin.pojo;
+package com.zhulin.sys.pojo;
 
 public class SystemRolePermission {
     private String roleId;

@@ -1,6 +1,6 @@
 package com.zhulin.sys.mapper.permission.provider;
 
-import com.zhulin.pojo.MethodPermission;
+import com.zhulin.sys.pojo.MethodPermission;
 
 import java.text.MessageFormat;
 import java.util.List;

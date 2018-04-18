@@ -1,9 +1,8 @@
 package com.zhulin.sys.mapper.role;
 
-import com.zhulin.pojo.*;
+import com.zhulin.sys.pojo.*;
 import com.zhulin.sys.mapper.role.provider.RoleDeleteProvider;
 import com.zhulin.sys.mapper.role.provider.RoleInsertProvider;
-import com.zhulin.sys.mapper.user.provider.UserInsertProvider;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
@@ -105,4 +104,17 @@ public interface SystemRoleMapper {
 
     @Delete("DELETE FROM system_user_role WHERE userId = #{value}")
     int deleteUserRolesByUserId(String userId);
+
+    @InsertProvider(type = RoleInsertProvider.class, method = "insertRoleMenus")
+    int insertRoleMenus(@Param("list") List<SystemRoleMenu> roleMenus);
+
+    @DeleteProvider(type = RoleDeleteProvider.class, method = "deleteAllUserRoles")
+    int deleteAllUserRoles(@Param("list") List<SystemUserRole> oldUserRoles);
+
+    @Select("SELECT userId, roleId FROM system_user_role")
+    @Results({
+            @Result(id = true, column = "userId", property = "userId"),
+            @Result(id = true, column = "roleId", property = "roleId")
+    })
+    List<SystemUserRole> selectAllUserRoles();
 }

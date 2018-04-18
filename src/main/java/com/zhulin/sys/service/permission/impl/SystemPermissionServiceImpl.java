@@ -2,7 +2,7 @@ package com.zhulin.sys.service.permission.impl;
 
 import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
-import com.zhulin.pojo.SystemPermission;
+import com.zhulin.sys.pojo.SystemPermission;
 import com.zhulin.sys.mapper.permission.SystemPermissionMapper;
 import com.zhulin.sys.service.permission.SystemPermissionServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ClassRolePermission(group = "system", name = "权限管理角色", value = "permission:m")
+@ClassRolePermission(group = "system", name = "权限管理角色", value = "permission:m", menuValue = "/admin/permission")
 @Service
 public class SystemPermissionServiceImpl implements SystemPermissionServiceI {
 

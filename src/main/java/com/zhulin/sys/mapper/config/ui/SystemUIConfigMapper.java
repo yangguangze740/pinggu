@@ -1,6 +1,6 @@
 package com.zhulin.sys.mapper.config.ui;
 
-import com.zhulin.pojo.SystemUIConfig;
+import com.zhulin.sys.pojo.SystemUIConfig;
 import org.apache.ibatis.annotations.*;
 
 @Mapper

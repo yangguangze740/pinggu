@@ -1,8 +1,6 @@
 package com.zhulin.sys.mapper.user;
 
-import com.zhulin.pojo.SystemUser;
-import com.zhulin.pojo.SystemUserRole;
-import com.zhulin.sys.mapper.user.provider.UserInsertProvider;
+import com.zhulin.sys.pojo.SystemUser;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 

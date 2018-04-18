@@ -5,7 +5,7 @@ import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import com.zhulin.common.def.Constants;
-import com.zhulin.pojo.*;
+import com.zhulin.sys.pojo.*;
 import com.zhulin.sys.mapper.menu.SystemMenuMapper;
 import com.zhulin.sys.mapper.permission.SystemPermissionMapper;
 import com.zhulin.sys.mapper.role.SystemRoleMapper;
@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@ClassRolePermission(group = "system", name = "角色管理角色", value = "role:m")
+@ClassRolePermission(group = "system", name = "角色管理角色", value = "role:m", menuValue = "/admin/role")
 @Service
 public class SystemRoleServiceImpl implements SystemRoleServiceI {
 
@@ -36,101 +36,6 @@ public class SystemRoleServiceImpl implements SystemRoleServiceI {
     @Override
     public List<SystemRole> queryUserRolesByUserId(String userId) {
         return systemRoleMapper.selectUserRolesByUserId(userId);
-    }
-
-    @Transactional(isolation = Isolation.REPEATABLE_READ,
-            rollbackFor = {RuntimeException.class, Exception.class, SQLException.class, ArithmeticException.class, ReflectionException.class},
-            propagation= Propagation.REQUIRED)
-    @Override
-    public boolean initSystemRolesAndPermissions(List<ClassRole> roles) {
-
-        if (roles.isEmpty()) return true;
-
-        List<RolePermission> rolePermissions = new ArrayList<>();
-        List<MethodPermission> methodPermissions = new ArrayList<>();
-
-        // 1. 获取权限
-        // 2. 构建对应数据关系,主键和外键的值
-        for (ClassRole classRole : roles) {
-            String rolePrimaryKey = PrimaryKeyUtil.uuidPrimaryKey();
-            classRole.setRoleId(rolePrimaryKey);
-
-            List<MethodPermission> tmpPermissions = classRole.getMethodPermissions();
-
-            for (MethodPermission permission : tmpPermissions) {
-                String permissionPrimaryKey = PrimaryKeyUtil.uuidPrimaryKey();
-
-                permission.setPermissionId(permissionPrimaryKey);
-
-                methodPermissions.add(permission);
-
-                RolePermission rolePermission = new RolePermission();
-
-                rolePermission.setPermissionId(permissionPrimaryKey);
-                rolePermission.setRoleId(rolePrimaryKey);
-
-                rolePermissions.add(rolePermission);
-            }
-        }
-
-        // 3. 备份当前版本的角色和权限
-        List<ClassRole> oldRoles = systemRoleMapper.selectDBAllRoleRecords();
-
-        if (!oldRoles.isEmpty()) {
-            // 3.1 备份数据, 先获取版本号
-            int newestVersion = 1;
-
-            ClassRole lastVersionRole = systemRoleMapper.selectLastVersionFromBakRole();
-            if (Optional.fromNullable(lastVersionRole).isPresent()) {
-                newestVersion = lastVersionRole.getVersion() + 1;
-            }
-
-            for (ClassRole tmpOldRole : oldRoles) {
-                tmpOldRole.setVersion(newestVersion);
-            }
-
-            int insertBakNum = systemRoleMapper.insertBakRoleToBakRoleTable(oldRoles);
-            // 3.2 删除数据
-            int deleteNum = systemRoleMapper.delete4CleanRoleTable(oldRoles);
-        }
-
-        // 3.3 添加新的角色
-        int newRolesNumber = systemRoleMapper.insertNewRolesToRoleTable(roles);
-
-        // 4. 备份当前版本权限
-        List<MethodPermission> oldPermissions = systemPermissionMapper.selectDBAllPermissionRecords();
-        if (!oldPermissions.isEmpty()) {
-            // 4.1 备份权限数据, 先获取版本号
-            int newestVersion = 1;
-
-            MethodPermission lastVersionPermissionDTO = systemPermissionMapper.selectLastVersionFromBakPermission();
-
-            if (Optional.fromNullable(lastVersionPermissionDTO).isPresent()) {
-                newestVersion += 1;
-
-                for (MethodPermission tmpPermission : oldPermissions) {
-                    tmpPermission.setVersion(newestVersion);
-                }
-            }
-
-            int insertBakPermissionNum = systemPermissionMapper.insertBakPermissionToBakPermissionTable(oldPermissions);
-            // 4.3 备份数据
-            int deletePermissionNum = systemPermissionMapper.delete4CleanPermissionTable(oldPermissions);
-        }
-
-        // 4.4 添加新的权限
-        int insertNewPermissionNum = systemPermissionMapper.insertNewPermissionsToPermissionTable(methodPermissions);
-
-        // 5. 添加新的角色和权限关系表数据
-        List<RolePermission> oldRolePermissions = systemRoleMapper.selectDBAllRolePermissionRecords();
-
-        if (!oldRolePermissions.isEmpty()) {
-            int deleteRolePermissionNum = systemRoleMapper.delete4CleanRolePermissionTable(oldRolePermissions);
-        }
-
-        int insertNewRolePermissionNum = systemRoleMapper.insertNewRolePermissionsToRolePermissionTable(rolePermissions);
-
-        return true;
     }
 
     @MethodRolePermission(group = "role", name = "角色查询", value = "role:rr", groupName = "角色组")

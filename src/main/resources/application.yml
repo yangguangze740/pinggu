@@ -5,9 +5,9 @@ mybatis:
 spring:
   datasource:
 #    druid:
-    url: jdbc:mysql://localhost:3306/dlz_chengzhang?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
-    username: chengzhang
-    password: chengzhang@dlz123
+    url: jdbc:mysql://localhost:3306/djtu_pinggu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+    username: pinggu
+    password: pinggu@djtu123
     driver-class-name: com.mysql.cj.jdbc.Driver
     initial-size: 5
     max-active: 10

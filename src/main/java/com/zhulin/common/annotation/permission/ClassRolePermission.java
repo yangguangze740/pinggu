@@ -9,4 +9,5 @@ public @interface ClassRolePermission {
     String value() default "";
     String group() default "";
     String name() default "";
+    String menuValue();
 }

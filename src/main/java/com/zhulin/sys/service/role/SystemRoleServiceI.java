@@ -1,12 +1,11 @@
 package com.zhulin.sys.service.role;
 
-import com.zhulin.pojo.*;
+import com.zhulin.sys.pojo.*;
 
 import java.util.List;
 
 public interface SystemRoleServiceI {
     List<SystemRole> queryUserRolesByUserId(String userId);
-    boolean initSystemRolesAndPermissions(List<ClassRole> roles);
     List<SystemRole> appReadList(SystemRole role);
     boolean createNewRole(SystemRole role);
     boolean deleteRole(String id);

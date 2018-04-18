@@ -53,4 +53,13 @@ public class Constants {
 
     /* 标识角色可编辑 */
     public static final int TRUE_ROLE_EDIT_FLAG = 1;
+
+    /* 用户登陆后菜单的标识 */
+    public static final String USER_MENU_PARENT_LEVEL = "userMenu";
+
+    /* 超级管理员的ID */
+    public static final String SUPER_ADMIN_USER_ID = "0";
+
+    /* 用户登陆后遍历的菜单,无父菜单的菜单 */
+    public static final String USER_MENU_LEVEL_1 = "userMenuLevel1";
 }

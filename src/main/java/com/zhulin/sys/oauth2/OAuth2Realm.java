@@ -1,10 +1,10 @@
 package com.zhulin.sys.oauth2;
 
 import com.zhulin.common.oauth2.OAuth2Token;
-import com.zhulin.pojo.SystemPermission;
-import com.zhulin.pojo.SystemRole;
-import com.zhulin.pojo.SystemUserInfo;
-import com.zhulin.pojo.SystemUserToken;
+import com.zhulin.sys.pojo.SystemPermission;
+import com.zhulin.sys.pojo.SystemRole;
+import com.zhulin.sys.pojo.SystemUserInfo;
+import com.zhulin.sys.pojo.SystemUserToken;
 import com.zhulin.sys.service.permission.SystemPermissionServiceI;
 import com.zhulin.sys.service.role.SystemRoleServiceI;
 import com.zhulin.sys.service.token.SystemUserTokenServiceI;

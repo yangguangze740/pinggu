@@ -1,6 +1,6 @@
 package com.zhulin.sys.mapper.menu.provider;
 
-import com.zhulin.pojo.Menu;
+import com.zhulin.sys.pojo.Menu;
 
 import java.text.MessageFormat;
 import java.util.List;

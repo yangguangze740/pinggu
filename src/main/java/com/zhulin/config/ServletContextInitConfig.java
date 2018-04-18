@@ -1,7 +1,7 @@
 package com.zhulin.config;
 
 import com.zhulin.common.def.Constants;
-import com.zhulin.pojo.SystemUIConfig;
+import com.zhulin.sys.pojo.SystemUIConfig;
 import com.zhulin.sys.service.config.ui.SystemUIConfigServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
