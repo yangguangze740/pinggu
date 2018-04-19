@@ -64,7 +64,7 @@
                                         <td th:text="${project.projectSort}"></td>
                                         <td>
                                             <a th:href="${'/admin/project/edit/' + project.projectId}">
-                                                <button type="button" class="btn btn-w-m btn-warning">编辑</button>
+                                                <button type="button" class="btn btn-m btn-warning">编辑</button>
                                             </a>
                                             <a th:href="${'/admin/project/delete/' + project.projectId}">
                                                 <button class="btn btn-m btn-danger" data-toggle="confirmation"
@@ -94,3 +94,45 @@
 
     </div>
 </div>
+
+<!-- Page-Level Scripts -->
+<script th:src="@{/def/listPage.js}"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": true,
+            "preventDuplicates": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        var msg = [[${message}]];
+        var msgCode = [[${msgCode}]];
+
+        if (msgCode == 200) {
+            toastr.success(msg);
+        } else if (msgCode == 500) {
+            toastr.error(msg);
+        }
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    });
+</script>
+
+</body>
+
+</html>
