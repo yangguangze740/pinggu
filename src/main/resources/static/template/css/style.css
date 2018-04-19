@@ -2539,12 +2539,12 @@ label.error {
 }
 /* Image cropper style */
 .img-container,
-.img-preview {
+.img-previeww {
   overflow: hidden;
   text-align: center;
   width: 100%;
 }
-.img-preview-sm {
+.img-previeww-sm {
   height: 130px;
   width: 200px;
 }

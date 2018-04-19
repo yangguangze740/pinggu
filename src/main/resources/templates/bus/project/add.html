@@ -100,26 +100,20 @@
         // 前台验证
         $("#addForm").validate({
             rules: {
-                raterUserName: {
+                projectName: {
                     required: true
                 },
-                raterUserPassword: {
+                projectSort: {
                     required: true
-                },
-                raterUserAccount: {
-                    required: true
-                },
+                }
 
             },
             messages: {
-                raterUserName: {
-                    required: "请填写评估用户名称"
+                projectName: {
+                    required: "请填写审核项目名称"
                 },
-                raterUserPassword: {
-                    required: "请填写评估用户密码"
-                },
-                raterUserAccount: {
-                    required: "请填写评估用户登录名"
+                projectSort: {
+                    required: "请填写排序键"
                 }
             }
         });

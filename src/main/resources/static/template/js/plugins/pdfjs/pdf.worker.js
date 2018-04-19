@@ -38522,7 +38522,7 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
             continue;
           } else if (glyphsUnicodeMap[glyphName] === undefined) {
             // (undocumented) c) Few heuristics to recognize unknown glyphs
-            // NOTE: Adobe Reader does not do this step, but OSX Preview does
+            // NOTE: Adobe Reader does not do this step, but OSX Previeww does
             var code = 0;
             switch (glyphName[0]) {
               case 'G': // Gxx glyph

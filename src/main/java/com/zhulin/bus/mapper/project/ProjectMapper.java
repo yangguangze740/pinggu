@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ProjectMapper extends ArcMapper<Project>{
 
-    @Select("SELECT projectId,projectName,projectCreateTime,deleteFlag,projectSort FROM pinggu_project where deleteFlag = 0")
+    @Select("SELECT projectId,projectName,projectCreateTime,deleteFlag,projectSort FROM pinggu_review_project where deleteFlag = 0")
     @Results({
             @Result(id = true, column = "projectId", property = "projectId"),
             @Result(column = "projectName", property = "projectName"),
@@ -23,11 +23,11 @@ public interface ProjectMapper extends ArcMapper<Project>{
     @Override
     List<Project> selectList(Project project);
 
-    @Update("UPDATE pinggu_project SET projectName = #{projectName}, projectSort = #{projectSort} WHERE projectId = #{projectId}")
+    @Update("UPDATE pinggu_review_project SET projectName = #{projectName}, projectSort = #{projectSort} WHERE projectId = #{projectId}")
     @Override
     boolean update(Project project);
 
-    @Select("SELECT projectId, projectName,projectSort FROM pinggu_project WHERE projectId = #{value}")
+    @Select("SELECT projectId, projectName,projectSort FROM pinggu_review_project WHERE projectId = #{value}")
     @Results({
             @Result(id = true, column = "projectId", property = "projectId"),
             @Result(column = "projectName", property = "projectName"),
@@ -36,11 +36,11 @@ public interface ProjectMapper extends ArcMapper<Project>{
     @Override
     Project selectDetail(String id);
 
-    @Insert("INSERT INTO pinggu_project (projectId, projectName,projectCreateTime,projectSort,adminId) VALUES (#{projectId}, #{projectName},#{projectCreateTime},#{projectSort},#{adminId})")
+    @Insert("INSERT INTO pinggu_review_project (projectId, projectName,projectCreateTime,projectSort,adminId) VALUES (#{projectId}, #{projectName},#{projectCreateTime},#{projectSort},#{adminId})")
     @Override
     boolean insert(Project project);
 
-    @Delete("DELETE FROM pinggu_project WHERE projectId = #{value}")
+    @Delete("DELETE FROM pinggu_review_project WHERE projectId = #{value}")
     @Override
     boolean delete(String id);
 }

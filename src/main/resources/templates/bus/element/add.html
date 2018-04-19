@@ -108,13 +108,19 @@
         // 前台验证
         $("#addForm").validate({
             rules: {
-                departmentName: {
+                elementName: {
+                    required: true
+                },
+                elementSort: {
                     required: true
                 }
             },
             messages: {
-                departmentName: {
-                    required: "请填写部门科室名称"
+                elementName: {
+                    required: "请填写审核要素名"
+                },
+                elementSort: {
+                    required: "请填写排序键"
                 }
             }
         });

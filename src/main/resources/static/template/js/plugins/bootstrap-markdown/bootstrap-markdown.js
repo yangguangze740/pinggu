@@ -54,7 +54,7 @@
     this.$editable     = {el:null, type:null,attrKeys:[], attrValues:[], content:null};
     this.$options      = $.extend(true, {}, $.fn.markdown.defaults, options, this.$element.data('options'));
     this.$oldContent   = null;
-    this.$isPreview    = false;
+    this.$isPrevieww    = false;
     this.$isFullscreen = false;
     this.$editor       = null;
     this.$textarea     = null;
@@ -230,7 +230,7 @@
       $editor.removeClass('md-fullscreen-mode');
       $('body').removeClass('md-nooverflow');
 
-      if (this.$isPreview == true) this.hidePreview().showPreview()
+      if (this.$isPrevieww == true) this.hidePrevieww().showPrevieww()
     }
 
     this.$isFullscreen = mode;
@@ -429,8 +429,8 @@
           });
         }
 
-        if (options.initialstate === 'preview') {
-          this.showPreview();
+        if (options.initialstate === 'previeww') {
+          this.showPrevieww();
         } else if (options.initialstate === 'fullscreen' && options.fullscreen.enable) {
           this.setFullscreen(true);
         }
@@ -486,42 +486,42 @@
       return content;
     }
 
-  , showPreview: function() {
+  , showPrevieww: function() {
       var options = this.$options,
           container = this.$textarea,
           afterContainer = container.next(),
-          replacementContainer = $('<div/>',{'class':'md-preview','data-provider':'markdown-preview'}),
+          replacementContainer = $('<div/>',{'class':'md-previeww','data-provider':'markdown-previeww'}),
           content,
           callbackContent;
 
-      if (this.$isPreview == true) {
+      if (this.$isPrevieww == true) {
         // Avoid sequenced element creation on missused scenario
         // @see https://github.com/toopay/bootstrap-markdown/issues/170
         return this;
       }
       
-      // Give flag that tell the editor enter preview mode
-      this.$isPreview = true;
+      // Give flag that tell the editor enter previeww mode
+      this.$isPrevieww = true;
       // Disable all buttons
-      this.disableButtons('all').enableButtons('cmdPreview');
+      this.disableButtons('all').enableButtons('cmdPrevieww');
 
       // Try to get the content from callback
-      callbackContent = options.onPreview(this);
+      callbackContent = options.onPrevieww(this);
       // Set the content based from the callback content if string otherwise parse value from textarea
       content = typeof callbackContent == 'string' ? callbackContent : this.parseContent();
 
-      // Build preview element
+      // Build previeww element
       replacementContainer.html(content);
 
       if (afterContainer && afterContainer.attr('class') == 'md-footer') {
-        // If there is footer element, insert the preview container before it
+        // If there is footer element, insert the previeww container before it
         replacementContainer.insertBefore(afterContainer);
       } else {
         // Otherwise, just append it after textarea
         container.parent().append(replacementContainer);
       }
 
-      // Set the preview element dimensions
+      // Set the previeww element dimensions
       replacementContainer.css({
         width: container.outerWidth() + 'px',
         height: container.outerHeight() + 'px'
@@ -545,14 +545,14 @@
       return this;
     }
 
-  , hidePreview: function() {
-      // Give flag that tell the editor quit preview mode
-      this.$isPreview = false;
+  , hidePrevieww: function() {
+      // Give flag that tell the editor quit previeww mode
+      this.$isPrevieww = false;
 
-      // Obtain the preview container
-      var container = this.$editor.find('div[data-provider="markdown-preview"]');
+      // Obtain the previeww container
+      var container = this.$editor.find('div[data-provider="markdown-previeww"]');
 
-      // Remove the preview container
+      // Remove the previeww container
       container.remove();
 
       // Enable all buttons
@@ -845,7 +845,7 @@
 
           if (attachedMarkdown = $(this).find('textarea').data('markdown'),
               attachedMarkdown === null) {
-              attachedMarkdown = $(this).find('div[data-provider="markdown-preview"]').data('markdown');
+              attachedMarkdown = $(this).find('div[data-provider="markdown-previeww"]').data('markdown');
           }
 
           if (attachedMarkdown) {
@@ -1276,22 +1276,22 @@
       },{
         name: 'groupUtil',
         data: [{
-          name: 'cmdPreview',
+          name: 'cmdPrevieww',
           toggle: true,
           hotkey: 'Ctrl+P',
-          title: 'Preview',
-          btnText: 'Preview',
+          title: 'Previeww',
+          btnText: 'Previeww',
           btnClass: 'btn btn-primary btn-sm',
           icon: { glyph: 'glyphicon glyphicon-search', fa: 'fa fa-search', 'fa-3': 'icon-search' },
           callback: function(e){
-            // Check the preview mode and toggle based on this flag
-            var isPreview = e.$isPreview,content;
+            // Check the previeww mode and toggle based on this flag
+            var isPrevieww = e.$isPrevieww,content;
 
-            if (isPreview === false) {
-              // Give flag that tell the editor enter preview mode
-              e.showPreview();
+            if (isPrevieww === false) {
+              // Give flag that tell the editor enter previeww mode
+              e.showPrevieww();
             } else {
-              e.hidePreview();
+              e.hidePrevieww();
             }
           }
         }]
@@ -1320,7 +1320,7 @@
 
     /* Events hook */
     onShow: function (e) {},
-    onPreview: function (e) {},
+    onPrevieww: function (e) {},
     onSave: function (e) {},
     onBlur: function (e) {},
     onFocus: function (e) {},
@@ -1361,7 +1361,7 @@
       var $this            = $(this),
           focused          = $activeElement.closest('.md-editor')[0] === this,
           attachedMarkdown = $this.find('textarea').data('markdown') ||
-                             $this.find('div[data-provider="markdown-preview"]').data('markdown');
+                             $this.find('div[data-provider="markdown-previeww"]').data('markdown');
 
       if (attachedMarkdown && !focused) {
         attachedMarkdown.blur();
