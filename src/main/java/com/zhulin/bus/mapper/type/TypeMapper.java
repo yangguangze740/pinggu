@@ -1,4 +1,4 @@
-package com.zhulin.bus.mapper.Type;
+package com.zhulin.bus.mapper.type;
 
 import com.zhulin.bus.bean.Type;
 import com.zhulin.framework.mapper.ArcMapper;
@@ -19,7 +19,7 @@ public interface TypeMapper extends ArcMapper<Type> {
     @Override
     List<Type> selectList(Type type);
 
-    @Update("UPDATE pinggu_type SET typeName=#{typeName} WHERE typeId=#{typeId}")
+    @Update("UPDATE pinggu_type SET typeName=#{typeName}, typeFileNumber=#{typeFileNumber} WHERE typeId=#{typeId}")
     @Override
     boolean update(Type type);
 

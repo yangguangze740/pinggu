@@ -14343,7 +14343,7 @@ exports.JpxImage = JpxImage;
 var getLookupTableFactory = sharedUtil.getLookupTableFactory;
 
 // The Metrics object contains glyph widths (in glyph space units).
-// As per PDF spec, for most fonts (Type 3 being an exception) a glyph
+// As per PDF spec, for most fonts (type 3 being an exception) a glyph
 // space unit corresponds to 1/1000th of text space unit.
 var getMetrics = getLookupTableFactory(function (t) {
   t['Courier'] = 600;
@@ -27849,7 +27849,7 @@ var PRIVATE_USE_OFFSET_END = 0xF8FF;
 var SKIP_PRIVATE_USE_RANGE_F000_TO_F01F = false;
 
 // PDF Glyph Space Units are one Thousandth of a TextSpace Unit
-// except for Type 3 fonts
+// except for type 3 fonts
 var PDF_GLYPH_SPACE_UNITS = 1000;
 
 // Accented charactars are not displayed properly on Windows, using this flag
@@ -36454,7 +36454,7 @@ Shadings.Mesh = (function MeshClosure() {
   }
 
   function decodeType6Shading(mesh, reader) {
-    // A special case of Type 7. The p11, p12, p21, p22 automatically filled
+    // A special case of type 7. The p11, p12, p21, p22 automatically filled
     var coords = mesh.coords;
     var colors = mesh.colors;
     var ps = new Int32Array(16); // p00, p10, ..., p30, p01, ..., p33

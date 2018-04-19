@@ -1,6 +1,7 @@
 package com.zhulin.bus.service.department.impl;
 
 import com.zhulin.bus.bean.Department;
+import com.zhulin.bus.bean.DepartmentProblem;
 import com.zhulin.bus.bean.DepartmentType;
 import com.zhulin.bus.bean.Type;
 import com.zhulin.bus.mapper.department.DepartmentMapper;
@@ -69,9 +70,7 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         return (deleteDepartmentNum >= 0) && (deleteDepartmentTypeNum >= 0);
     }
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ,
-            rollbackFor = {RuntimeException.class, Exception.class, SQLException.class, ArithmeticException.class},
-            propagation= Propagation.REQUIRED)
+    @Transactional
     @Override
     public boolean appCreate(Department department) {
         String departmentId = PrimaryKeyUtil.uuidPrimaryKey();
@@ -93,5 +92,30 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         int insertDepartmentTypeNum = departmentMapper.insertDepartmentType(departmentTypes);
 
         return ((insertDepartmentNum == 1)&&(insertDepartmentTypeNum == typeIds.size()));
+    }
+
+    @Transactional
+    @Override
+    public boolean updateProblem(Department department) {
+        String departmentId = department.getDepartmentId();
+
+        int deleteProNum = departmentMapper.deleteDepartmentPro(departmentId);
+
+        List<DepartmentProblem> departmentProblems = new ArrayList<>();
+
+        List<String> problemIds = department.getProblemIds();
+
+        for (String id : problemIds) {
+            DepartmentProblem departmentProblem = new DepartmentProblem();
+
+            departmentProblem.setProblemId(id);
+            departmentProblem.setDepartmentId(departmentId);
+
+            departmentProblems.add(departmentProblem);
+        }
+
+        int insertDepartmentTypeNum = departmentMapper.insertDepartmentPro(departmentProblems);
+
+        return (deleteProNum >= 0)&&(insertDepartmentTypeNum == problemIds.size());
     }
 }

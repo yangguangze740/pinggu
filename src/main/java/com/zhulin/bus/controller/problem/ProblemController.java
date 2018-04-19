@@ -1,7 +1,7 @@
-package com.zhulin.bus.controller.type;
+package com.zhulin.bus.controller.problem;
 
-import com.zhulin.bus.bean.Type;
-import com.zhulin.bus.service.type.TypeServiceI;
+import com.zhulin.bus.bean.Problem;
+import com.zhulin.bus.service.problem.ProblemServiceI;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -17,20 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/type")
-public class TypeController extends ArcController<Type>{
+@RequestMapping("/admin/problem")
+public class ProblemController extends ArcController<Problem>{
 
     @Autowired
-    private TypeServiceI typeServiceI;
+    private ProblemServiceI problemServiceI;
 
     @Override
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String list(Type type, HttpServletRequest request, Model model) {
-        List<Type> types = typeServiceI.appReadList(type);
+    public String list(Problem problem, HttpServletRequest request, Model model) {
+        List<Problem> problems = problemServiceI.appReadList(problem);
 
-        model.addAttribute("types", types);
+        model.addAttribute("problems", problems);
 
-        return "bus/type/index";
+        return "bus/problem/index";
     }
 
     @Override
@@ -41,61 +41,65 @@ public class TypeController extends ArcController<Type>{
     @Override
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
     public String query4Edit(@PathVariable String id, HttpServletRequest request, Model model) {
-        Type type = typeServiceI.appReadDetail(id);
+        Problem problem = problemServiceI.appReadDetail(id);
 
-        model.addAttribute("type", type);
+        model.addAttribute("problem", problem);
 
-        return "bus/type/edit";
+        return "bus/problem/edit";
     }
 
     @Override
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String update(Type type, HttpServletRequest request, Model model, RedirectAttributes message) {
-        if (typeServiceI.appUpdate(type)){
+    public String update(Problem problem, HttpServletRequest request, Model model, RedirectAttributes message) {
+        boolean isEdit = problemServiceI.appUpdate(problem);
+
+        if (isEdit){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "修改部门类别成功");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "编辑问题成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "修改部门类别失败");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "编辑问题失败");
         }
 
-        return "redirect:/admin/type";
+        return "redirect:/admin/problem";
     }
 
     @Override
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable String id, HttpServletRequest request, Model model, RedirectAttributes message) {
-        if (typeServiceI.appDelete(id)){
+        boolean isDelete = problemServiceI.appDelete(id);
+
+        if (isDelete){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除部门类别成功");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除问题成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除部门类别失败");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除问题失败");
         }
 
-        return "redirect:/admin/type";
+        return "redirect:/admin/problem";
     }
 
     @Override
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String routeAdd(HttpServletRequest request, Model model) {
-        return "bus/type/add";
+        return "bus/problem/add";
     }
 
     @Override
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String saveAdd(Type type, HttpServletRequest request, Model model, RedirectAttributes message) {
+    public String saveAdd(Problem problem, HttpServletRequest request, Model model, RedirectAttributes message) {
         SystemUser user =(SystemUser) request.getSession().getAttribute(Constants.LOGIN_USER);
-        type.setAdminId(user.getUserId());
+        problem.setAdminId(user.getUserId());
 
-        if (typeServiceI.appCreate(type)){
+        if (problemServiceI.appCreate(problem)){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加部门类别成功");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加问题成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加部门类别失败");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加问题失败");
         }
 
-        return "redirect:/admin/type";
+        return "redirect:/admin/problem";
     }
 }
