@@ -1,6 +1,8 @@
 package com.zhulin.bus.controller.user.general;
 
+import com.zhulin.bus.bean.Department;
 import com.zhulin.bus.bean.User;
+import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.user.general.GeneralUserServiceI;
 import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
@@ -23,6 +25,9 @@ public class GeneralUserController extends ArcController<User>{
     @Autowired
     private GeneralUserServiceI userService;
 
+    @Autowired
+    private DepartmentServiceI departmentService;
+
     @RequestMapping(value = "" , method = RequestMethod.GET )
     @Override
     public String list(User user, HttpServletRequest request, Model model) {
@@ -40,8 +45,12 @@ public class GeneralUserController extends ArcController<User>{
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     @Override
     public String query4Edit(@PathVariable String id, HttpServletRequest request, Model model) {
+
         User user = userService.appReadDetail(id);
+        List<Department> departments = departmentService.appReadList(new Department());
+
         model.addAttribute("user",user);
+        model.addAttribute("departments",departments);
 
         return "bus/user/edit";
     }
@@ -57,7 +66,7 @@ public class GeneralUserController extends ArcController<User>{
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "修改普通用户信息失败");
         }
-        return "redirect:/admin/users";
+        return "redirect:/admin/user/general";
     }
 
     @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
@@ -71,12 +80,16 @@ public class GeneralUserController extends ArcController<User>{
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除普通用户信息失败");
         }
-        return "redirect:/admin/users";
+        return "redirect:/admin/user/general";
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.GET)
     @Override
     public String routeAdd(HttpServletRequest request, Model model) {
+
+        List<Department> departments = departmentService.appReadList(new Department());
+
+        model.addAttribute("departments",departments);
         return "bus/user/add";
     }
 
@@ -91,6 +104,6 @@ public class GeneralUserController extends ArcController<User>{
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "增加普通用户信息失败");
         }
-        return "redirect:/admin/users";
+        return "redirect:/admin/user/general";
     }
 }

@@ -2666,7 +2666,7 @@ a.forum-item-title:hover {
 }
 /* New Timeline style */
 .vertical-container {
-  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+  /* this class is used to give a max-width to the Element it is applied to, and center it horizontally when it reaches that max-width */
   width: 90%;
   max-width: 1170px;
   margin: 0 auto;
@@ -6837,7 +6837,7 @@ body.landing-page {
   -------------------------------------------------- */
   /* Carousel base class */
   /* Since positioning the image, we need to help out the caption */
-  /* Declare heights because of positioning of img element */
+  /* Declare heights because of positioning of img Element */
   /* Sections
   ------------------------- */
   /* Buttons - only primary custom button

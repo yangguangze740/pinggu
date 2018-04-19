@@ -346,7 +346,7 @@ hr.fc-divider {
 .fc-bgevent-skeleton,
 .fc-highlight-skeleton,
 .fc-helper-skeleton {
-	/* these element should always cling to top-left/right corners */
+	/* these Element should always cling to top-left/right corners */
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -495,7 +495,7 @@ temporary rendered events).
 .fc-scroller > .fc-day-grid,
 .fc-scroller > .fc-time-grid {
 	position: relative; /* re-scope all positions */
-	width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
+	width: 100%; /* hack to force re-sizing this inner Element when scrollbars appear/disappear */
 }
 
 
@@ -862,7 +862,7 @@ a.fc-more:hover {
 }
 
 .fc-view, /* scope positioning and z-index's for everything within the view */
-.fc-view > table { /* so dragged elements can be above the view's main element */
+.fc-view > table { /* so dragged elements can be above the view's main Element */
 	position: relative;
 	z-index: 1;
 }

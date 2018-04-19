@@ -9,7 +9,7 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, rateUserUrl=${'/admin/rateUser'}">
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, rateUserUrl=${'/admin/user/rater'}">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -42,7 +42,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content" th:with="actionUrl=${'/admin/rateUser/edit'}">
+                        <div class="ibox-content" th:with="actionUrl=${'/admin/user/rater/edit'}">
                             <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
                                 <input type="hidden" name="raterUserId" th:value="${rateUser.raterUserId}">
                                 <div class="form-group">

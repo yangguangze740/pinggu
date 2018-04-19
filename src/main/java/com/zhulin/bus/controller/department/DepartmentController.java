@@ -6,9 +6,7 @@ import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.type.TypeServiceI;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
-import com.zhulin.pojo.SystemUser;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import com.zhulin.sys.pojo.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/department")
