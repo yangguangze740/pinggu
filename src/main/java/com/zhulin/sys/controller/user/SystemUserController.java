@@ -1,5 +1,6 @@
 package com.zhulin.sys.controller.user;
 
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.sys.pojo.SystemRole;
 import com.zhulin.sys.pojo.SystemUser;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/user")
+@ClassMenuURL(value = "/admin/user", group = "system", name = "系统用户管理", groupName = "系统配置")
 public class SystemUserController {
 
     @Autowired

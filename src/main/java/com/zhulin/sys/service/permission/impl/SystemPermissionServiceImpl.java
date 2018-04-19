@@ -52,7 +52,7 @@ public class SystemPermissionServiceImpl implements SystemPermissionServiceI {
         return groupPermissions;
     }
 
-    @MethodRolePermission(group = "role", name = "角色权限查询", value = "role:rqr", groupName = "权限")
+    @MethodRolePermission(group = "role", name = "角色权限查询", value = "role:rpr", groupName = "角色组")
     @Override
     public List<SystemPermission> readRolePermissionList(String id) {
         return systemPermissionMapper.selectRolePermissionList(id);
