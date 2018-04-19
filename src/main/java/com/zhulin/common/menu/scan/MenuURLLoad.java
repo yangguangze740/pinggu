@@ -73,7 +73,7 @@ public class MenuURLLoad {
         if (LOGGER.isInfoEnabled()) {
             for (Class<?> clazz : this.scanClasses) {
                 LOGGER.info("===================================================================================================================================================================");
-                LOGGER.info("[MENU LOAD -> com.zhulin.project.common.menu.scan.scanAnnotationMenus -> scanAnnotationMenus] found class {}.", clazz.getName());
+                LOGGER.info("[MENU LOAD -> com.zhulin.Project.common.menu.scan.scanAnnotationMenus -> scanAnnotationMenus] found class {}.", clazz.getName());
             }
         }
 
@@ -95,7 +95,7 @@ public class MenuURLLoad {
         if (LOGGER.isInfoEnabled()) {
             for (Menu menu : menus) {
                 LOGGER.info("===================================================================================================================================================================");
-                LOGGER.info("[MENU LOAD -> com.zhulin.project.common.menu.scan.MenuURLLoad -> scanAnnotationMenus] menu menuGroup : {} menuName : {} URL {}.",
+                LOGGER.info("[MENU LOAD -> com.zhulin.Project.common.menu.scan.MenuURLLoad -> scanAnnotationMenus] menu menuGroup : {} menuName : {} URL {}.",
                         menu.getMenuGroupName(), menu.getMenuName(), menu.getMenuURL());
             }
         }

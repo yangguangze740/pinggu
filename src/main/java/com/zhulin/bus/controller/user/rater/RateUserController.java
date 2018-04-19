@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/rateUser")
+@RequestMapping("/admin/user/rater")
 public class RateUserController extends ArcController<RateUser> {
     @Autowired
     private RateUserServiceI rateUserService;
@@ -55,7 +55,7 @@ public class RateUserController extends ArcController<RateUser> {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "修改评审用户信息失败");
         }
-        return "redirect:/admin/rateUser";
+        return "redirect:/admin/user/rater";
     }
 
     @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class RateUserController extends ArcController<RateUser> {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除评审用户信息失败");
         }
-        return "redirect:/admin/rateUser";
+        return "redirect:/admin/user/rater";
 
     }
 
@@ -91,6 +91,6 @@ public class RateUserController extends ArcController<RateUser> {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "增加评审用户信息失败");
         }
-        return "redirect:/admin/rateUser";
+        return "redirect:/admin/user/rater";
     }
 }

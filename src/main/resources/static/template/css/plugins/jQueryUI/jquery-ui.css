@@ -225,7 +225,7 @@ button.ui-button-icons-only {
 	width: 3.7em;
 }
 
-/* button text element */
+/* button text Element */
 .ui-button .ui-button-text {
 	display: block;
 	line-height: normal;
@@ -255,7 +255,7 @@ input.ui-button {
 	padding: .4em 1em;
 }
 
-/* button icon element(s) */
+/* button icon Element(s) */
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
 .ui-button-text-icon-secondary .ui-icon,
@@ -727,7 +727,7 @@ button.ui-button::-moz-focus-inner {
 	background-position: -65px -16px;
 }
 .ui-tabs {
-	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+	position: relative;/* position: relative prevents IE scroll bug (Element with position: relative inside container with overflow: auto appear as "fixed") */
 	padding: .2em;
 }
 .ui-tabs .ui-tabs-nav {

@@ -40,7 +40,7 @@ public interface GeneralUserMapper extends ArcMapper<User>{
     @Override
     User selectDetail(String id);
 
-    @Insert("INSERT INTO pinggu_general_user (userId, departmentId,userName,userPassword,,userAccount) VALUES (#{userId}, #{departmentId},#{userName},#{userPassword},#{userAccount})")
+    @Insert("INSERT INTO pinggu_general_user (userId,departmentId,userName,userPassword,userAccount) VALUES (#{userId},#{departmentId},#{userName},#{userName},#{userAccount})")
     @Override
     boolean insert(User user);
 

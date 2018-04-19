@@ -76,9 +76,9 @@ public final class HTMLFilter {
     private static final ConcurrentMap<String,Pattern> P_REMOVE_PAIR_BLANKS = new ConcurrentHashMap<String, Pattern>();
     private static final ConcurrentMap<String,Pattern> P_REMOVE_SELF_BLANKS = new ConcurrentHashMap<String, Pattern>();
 
-    /** set of allowed html elements, along with allowed attributes for each element **/
+    /** set of allowed html elements, along with allowed attributes for each Element **/
     private final Map<String, List<String>> vAllowed;
-    /** counts of open tags for each (allowable) html element **/
+    /** counts of open tags for each (allowable) html Element **/
     private final Map<String, Integer> vTagCounts = new HashMap<String, Integer>();
 
     /** html elements which must always be self-closing (e.g. "<img />") **/

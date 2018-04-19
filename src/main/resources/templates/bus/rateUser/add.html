@@ -9,7 +9,7 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, typeUrl=${'/admin/rateUser'}">
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, typeUrl=${'/admin/user/rater'}">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -42,7 +42,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content" th:with="actionUrl=${'/admin/rateUser/add'}">
+                        <div class="ibox-content" th:with="actionUrl=${'/admin/user/rater/add'}">
                             <form id="addForm" method="post" class="form-horizontal" th:action="${actionUrl}">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">评估用户名</label>

@@ -78,7 +78,7 @@ public class SystemPermissionConfigPreload {
         if (LOGGER.isInfoEnabled()) {
             for (Class<?> clazz : this.scanClasses) {
                 LOGGER.info("===================================================================================================================================================================");
-                LOGGER.info("[PRELOAD -> com.zl.project.common.permission.preload.SystemPermissionConfigPreload -> scanAnnotationClasses] found class {}.", clazz.getName());
+                LOGGER.info("[PRELOAD -> com.zl.Project.common.permission.preload.SystemPermissionConfigPreload -> scanAnnotationClasses] found class {}.", clazz.getName());
             }
         }
 
@@ -136,14 +136,14 @@ public class SystemPermissionConfigPreload {
         if (LOGGER.isInfoEnabled()) {
             for (ClassRole classRoleVO : classRoles) {
                 LOGGER.info("===================================================================================================================================================================");
-                LOGGER.info("[PRELOAD -> com.zl.project.common.permission.preload.SystemPermissionConfigPreload -> scanAnnotationClasses] classRole group : {} name : {} role {}.",
+                LOGGER.info("[PRELOAD -> com.zl.Project.common.permission.preload.SystemPermissionConfigPreload -> scanAnnotationClasses] classRole group : {} name : {} role {}.",
                         classRoleVO.getGroup(), classRoleVO.getName(), classRoleVO.getValue());
             }
         }
         if (LOGGER.isInfoEnabled()) {
             for (MethodPermission methodPermissionVO : methodPermissions) {
                 LOGGER.info("===================================================================================================================================================================");
-                LOGGER.info("[PRELOAD -> com.zl.project.common.permission.preload.SystemPermissionConfigPreload -> scanAnnotationClasses] methodPermission group : {} name : {} permission {}.",
+                LOGGER.info("[PRELOAD -> com.zl.Project.common.permission.preload.SystemPermissionConfigPreload -> scanAnnotationClasses] methodPermission group : {} name : {} permission {}.",
                         methodPermissionVO.getGroup(), methodPermissionVO.getName(), methodPermissionVO.getValue());
             }
             LOGGER.info("===================================================================================================================================================================");
