@@ -44,7 +44,7 @@
                         </div>
                         <div class="ibox-content" th:with="actionUrl=${'/admin/element/edit'}">
                             <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
-                                <input type="hidden" name="userId" th:value="${element.elementId}">
+                                <input type="hidden" name="elementId" th:value="${element.elementId}">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">姓名</label>
                                     <div class="col-sm-8">

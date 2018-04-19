@@ -56,6 +56,7 @@ public class ElementController extends ArcController<Element>{
         return "bus/element/edit";
     }
 
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @Override
     public String update(Element element, HttpServletRequest request, Model model, RedirectAttributes message) {
         boolean isUpadate = elementService.appUpdate(element);
