@@ -2263,7 +2263,7 @@
     }
   }
 
-  // Register a change to a single line. Type must be one of "text",
+  // Register a change to a single line. type must be one of "text",
   // "gutter", "class", "widget"
   function regLineChange(cm, line, type) {
     cm.curOp.viewChanged = true;

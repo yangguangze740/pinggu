@@ -10,6 +10,15 @@ public class Department {
     private String adminId;
     private int lockFlag;
     private List<String> typeIds;
+    private List<String> problemIds;
+
+    public List<String> getProblemIds() {
+        return problemIds;
+    }
+
+    public void setProblemIds(List<String> problemIds) {
+        this.problemIds = problemIds;
+    }
 
     public List<String> getTypeIds() {
         return typeIds;

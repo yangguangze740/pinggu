@@ -1,6 +1,7 @@
 package com.zhulin.bus.mapper.department;
 
 import com.zhulin.bus.bean.Department;
+import com.zhulin.bus.bean.DepartmentProblem;
 import com.zhulin.bus.bean.DepartmentType;
 import com.zhulin.bus.mapper.department.provider.DepartmentInsertProvider;
 import com.zhulin.framework.mapper.ArcMapper;
@@ -44,4 +45,10 @@ public interface DepartmentMapper extends ArcMapper<Department>{
             @Result(column = "lockFlag", property = "lockFlag")
     })
     Department selectDetail(String id);
+
+    @Delete("DELETE FROM pinggu_problem_department WHERE departmentId = #{value}")
+    int deleteDepartmentPro(String departmentId);
+
+    @InsertProvider(type = DepartmentInsertProvider.class, method = "insertDepartmentProblems")
+    int insertDepartmentPro(List<DepartmentProblem> departmentProblems);
 }

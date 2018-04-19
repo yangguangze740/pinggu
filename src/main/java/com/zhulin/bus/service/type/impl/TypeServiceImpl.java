@@ -1,11 +1,12 @@
 package com.zhulin.bus.service.type.impl;
 
 import com.zhulin.bus.bean.Type;
-import com.zhulin.bus.mapper.Type.TypeMapper;
+import com.zhulin.bus.mapper.type.TypeMapper;
 import com.zhulin.bus.service.type.TypeServiceI;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,20 +29,22 @@ public class TypeServiceImpl implements TypeServiceI{
         return typeMapper.selectDetail(id);
     }
 
+    @Transactional
     @Override
     public boolean appUpdate(Type type) {
         return typeMapper.update(type);
     }
 
+    @Transactional
     @Override
     public boolean appDelete(String id) {
         return typeMapper.delete(id);
     }
 
+    @Transactional
     @Override
     public boolean appCreate(Type type) {
         type.setTypeId(PrimaryKeyUtil.uuidPrimaryKey());
-        type.setTypeFileNumber(0);
 
         return typeMapper.insert(type);
     }

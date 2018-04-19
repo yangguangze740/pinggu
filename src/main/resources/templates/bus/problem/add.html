@@ -9,7 +9,7 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, typeUrl=${'/admin/type'}">
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, typeUrl=${'/admin/problem'}">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -19,10 +19,10 @@
                         <a th:href="${homeUrl}">首页</a>
                     </li>
                     <li>
-                        <a th:href="${typeUrl}">部门类别管理</a>
+                        <a th:href="${typeUrl}">问题管理</a>
                     </li>
                     <li class="active">
-                        <strong>部门类别编辑</strong>
+                        <strong>问题添加</strong>
                     </li>
                 </ol>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>部门类别编辑</h5>
+                            <h5>问题添加</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -42,19 +42,12 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content" th:with="actionUrl=${'/admin/type/edit'}">
-                            <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
-                                <input type="hidden" name="typeId" th:value="${type.typeId}">
+                        <div class="ibox-content" th:with="actionUrl=${'/admin/problem/add'}">
+                            <form id="addForm" method="post" class="form-horizontal" th:action="${actionUrl}">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">部门类别名</label>
+                                    <label class="col-sm-3 control-label">问题名</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="typeName" th:value="${type.typeName}"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">类别文件数</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="typeFileNumber" th:value="${type.typeFileNumber}"/>
+                                        <input type="text" class="form-control" name="problemContent" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -91,29 +84,16 @@
 
 <script th:inline="javascript">
     $(function() {
-        // 数字验证
-        jQuery.validator.addMethod("shuzi", function(value, element) {
-            return this.optional(element) || /^[0-9]+$/.test(value);
-        }, "请输入数字");
-
         // 前台验证
-        $("#editForm").validate({
+        $("#addForm").validate({
             rules: {
-                typeName: {
+                problemContent: {
                     required: true
-                },
-                typeFileNumber: {
-                    required: true,
-                    shuzi: true
                 }
             },
             messages: {
-                typeName: {
-                    required: "请填写部门类别名称"
-                },
-                typeFileNumber: {
-                    required: "请填写类别文件数",
-                    shuzi: "请填写数字"
+                problemContent: {
+                    required: "请填写问题内容"
                 }
             }
         });
