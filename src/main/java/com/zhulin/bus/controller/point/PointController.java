@@ -28,7 +28,7 @@ public class PointController extends ArcController<Point>{
     @Autowired
     private DutyDepartmentServiceI dutyDepartmentService;
 
-    
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @Override

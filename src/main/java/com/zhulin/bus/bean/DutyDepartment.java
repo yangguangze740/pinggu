@@ -1,0 +1,63 @@
+package com.zhulin.bus.bean;
+
+
+import java.sql.Timestamp;
+
+public class DutyDepartment {
+    private String dutyDepartmentId;
+    private String dutyName;
+    private Timestamp dutyCreateTime;
+    private String adminId;
+    private String deleteFlag;
+    private String lockFlag;
+
+    public String getDutyDepartmentId() {
+        return dutyDepartmentId;
+    }
+
+    public void setDutyDepartmentId(String dutyDepartmentId) {
+        this.dutyDepartmentId = dutyDepartmentId;
+    }
+
+    public String getDutyName() {
+        return dutyName;
+    }
+
+    public void setDutyName(String dutyName) {
+        this.dutyName = dutyName;
+    }
+
+    public Timestamp getDutyCreateTime() {
+        return dutyCreateTime;
+    }
+
+    public void setDutyCreateTime(Timestamp dutyCreateTime) {
+        this.dutyCreateTime = dutyCreateTime;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(String deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    public String getLockFlag() {
+        return lockFlag;
+    }
+
+    public void setLockFlag(String lockFlag) {
+        this.lockFlag = lockFlag;
+    }
+
+
+}
