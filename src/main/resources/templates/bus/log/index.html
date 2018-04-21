@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head"></head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="layout/leftNav :: leftNav"></div>
+
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/index'}, typeUrl=${'/admin/role'}">
+        <div th:replace="layout/topHeader :: topHeader"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>系统配置管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a th:href="${homeUrl}">首页</a>
+                    </li>
+                    <li>
+                        <a th:href="${typeUrl}">日志管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>日志列表</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>日志列表</h5>
+                            <div class="ibox-tools" th:with="typeAddUrl=${'/admin/department/add'}">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作</th>
+                                            <th>操作者</th>
+                                            <th>操作时间</th>
+                                            <th>操作Ip</th>
+                                            <th>操作内容</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="log, status:${logs}">
+                                            <td th:text="${status.index + 1}"></td>
+                                            <td th:if="${log.logAction}==1" th:text="检索"></td>
+                                            <td th:if="${log.logAction}==2" th:text="删除"></td>
+                                            <td th:if="${log.logAction}==3" th:text="添加"></td>
+                                            <td th:if="${log.logAction}==4" th:text="修改"></td>
+                                            <td th:if="${log.logAction}==5" th:text="其他"></td>
+                                            <td th:text="${log.logUser}"></td>
+                                            <td th:text="${log.logTime}"></td>
+                                            <td th:text="${log.logIp}"></td>
+                                            <td th:text="${log.logContent}"></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>操作</th>
+                                            <th>操作者</th>
+                                            <th>操作时间</th>
+                                            <th>操作Ip</th>
+                                            <th>操作内容</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/bottomFooter :: bottomFooter"></div>
+
+    </div>
+</div>
+
+<!-- Page-Level Scripts -->
+<script th:src="@{/def/listPage.js}"></script>
+
+<script th:inline="javascript">
+    $(function () {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": true,
+            "preventDuplicates": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        var msg = [[${message}]];
+        var msgCode = [[${msgCode}]];
+
+        if (msgCode == 200) {
+            toastr.success(msg);
+        } else if (msgCode == 500) {
+            toastr.error(msg);
+        }
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    });
+</script>
+</body>
+</html>

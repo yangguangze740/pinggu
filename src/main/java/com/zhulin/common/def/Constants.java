@@ -62,4 +62,10 @@ public class Constants {
 
     /* 用户登陆后遍历的菜单,无父菜单的菜单 */
     public static final String USER_MENU_LEVEL_1 = "userMenuLevel1";
+
+    /**
+     * excel文件后缀名
+     */
+    public static final String EXCEL_FILE_SUFFIX_1 = ".xls";
+    public static final String EXCEL_FILE_SUFFIX_2 = ".xlsx";
 }
