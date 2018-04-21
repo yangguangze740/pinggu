@@ -7,6 +7,7 @@ import com.zhulin.bus.service.user.rater.RateUserServiceI;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,16 +26,19 @@ public class RateUserServiceImpl implements RateUserServiceI{
         return rateUserMapper.selectDetail(id);
     }
 
+    @Transactional
     @Override
     public boolean appUpdate(RateUser rateUser) {
         return rateUserMapper.update(rateUser);
     }
 
+    @Transactional
     @Override
     public boolean appDelete(String id) {
         return rateUserMapper.delete(id);
     }
 
+    @Transactional
     @Override
     public boolean appCreate(RateUser rateUser) {
         String primaryKey = PrimaryKeyUtil.uuidPrimaryKey();

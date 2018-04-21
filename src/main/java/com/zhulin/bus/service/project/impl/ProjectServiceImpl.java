@@ -6,6 +6,7 @@ import com.zhulin.bus.service.project.ProjectServiceI;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,16 +26,19 @@ public class ProjectServiceImpl implements ProjectServiceI{
         return projectMapper.selectDetail(id);
     }
 
+    @Transactional
     @Override
     public boolean appUpdate(Project project) {
         return projectMapper.update(project);
     }
 
+    @Transactional
     @Override
     public boolean appDelete(String id) {
         return projectMapper.delete(id);
     }
 
+    @Transactional
     @Override
     public boolean appCreate(Project project) {
 

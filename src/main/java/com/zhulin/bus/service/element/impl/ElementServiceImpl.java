@@ -47,6 +47,7 @@ public class ElementServiceImpl implements ElementServiceI{
         return elementMapper.insert(element);
     }
 
+
     @Override
     public List<Element> appReadProjectElements(String projectId) {
         return elementMapper.selectProjectElements(projectId);
