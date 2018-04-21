@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head"></head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="layout/leftNav :: leftNav"></div>
+
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, typeUrl=${'/admin/lead'}">
+        <div th:replace="layout/topHeader :: topHeader"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>基础信息管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a th:href="${homeUrl}">首页</a>
+                    </li>
+                    <li>
+                        <a th:href="${typeUrl}">文件管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>文件列表</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>文件列表</h5>
+                            <div class="ibox-tools" th:with="typeAddUrl=${'/admin/lead/add'}">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th>部门</th>
+                                        <th>类别</th>
+                                        <th>用户</th>
+                                        <th>文件名</th>
+                                        <th>文件类型</th>
+                                        <th>上传时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="raterFile:${raterFiles}">
+                                        <td th:each="department:${departments}" th:if="${department.departmentId}==${raterFile.departmentId}" th:text="${department.departmentName}"></td>
+                                        <td th:each="type:${types}" th:if="${type.typeId}==${raterFile.departmentTypeId}" th:text="${type.typeName}"></td>
+                                        <td th:each="user:${users}" th:if="${user.userId}==${raterFile.userId}" th:text="${user.userName}"></td>
+                                        <td th:text="${raterFile.raterFileName}"></td>
+                                        <td th:text="${raterFile.fileTypeFlag}"></td>
+                                        <td th:text="${raterFile.raterFileCreateTime}"></td>
+                                        <td>
+                                            <button type="button" th:fileName="${raterFile.raterFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${raterFile.fileTypeFlag} eq 'pdf'" th:id="${raterFile.raterFileId}">预览</button>
+                                            <a th:href="${'/admin/raterFile/downLoad?c=' + raterFile.raterFileId}">
+                                                <button type="button" class="btn btn-m btn-info" th:if="${raterFile.fileTypeFlag} ne 'pdf'" th:id="${raterFile.raterFileId}">下载</button>
+                                            </a>
+                                            <a th:href="${'/admin/raterFile/delete/' + raterFile.raterFileId}">
+                                                <!--<button type="button" class="btn btn-w-m btn-danger">删除</button>-->
+                                                <button class="btn btn-m btn-danger" data-toggle="confirmation"
+                                                        data-btn-ok-label="确定" data-btn-ok-class="btn-success"
+                                                        data-btn-ok-icon-class="material-icons" data-btn-ok-icon-content="check"
+                                                        data-btn-cancel-label="取消" data-btn-cancel-class="btn-danger"
+                                                        data-btn-cancel-icon-class="material-icons" data-btn-cancel-icon-content="close"
+                                                        data-title="确定删除?" data-content="注意操作不可回滚">
+                                                    删除
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>部门</th>
+                                        <th>类别</th>
+                                        <th>用户</th>
+                                        <th>文件名</th>
+                                        <th>文件类型</th>
+                                        <th>上传时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/bottomFooter :: bottomFooter"></div>
+
+        <!-- PDF文件预览-->
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-lg" id="pdfPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="pdfPreviewFileName"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="pdfiFrame" width='100%' height='700px' allowfullscreen webkitallowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $(function () {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": true,
+            "preventDuplicates": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        var msg = [[${message}]];
+        var msgCode = [[${msgCode}]];
+
+        console.log(msgCode + " : " + msg);
+
+        if (msgCode == 200) {
+            toastr.success(msg);
+        } else if (msgCode == 500) {
+            toastr.error(msg);
+        }
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+
+        // pdf预览
+        $(".pdfPreview").click(function () {
+            var fileId = $(this).attr("id");
+            var fileName = $(this).attr("fileName");
+
+            $("#pdfPreviewFileName").html(fileName);
+
+            var previewUrl = '/pdf/web/viewer.html?file=/admin/raterFile/preview/' + fileId;
+
+            $("#pdfiFrame").attr("src", previewUrl)
+        });
+    });
+</script>
+
+<!-- Page-Level Scripts -->
+<script th:src="@{/def/listPage.js}"></script>
+
+</body>
+
+</html>
