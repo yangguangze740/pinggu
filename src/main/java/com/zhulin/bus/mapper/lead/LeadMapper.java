@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface LeadMapper extends ArcMapper<Lead>{
     @Override
-    @Select("SELECT leadId, leadName, leadCreateTime, adminId, lockFlag FROM pinggu_lead WHERE deleteFlag=0")
+    @Select("SELECT leadDepartmentId, leadName, leadCreateTime, adminId, lockFlag FROM pinggu_lead_department WHERE deleteFlag=0")
     @Results({
-            @Result(id = true, column = "leadId", property = "leadId"),
+            @Result(id = true, column = "leadDepartmentId", property = "leadDepartmentId"),
             @Result(column = "leadName", property = "leadName"),
             @Result(column = "leadCreateTime", property = "leadCreateTime"),
             @Result(column = "adminId", property = "adminId"),
@@ -20,13 +20,13 @@ public interface LeadMapper extends ArcMapper<Lead>{
     List<Lead> selectList(Lead lead);
 
     @Override
-    @Update("UPDATE pinggu_lead SET leadName=#{leadName} WHERE leadId=#{leadId}")
+    @Update("UPDATE pinggu_lead_department SET leadName=#{leadName} WHERE leadDepartmentId=#{leadDepartmentId}")
     boolean update(Lead lead);
 
     @Override
-    @Select("SELECT leadId, leadName, leadCreateTime, adminId, lockFlag FROM pinggu_lead WHERE leadId=#{leadId}")
+    @Select("SELECT leadDepartmentId, leadName, leadCreateTime, adminId, lockFlag FROM pinggu_lead_department WHERE leadDepartmentId=#{leadDepartmentId}")
     @Results({
-            @Result(id = true, column = "leadId", property = "leadId"),
+            @Result(id = true, column = "leadDepartmentId", property = "leadDepartmentId"),
             @Result(column = "leadName", property = "leadName"),
             @Result(column = "leadCreateTime", property = "leadCreateTime"),
             @Result(column = "adminId", property = "adminId"),
@@ -35,10 +35,10 @@ public interface LeadMapper extends ArcMapper<Lead>{
     Lead selectDetail(String id);
 
     @Override
-    @Insert("INSERT INTO pinggu_lead (leadId, leadName, adminId) VALUES (#{leadId}, #{leadName}, #{adminId})")
+    @Insert("INSERT INTO pinggu_lead_department (leadDepartmentId, leadName, adminId) VALUES (#{leadDepartmentId}, #{leadName}, #{adminId})")
     boolean insert(Lead lead);
 
     @Override
-    @Update("UPDATE pinggu_lead SET deleteFlag=1 WHERE leadId=#{value}")
+    @Update("UPDATE pinggu_lead_department SET deleteFlag=1 WHERE leadDepartmentId=#{value}")
     boolean delete(String id);
 }

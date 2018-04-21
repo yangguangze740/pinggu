@@ -42,4 +42,9 @@ public class DutyDepartmentServiceImpl implements DutyDepartmentServiceI{
 
         return dutyDepartmentMapper.insert(dutyDepartment);
     }
+
+    @Override
+    public List<DutyDepartment> haveDutyDepartments(String id) {
+        return dutyDepartmentMapper.selectHaveDutyDepartments(id);
+    }
 }

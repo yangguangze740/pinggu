@@ -44,7 +44,7 @@
                         </div>
                         <div class="ibox-content" th:with="actionUrl=${'/admin/lead/edit'}">
                             <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
-                                <input type="hidden" name="leadId" th:value="${lead.leadId}">
+                                <input type="hidden" name="leadDepartmentId" th:value="${lead.leadDepartmentId}">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">部门类别名</label>
                                     <div class="col-sm-8">

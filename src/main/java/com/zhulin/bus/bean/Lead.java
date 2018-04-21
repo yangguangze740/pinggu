@@ -3,7 +3,7 @@ package com.zhulin.bus.bean;
 import java.sql.Time;
 
 public class Lead {
-    private String leadId;
+    private String leadDepartmentId;
     private String leadName;
     private Time leadCreateTime;
     private String adminId;
@@ -54,13 +54,12 @@ public class Lead {
         this.leadName = leadName;
     }
 
-    public String getLeadId() {
-
-        return leadId;
+    public String getLeadDepartmentId() {
+        return leadDepartmentId;
     }
 
-    public void setLeadId(String leadId) {
-        this.leadId = leadId;
+    public void setLeadDepartmentId(String leadDepartmentId) {
+        this.leadDepartmentId = leadDepartmentId;
     }
 }
 

@@ -43,4 +43,11 @@ public interface ElementMapper extends ArcMapper<Element> {
     @Delete("DELETE FROM pinggu_review_element WHERE elementId = #{value}")
     @Override
     boolean delete(String id);
+
+    @Select("SELECT elementId, elementName FROM pinggu_review_element WHERE projectId = #{project} AND deleteFlag = 0 ORDER BY elementSort")
+    @Results({
+            @Result(id = true, column = "elementId", property = "elementId"),
+            @Result(column = "elementName", property = "elementName")
+    })
+    List<Element> selectProjectElements(String projectId);
 }

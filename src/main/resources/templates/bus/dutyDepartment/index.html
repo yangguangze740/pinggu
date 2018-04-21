@@ -46,18 +46,17 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover dataTables-example" >
                                     <thead>
                                     <tr>
-                                        <th>责任部门名</th>
+                                        <th>责任部门</th>
                                         <th>创建时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="dutyDepartment,${dutyDepartments}">
+                                    <tr th:each="dutyDepartment:${dutyDepartments}">
                                         <td th:text="${dutyDepartment.dutyName}"></td>
                                         <td th:text="${dutyDepartment.dutyCreateTime}"></td>
                                         <td>

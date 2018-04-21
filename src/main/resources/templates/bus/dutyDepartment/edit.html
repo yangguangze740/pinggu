@@ -44,7 +44,7 @@
                         </div>
                         <div class="ibox-content" th:with="actionUrl=${'/admin/department/duty/edit'}">
                             <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
-                                <input type="hidden" name="projectId" th:value="${dutyDepartment.dutyDepartmentId}">
+                                <input type="hidden" name="dutyDepartmentId" th:value="${dutyDepartment.dutyDepartmentId}">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">责任部门名</label>
                                     <div class="col-sm-8">

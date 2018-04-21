@@ -42,7 +42,7 @@ public class LeadServiceImpl implements LeadServiceI{
     @Override
     public boolean appCreate(Lead lead) {
         String id = PrimaryKeyUtil.uuidPrimaryKey();
-        lead.setLeadId(id);
+        lead.setLeadDepartmentId(id);
 
         return leadMapper.insert(lead);
     }

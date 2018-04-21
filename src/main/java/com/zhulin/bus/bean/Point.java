@@ -2,13 +2,14 @@ package com.zhulin.bus.bean;
 
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Point {
     private String pointId;
     private String pointName;
     private Timestamp pointCreateTime;
     private String adminId;
-    private String pointSort;
+    private int pointSort;
     private String deleteFlag;
     private String elementId;
     private String elementName;
@@ -16,6 +17,41 @@ public class Point {
     private String dutyName;
     private String leadDepartmentId;
     private String leadName;
+    private List<String> dutyDepartmentIds;
+    private String projectName;
+    private String projectId;
+
+    public int getPointSort() {
+        return pointSort;
+    }
+
+    public void setPointSort(int pointSort) {
+        this.pointSort = pointSort;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public List<String> getDutyDepartmentIds() {
+        return dutyDepartmentIds;
+    }
+
+    public void setDutyDepartmentIds(List<String> dutyDepartmentIds) {
+        this.dutyDepartmentIds = dutyDepartmentIds;
+    }
 
     public String getPointId() {
         return pointId;
@@ -47,14 +83,6 @@ public class Point {
 
     public void setAdminId(String adminId) {
         this.adminId = adminId;
-    }
-
-    public String getPointSort() {
-        return pointSort;
-    }
-
-    public void setPointSort(String pointSort) {
-        this.pointSort = pointSort;
     }
 
     public String getDeleteFlag() {

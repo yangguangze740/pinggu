@@ -10,6 +10,15 @@ public class DutyDepartment {
     private String adminId;
     private String deleteFlag;
     private String lockFlag;
+    private String pointId;
+
+    public String getPointId() {
+        return pointId;
+    }
+
+    public void setPointId(String pointId) {
+        this.pointId = pointId;
+    }
 
     public String getDutyDepartmentId() {
         return dutyDepartmentId;

@@ -40,4 +40,11 @@ public interface DutyDepartmentMapper extends ArcMapper<DutyDepartment>{
     @Update("UPDATE pinggu_duty_department SET deleteFlag = '1' WHERE dutyDepartmentId = #{dutyDepartmentId}")
     @Override
     boolean delete(String id);
+
+    @Select("SELECT dutyDepartmentId, dutyName FROM pinggu_duty_department WHERE dutyDepartmentId IN (SELECT dutyDepartmentId FROM pinggu_review_point_duty_department WHERE pointId = #{value}) AND deleteFlag = 0")
+    @Results({
+            @Result(id = true, column = "dutyDepartmentId", property = "dutyDepartmentId"),
+            @Result(column = "dutyName", property = "dutyName"),
+    })
+    List<DutyDepartment> selectHaveDutyDepartments(String id);
 }
