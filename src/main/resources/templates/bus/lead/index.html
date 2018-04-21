@@ -61,10 +61,10 @@
                                             <td th:text="${status.index + 1}"></td>
                                             <td th:text="${lead.leadName}"></td>
                                             <td>
-                                                <a th:href="${'/admin/lead/edit/' + lead.leadId}">
+                                                <a th:href="${'/admin/lead/edit/' + lead.leadDepartmentId}">
                                                     <button type="button" class="btn btn-w-m btn-warning">编辑</button>
                                                 </a>
-                                                <a th:href="${'/admin/lead/delete/' + lead.leadId}">
+                                                <a th:href="${'/admin/lead/delete/' + lead.leadDepartmentId}">
                                                     <!--<button type="button" class="btn btn-w-m btn-danger">删除</button>-->
                                                     <button class="btn btn-m btn-danger" data-toggle="confirmation"
                                                             data-btn-ok-label="确定" data-btn-ok-class="btn-success"

@@ -28,7 +28,7 @@ public interface PointMapper extends ArcMapper<Point>{
     @Override
     List<Point> selectList(Point point);
 
-    @Update("UPDATE pinggu_review_point SET pointName = #{pointName},pointSort = #{pointSort},projectId = #{projectId}，elementId = #{elementId},leadDepartmentId = #{leadDepartmentId} WHERE pointId = #{pointId}")
+    @Update("UPDATE pinggu_review_point SET pointName = #{pointName},pointSort = #{pointSort},projectId = #{projectId},elementId = #{elementId},leadDepartmentId = #{leadDepartmentId} WHERE pointId = #{pointId}")
     int updatePoint(Point point);
 
     @Select("SELECT pointId, pointName,pointSort, RP.projectId, RP.elementId, RE.elementName, leadDepartmentId FROM pinggu_review_point RP LEFT JOIN pinggu_review_element RE ON RE.elementId = RP.elementId WHERE pointId = #{value}")

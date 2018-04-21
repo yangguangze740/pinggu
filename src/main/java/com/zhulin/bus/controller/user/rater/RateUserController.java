@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.user.rater;
 
 import com.zhulin.bus.bean.RateUser;
 import com.zhulin.bus.service.user.rater.RateUserServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/user/rater")
+@ClassMenuURL(value = "/admin/user/rater", group = "frontUser", name = "评审用户管理", groupName = "前台用户")
 public class RateUserController extends ArcController<RateUser> {
     @Autowired
     private RateUserServiceI rateUserService;
