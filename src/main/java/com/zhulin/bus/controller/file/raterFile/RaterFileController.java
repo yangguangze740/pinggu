@@ -5,6 +5,7 @@ import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.file.raterFile.RaterFileServiceI;
 import com.zhulin.bus.service.type.TypeServiceI;
 import com.zhulin.bus.service.user.general.impl.GeneralUserServiceImpl;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/raterFile")
+@ClassMenuURL(value = "/admin/raterFile", group = "file", name = "评审文件管理", groupName = "文件管理")
 public class RaterFileController extends ArcController<RaterFile>{
 
     @Autowired

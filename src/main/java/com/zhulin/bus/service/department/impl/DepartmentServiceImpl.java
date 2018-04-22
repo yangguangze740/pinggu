@@ -6,6 +6,8 @@ import com.zhulin.bus.bean.DepartmentType;
 import com.zhulin.bus.bean.Type;
 import com.zhulin.bus.mapper.department.DepartmentMapper;
 import com.zhulin.bus.service.department.DepartmentServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
+import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,22 +19,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@ClassRolePermission(group = "problem", name = "问题管理", value = "problem:m", menuValue = "/admin/department")
 @Service
 public class DepartmentServiceImpl implements DepartmentServiceI{
 
     @Autowired
     private DepartmentMapper departmentMapper;
 
+    @MethodRolePermission(group = "department", name = "部门查看", value = "department:mr", groupName = "部门组")
     @Override
     public List<Department> appReadList(Department department) {
         return departmentMapper.selectList(department);
     }
 
+    @MethodRolePermission(group = "department", name = "部门详细", value = "department:mr", groupName = "部门组")
     @Override
     public Department appReadDetail(String id) {
         return departmentMapper.selectDetail(id);
     }
 
+    @MethodRolePermission(group = "department", name = "部门编辑", value = "department:mu", groupName = "部门组")
     @Transactional
     @Override
     public boolean appUpdate(Department department) {
@@ -60,6 +66,7 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         return (deleteTypeNum >= 0)&&(editDepartment > 0)&&(insertDepartmentTypeNum == departmentIds.size());
     }
 
+    @MethodRolePermission(group = "department", name = "部门删除", value = "department:md", groupName = "部门组")
     @Transactional
     @Override
     public boolean appDelete(String id) {
@@ -70,6 +77,7 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         return (deleteDepartmentNum >= 0) && (deleteDepartmentTypeNum >= 0);
     }
 
+    @MethodRolePermission(group = "department", name = "部门添加", value = "department:mc", groupName = "部门组")
     @Transactional
     @Override
     public boolean appCreate(Department department) {

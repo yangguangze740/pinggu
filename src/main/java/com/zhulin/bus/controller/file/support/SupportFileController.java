@@ -9,6 +9,7 @@ import com.zhulin.bus.service.lead.LeadServiceI;
 import com.zhulin.bus.service.point.PointServiceI;
 import com.zhulin.bus.service.project.ProjectServiceI;
 import com.zhulin.bus.service.user.general.GeneralUserServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -29,6 +30,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/supportFile")
+@ClassMenuURL(value = "/admin/supportFile", name = "支撑文件管理", group = "file", groupName = "文件管理")
 public class SupportFileController extends ArcController<SupportFile>{
 
     @Autowired

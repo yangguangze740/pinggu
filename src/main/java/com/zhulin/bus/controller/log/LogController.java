@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.log;
 
 import com.zhulin.bus.bean.Log;
 import com.zhulin.bus.service.log.LogServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.framework.controller.ArcController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/log")
+@ClassMenuURL(value = "/admin/log", group = "config", name = "日志", groupName = "系统配置")
 public class LogController extends ArcController<Log>{
 
     @Autowired

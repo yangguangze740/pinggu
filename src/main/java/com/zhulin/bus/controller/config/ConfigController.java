@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.config;
 
 import com.zhulin.bus.bean.Config;
 import com.zhulin.bus.service.config.ConfigServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/admin/config")
+@ClassMenuURL(value = "/admin/config", group = "config", name = "系统配置", groupName = "系统配置")
 public class ConfigController extends ArcController<Config> {
 
     @Autowired

@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.score;
 
 import com.zhulin.bus.bean.Score;
 import com.zhulin.bus.service.score.ScoreServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/score")
+@ClassMenuURL(value = "/admin/score", group = "problem", name = "分数管理", groupName = "评审问题")
 public class ScoreController extends ArcController<Score>{
 
     @Autowired
