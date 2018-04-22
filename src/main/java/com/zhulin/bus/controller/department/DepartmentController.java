@@ -126,6 +126,14 @@ public class DepartmentController extends ArcController<Department>{
     public String saveAdd(Department department, HttpServletRequest request, Model model, RedirectAttributes message) {
         SystemUser user = (SystemUser)request.getSession().getAttribute(Constants.LOGIN_USER);
         department.setAdminId(user.getUserId());
+
+        if (department.getTypeIds()==null || department.getTypeIds().isEmpty()){
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加部门失败");
+
+            return "redirect:/admin/department";
+        }
+
         boolean isAdd = departmentServiceI.appCreate(department);
 
         if (isAdd) {
