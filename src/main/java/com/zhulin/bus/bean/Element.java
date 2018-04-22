@@ -12,6 +12,24 @@ public class Element {
     private String adminId;
     private String elementSort;
     private String deleteFlag;
+    private String pointId;
+    private String pointName;
+
+    public String getPointId() {
+        return pointId;
+    }
+
+    public void setPointId(String pointId) {
+        this.pointId = pointId;
+    }
+
+    public String getPointName() {
+        return pointName;
+    }
+
+    public void setPointName(String pointName) {
+        this.pointName = pointName;
+    }
 
     public String getElementId() {
         return elementId;
