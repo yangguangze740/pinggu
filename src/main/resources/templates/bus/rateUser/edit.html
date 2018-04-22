@@ -105,21 +105,25 @@
         // 前台验证
         $("#editForm").validate({
             rules: {
-                ruleName: {
+                raterUserName: {
                     required: true
                 },
-                score: {
-                    required: true,
-                    shuzi: true
+                raterUserPassword: {
+                    required: true
+                },
+                raterUserAccount: {
+                    required: true
                 }
             },
             messages: {
-                ruleName: {
-                    required: "请填写规则名称"
+                raterUserName: {
+                    required: "请填写姓名"
                 },
-                score: {
-                    required: "请填写分值",
-                    shuzi: "请填写数字"
+                raterUserPassword: {
+                    required: "请填写密码"
+                },
+                raterUserAccount: {
+                    required: "请填写登录名"
                 }
             }
         });

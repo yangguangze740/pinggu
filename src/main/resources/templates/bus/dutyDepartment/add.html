@@ -94,20 +94,13 @@
         // 前台验证
         $("#addForm").validate({
             rules: {
-                projectName: {
-                    required: true
-                },
-                projectSort: {
+                dutyName: {
                     required: true
                 }
-
             },
             messages: {
-                projectName: {
-                    required: "请填写审核项目名称"
-                },
-                projectSort: {
-                    required: "请填写排序键"
+                dutyName: {
+                    required: "请填写名称"
                 }
             }
         });

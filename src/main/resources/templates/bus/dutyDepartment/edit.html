@@ -93,21 +93,13 @@
         // 前台验证
         $("#editForm").validate({
             rules: {
-                ruleName: {
+                dutyName: {
                     required: true
-                },
-                score: {
-                    required: true,
-                    shuzi: true
                 }
             },
             messages: {
-                ruleName: {
-                    required: "请填写规则名称"
-                },
-                score: {
-                    required: "请填写分值",
-                    shuzi: "请填写数字"
+                dutyName: {
+                    required: "请填写名称"
                 }
             }
         });
