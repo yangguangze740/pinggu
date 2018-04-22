@@ -51,11 +51,11 @@ logging:
   config: classpath:logBack.xml
 file:
   rater:
-    location: E:/pinggu/rater
+    location: /var/pinggu/rater
   support:
-    location: E:/pinggu/support
+    location: /var/pinggu/support
   archive:
     rater:
-      location: E:/pinggu/archive/rater
+      location: /var/pinggu/archive/rater
     support:
-      location: E:/pinggu/archive/support
+      location: /var/pinggu/archive/support
