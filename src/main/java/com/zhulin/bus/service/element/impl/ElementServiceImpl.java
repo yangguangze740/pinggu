@@ -4,6 +4,7 @@ import com.zhulin.bus.bean.Element;
 import com.zhulin.bus.bean.Point;
 import com.zhulin.bus.mapper.element.ElementMapper;
 import com.zhulin.bus.service.element.ElementServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@ClassRolePermission(group = "supportFile", name = "审查要素管理", value = "element:f", menuValue = "/admin/element")
 @Service
 public class ElementServiceImpl implements ElementServiceI{
 

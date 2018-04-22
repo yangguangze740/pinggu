@@ -67,7 +67,7 @@ public class PointController extends ArcController<Point>{
         List<DutyDepartment> dutyDepartments = dutyDepartmentService.appReadList(new DutyDepartment());
         List<Lead> leads = leadService.appReadList(new Lead());
         List<Project> projects = projectService.appReadList(new Project());
-        List<DutyDepartment> haveDutyDepartments = dutyDepartmentService.haveDutyDepartments(id);
+        List<Point> oldDutyDepartments = pointService.haveDutyDepartments(id);
         Point point = pointService.appReadDetail(id);
 
         String projectId = point.getProjectId();
@@ -77,7 +77,7 @@ public class PointController extends ArcController<Point>{
         model.addAttribute("leads", leads);
         model.addAttribute("point", point);
         model.addAttribute("projects", projects);
-        model.addAttribute("haveDutyDepartments", haveDutyDepartments);
+        model.addAttribute("oldDutyDepartments", oldDutyDepartments);
         model.addAttribute("elements", elements);
 
         return "bus/point/edit";

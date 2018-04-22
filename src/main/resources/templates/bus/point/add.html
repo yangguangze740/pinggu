@@ -109,6 +109,31 @@
 
 <script th:inline="javascript">
     $(function () {
+        // 数字验证
+        jQuery.validator.addMethod("shuzi", function(value, point) {
+            return this.optional(point) || /^[0-9]+$/.test(value);
+        }, "请输入数字");
+
+        // 前台验证
+        $("#addForm").validate({
+            rules: {
+                elementName: {
+                    required: true
+                },
+                elementSort: {
+                    required: true
+                }
+            },
+            messages: {
+                elementName: {
+                    required: "请填写审核要素名"
+                },
+                elementSort: {
+                    required: "请填写排序键",
+                    shuzi: "请填写数字"
+                }
+            }
+        });
         $("#projectId").change(function () {
 
             var projectId = $("#projectId").val();

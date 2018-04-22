@@ -5,6 +5,7 @@ import com.zhulin.bus.bean.Element;
 import com.zhulin.bus.bean.Point;
 import com.zhulin.bus.mapper.point.PointMapper;
 import com.zhulin.bus.service.point.PointServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@ClassRolePermission(group = "supportFile", name = "审查要点管理", value = "point:f", menuValue = "/admin/point")
 @Service
 public class PointServiceImpl implements PointServiceI{
     @Autowired
@@ -53,14 +54,14 @@ public class PointServiceImpl implements PointServiceI{
                 DutyDepartment dutyDepartment = new DutyDepartment();
 
                 dutyDepartment.setDutyDepartmentId(id);
-                dutyDepartment.setDutyDepartmentId(pointId);
+                dutyDepartment.setPointId(pointId);
 
                 dutyDepartments.add(dutyDepartment);
             }
             //添加要点
             int insertDutyDepartmentNum = pointMapper.insertDutyDepartment(dutyDepartments);
 
-            return (deleteDutyDepartmentNum >= 0)&&(editpoint >= 0)&&(insertDutyDepartmentNum == dutyDepartmentIds.size());
+            return (deleteDutyDepartmentNum == point.getOldDutyIds().size())&&(editpoint >= 0)&&(insertDutyDepartmentNum == dutyDepartmentIds.size());
 
         }
     }
@@ -105,5 +106,10 @@ public class PointServiceImpl implements PointServiceI{
     @Override
     public List<Element> queryElementByProjectId(String projectId) {
         return pointMapper.selectElementByProject(projectId);
+    }
+
+    @Override
+    public List<Point> haveDutyDepartments(String id) {
+        return pointMapper.selectOldDepartments(id);
     }
 }

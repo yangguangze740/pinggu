@@ -3,6 +3,7 @@ package com.zhulin.bus.service.DutyDepartment.impl;
 import com.zhulin.bus.bean.DutyDepartment;
 import com.zhulin.bus.mapper.dutyDepartment.DutyDepartmentMapper;
 import com.zhulin.bus.service.DutyDepartment.DutyDepartmentServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@ClassRolePermission(group = "supportFile", name = "牵头部门管理", value = "dutyDepartment:f", menuValue = "/admin/department/duty")
 @Service
 public class DutyDepartmentServiceImpl implements DutyDepartmentServiceI{
 
