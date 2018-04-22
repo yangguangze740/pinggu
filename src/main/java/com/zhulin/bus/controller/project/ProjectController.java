@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.project;
 
 import com.zhulin.bus.bean.Project;
 import com.zhulin.bus.service.project.ProjectServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/project")
+@ClassMenuURL(value = "/admin/project", group = "supportFile", name = "审核项目管理", groupName = "支撑文件")
 public class ProjectController extends ArcController<Project>{
 
     @Autowired

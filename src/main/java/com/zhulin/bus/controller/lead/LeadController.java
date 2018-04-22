@@ -2,10 +2,10 @@ package com.zhulin.bus.controller.lead;
 
 import com.zhulin.bus.bean.Lead;
 import com.zhulin.bus.service.lead.LeadServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
-import org.apache.ibatis.annotations.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/lead")
+@ClassMenuURL(value = "/admin/lead", group = "supportFile", name = "牵头部门管理", groupName = "支撑文件")
 public class LeadController extends ArcController<Lead>{
 
     @Autowired

@@ -6,6 +6,7 @@ import com.zhulin.bus.service.element.ElementServiceI;
 import com.zhulin.bus.service.lead.LeadServiceI;
 import com.zhulin.bus.service.point.PointServiceI;
 import com.zhulin.bus.service.project.ProjectServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -26,6 +27,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/point")
+@ClassMenuURL(value = "/admin/point", group = "supportFile", name = "审核要点管理", groupName = "支撑文件")
 public class PointController extends ArcController<Point>{
 
     @Autowired
