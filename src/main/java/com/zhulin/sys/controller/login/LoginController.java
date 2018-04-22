@@ -67,7 +67,7 @@ public class LoginController {
             session.setAttribute(Constants.USER_MENU_PARENT_LEVEL, userMenus);
             session.setAttribute(Constants.USER_MENU_LEVEL_1, noParentMenus);
 
-            return "redirect:/home/index";
+            return "redirect:/admin/raterFile";
         } else {
             return "redirect:/login";
         }

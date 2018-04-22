@@ -10,19 +10,20 @@ import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/raterFile")
@@ -163,6 +164,41 @@ public class RaterFileController extends ArcController<RaterFile>{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(RaterFile raterFile, HttpServletRequest request, Model model, RedirectAttributes message){
+        List<RaterFile> raterFiles = raterFileServiceI.appReadList(raterFile);
+        List<Department> departments = departmentServiceI.appReadList(new Department());
+        List<Type> types = typeServiceI.appReadList(new Type());
+        List<User> users = generalUserService.appReadList(new User());
+
+        model.addAttribute("raterFiles", raterFiles);
+        model.addAttribute("departments", departments);
+        model.addAttribute("types", types);
+        model.addAttribute("users", users);
+
+        return "bus/file/rater/index";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/type", method = RequestMethod.GET)
+    public Map<String, List<Type>> selectTypeByDepartment(Department department, HttpServletRequest request, Model model){
+        Map<String, List<Type>> map = new HashMap<>();
+
+        if (department.getDepartmentId()==null){
+            List<Type> types = typeServiceI.appReadList(new Type());
+
+            map.put("types", types);
+
+            return map;
+        } else {
+            List<Type> types = typeServiceI.readHaveTypes(department.getDepartmentId());
+
+            map.put("types", types);
+
+            return map;
         }
     }
 }

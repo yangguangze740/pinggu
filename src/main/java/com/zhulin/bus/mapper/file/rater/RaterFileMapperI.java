@@ -2,9 +2,12 @@ package com.zhulin.bus.mapper.file.rater;
 
 import com.zhulin.bus.bean.RaterFile;
 import com.zhulin.bus.bean.RaterFileModify;
+import com.zhulin.bus.mapper.file.rater.provider.SelectRaterFileProvider;
 import com.zhulin.framework.mapper.ArcMapper;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.data.repository.query.*;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface RaterFileMapperI extends ArcMapper<RaterFile>{
 
-    @Select("SELECT raterFileId, raterFileName, raterFileDbName, raterFilePath, departmentId, userId, fileTypeFlag, raterFileCreateTime, departmentTypeId, raterFileRemark, deleteFlag FROM pinggu_rater_file WHERE deleteFlag=0")
+    @SelectProvider(type = SelectRaterFileProvider.class, method = "selectRaterFile")
     @Results({
             @Result(id = true, column = "raterFileId", property = "raterFileId"),
             @Result(column = "raterFileName", property = "raterFileName"),
@@ -25,7 +28,7 @@ public interface RaterFileMapperI extends ArcMapper<RaterFile>{
             @Result(column = "departmentTypeId", property = "departmentTypeId"),
             @Result(column = "raterFileRemark", property = "raterFileRemark")
     })
-    List<RaterFile> selectList(RaterFile raterFile);
+    List<RaterFile> selectList(@Param("raterFile") RaterFile raterFile);
 
     @Select("SELECT raterFileId, raterFilePath, raterFileDbName, raterFileName FROM pinggu_rater_file WHERE raterFileId = #{value}")
     @Results({

@@ -9,7 +9,7 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, typeUrl=${'/admin/lead'}">
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/raterFile'}, typeUrl=${'/admin/lead'}">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -28,8 +28,44 @@
             </div>
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
+
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>查询</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form role="form" class="form-inline" method="post" action="/admin/raterFile/selectById">
+                                <div class="form-group">
+                                    <select class="form-control" id="departmentId" name="departmentId" placeholder="部门">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option th:each="department:${departments}" th:value="${department.departmentId}" th:text="${department.departmentName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="departmentTypeId" name="departmentTypeId" placeholder="类型">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option th:each="type:${types}" th:value="${type.typeId}" th:text="${type.typeName}"></option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-white" type="submit" style="margin-bottom: 0;">查询</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>文件列表</h5>
@@ -131,6 +167,33 @@
 </div>
 
 <script th:inline="javascript">
+    $(function () {
+        $("#departmentId").change(function () {
+
+            var departmentId = $("#departmentId").val();
+
+            $.ajax({
+                type: 'get',
+                contentType: 'application/x-www-form-urlencoded',
+                dateType: 'json',
+                url: '/admin/raterFile/type?departmentId=' + departmentId,
+                success: function(result) {
+                    if (result) {
+                        $("#departmentTypeId").empty();
+
+                        $.each(result.types, function (index, value) {
+                            console.log(value);
+                            $("#departmentTypeId").append(new Option(value.typeName, value.typeId));
+                        });
+                    }
+                },
+                error: function (e) {
+                    console.log("error information");
+                }
+            })
+        });
+    });
+
     $(function () {
         toastr.options = {
             "closeButton": true,
