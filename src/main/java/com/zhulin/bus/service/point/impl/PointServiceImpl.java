@@ -5,6 +5,7 @@ import com.zhulin.bus.bean.Element;
 import com.zhulin.bus.bean.Point;
 import com.zhulin.bus.mapper.point.PointMapper;
 import com.zhulin.bus.service.point.PointServiceI;
+import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,19 @@ public class PointServiceImpl implements PointServiceI{
     @Autowired
     private PointMapper pointMapper;
 
+    @MethodRolePermission(group = "supportFile", name = "审查要点查看", value = "point:fr", groupName = "审查要点管理组")
     @Override
     public List<Point> appReadList(Point point) {
         return pointMapper.selectList(point);
     }
 
+    @MethodRolePermission(group = "supportFile", name = "审查要点详细", value = "point:fd", groupName = "审查要点管理组")
     @Override
     public Point appReadDetail(String id) {
         return pointMapper.selectDetail(id);
     }
 
+    @MethodRolePermission(group = "supportFile", name = "审查要点编辑", value = "point:fe", groupName = "审查要点管理组")
     @Transactional
     @Override
     public boolean appUpdate(Point point) {
@@ -61,6 +65,7 @@ public class PointServiceImpl implements PointServiceI{
         }
     }
 
+    @MethodRolePermission(group = "supportFile", name = "审查要点删除", value = "point:fd", groupName = "审查要点管理组")
     @Transactional
     @Override
     public boolean appDelete(String id) {
@@ -72,6 +77,7 @@ public class PointServiceImpl implements PointServiceI{
         return (deleteDutyDepartment >= 0)  && (pointDelete >= 0);
     }
 
+    @MethodRolePermission(group = "supportFile", name = "审查要点添加", value = "point:fc", groupName = "审查要点管理组")
     @Transactional
     @Override
     public boolean appCreate(Point point) {
