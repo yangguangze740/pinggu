@@ -1,9 +1,8 @@
 package com.zhulin.bus.service.file.support.impl;
 
-import com.zhulin.bus.bean.RaterFile;
 import com.zhulin.bus.bean.SupportFile;
 import com.zhulin.bus.bean.SupportFileModify;
-import com.zhulin.bus.mapper.file.support.SupportFileMapperI;
+import com.zhulin.bus.mapper.file.support.SupportFileMapper;
 import com.zhulin.bus.service.file.support.SupportFileServiceI;
 import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
@@ -19,7 +18,7 @@ import java.util.List;
 public class SupportFileServiceImpl implements SupportFileServiceI{
 
     @Autowired
-    private SupportFileMapperI supportFileMapperI;
+    private SupportFileMapper supportFileMapperI;
 
     @MethodRolePermission(group = "support", name = "支撑问件查看", value = "support:mr", groupName = "支撑文件组")
     @Override
