@@ -49,3 +49,13 @@ spring:
     cache: false
 logging:
   config: classpath:logBack.xml
+file:
+  rater:
+    location: E:/pinggu/rater
+  support:
+    location: E:/pinggu/support
+  archive:
+    rater:
+      location: E:/pinggu/archive/rater
+    support:
+      location: E:/pinggu/archive/support
