@@ -6,6 +6,7 @@ import com.zhulin.bus.bean.Type;
 import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.problem.ProblemServiceI;
 import com.zhulin.bus.service.type.TypeServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -26,6 +27,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/department")
+@ClassMenuURL(value = "/admin/department", group = "problem", name = "部门管理", groupName = "评审问题")
 public class DepartmentController extends ArcController<Department>{
 
     @Autowired

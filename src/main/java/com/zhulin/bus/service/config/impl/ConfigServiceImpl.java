@@ -3,6 +3,8 @@ package com.zhulin.bus.service.config.impl;
 import com.zhulin.bus.bean.Config;
 import com.zhulin.bus.mapper.config.ConfigMapper;
 import com.zhulin.bus.service.config.ConfigServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
+import com.zhulin.common.annotation.permission.MethodRolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Calendar;
 import java.util.List;
 
+@ClassRolePermission(group = "config", name = "系统配置", value = "config:m", menuValue = "/admin/config")
 @Service
 public class ConfigServiceImpl implements ConfigServiceI{
 
@@ -41,11 +44,13 @@ public class ConfigServiceImpl implements ConfigServiceI{
         return false;
     }
 
+    @MethodRolePermission(group = "config", name = "配置查看", value = "config:mr", groupName = "配置组")
     @Override
     public Config readConfig() {
         return configMapper.selectConfig();
     }
 
+    @MethodRolePermission(group = "config", name = "配置编辑", value = "config:mr", groupName = "配置组")
     @Transactional
     @Override
     public boolean updateConfig(Config config) {

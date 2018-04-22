@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.type;
 
 import com.zhulin.bus.bean.Type;
 import com.zhulin.bus.service.type.TypeServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/type")
+@ClassMenuURL(value = "/admin/type", group = "problem", name = "类型管理", groupName = "评审问题")
 public class TypeController extends ArcController<Type>{
 
     @Autowired

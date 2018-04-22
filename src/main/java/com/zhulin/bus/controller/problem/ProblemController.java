@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.problem;
 
 import com.zhulin.bus.bean.Problem;
 import com.zhulin.bus.service.problem.ProblemServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/problem")
+@ClassMenuURL(value = "/admin/problem", group = "problem", name = "评审问题管理", groupName = "评审问题")
 public class ProblemController extends ArcController<Problem>{
 
     @Autowired
