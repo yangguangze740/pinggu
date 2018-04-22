@@ -3,7 +3,7 @@ package com.zhulin.bus.bean;
 import java.sql.Timestamp;
 
 public class SupportFileModify {
-    private String supportChangeId;
+    private String supportFileModifyId;
     private String userId;
     private String supportFileId;
     private String supportArchiveId;
@@ -54,12 +54,12 @@ public class SupportFileModify {
         this.userId = userId;
     }
 
-    public String getSupportChangeId() {
+    public String getSupportFileModifyId() {
 
-        return supportChangeId;
+        return supportFileModifyId;
     }
 
-    public void setSupportChangeId(String supportChangeId) {
-        this.supportChangeId = supportChangeId;
+    public void setSupportFileModifyId(String supportFileModifyId) {
+        this.supportFileModifyId = supportFileModifyId;
     }
 }

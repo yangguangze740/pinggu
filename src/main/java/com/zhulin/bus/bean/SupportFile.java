@@ -11,7 +11,7 @@ public class SupportFile {
     private String pointId;
     private String dutyDepartmentId;
     private String leadDepartmentId;
-    private String supportFileNme;
+    private String supportFileName;
     private String supportFileDbName;
     private String supportFilePath;
     private int deleteFlag;
@@ -72,13 +72,13 @@ public class SupportFile {
         this.supportFileDbName = supportFileDbName;
     }
 
-    public String getSupportFileNme() {
+    public String getSupportFileName() {
 
-        return supportFileNme;
+        return supportFileName;
     }
 
-    public void setSupportFileNme(String supportFileNme) {
-        this.supportFileNme = supportFileNme;
+    public void setSupportFileName(String supportFileName) {
+        this.supportFileName = supportFileName;
     }
 
     public String getLeadDepartmentId() {
