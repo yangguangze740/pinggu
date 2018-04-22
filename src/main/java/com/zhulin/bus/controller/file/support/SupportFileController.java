@@ -17,16 +17,15 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/supportFile")
@@ -57,8 +56,11 @@ public class SupportFileController extends ArcController<SupportFile>{
     @Autowired
     private ProjectServiceI projectServiceI;
 
+    @Autowired
+    private PointServiceI pointService;
+
     @Override
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "")
     public String list(SupportFile supportFile, HttpServletRequest request, Model model) {
         List<SupportFile> supportFiles = supportFileServiceI.appReadList(supportFile);
         List<Department> departments = departmentServiceI.appReadList(new Department());
@@ -146,6 +148,18 @@ public class SupportFileController extends ArcController<SupportFile>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/elements",method = RequestMethod.GET )
+    public Map<String,List<Element>> routeAdd(Project project) {
+        Map<String,List<Element>> map = new HashMap<>();
+
+        List<Element> elements = pointService.queryElementByProjectId(project.getProjectId());
+
+        map.put("elements", elements);
+
+        return map;
     }
 
     @RequestMapping(value = "/downLoad", method = RequestMethod.GET)

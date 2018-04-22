@@ -1,6 +1,7 @@
 package com.zhulin.bus.service.element.impl;
 
 import com.zhulin.bus.bean.Element;
+import com.zhulin.bus.bean.Point;
 import com.zhulin.bus.mapper.element.ElementMapper;
 import com.zhulin.bus.service.element.ElementServiceI;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
@@ -56,5 +57,10 @@ public class ElementServiceImpl implements ElementServiceI{
     @Override
     public List<Element> appReadProjectElements(String projectId) {
         return elementMapper.selectProjectElements(projectId);
+    }
+
+    @Override
+    public List<Point> queryPointByElementId(String elementId) {
+       return elementMapper.selectElementProject(elementId);
     }
 }

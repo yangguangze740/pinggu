@@ -1,6 +1,7 @@
 package com.zhulin.bus.mapper.element;
 
 import com.zhulin.bus.bean.Element;
+import com.zhulin.bus.bean.Point;
 import com.zhulin.framework.mapper.ArcMapper;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -44,10 +45,17 @@ public interface ElementMapper extends ArcMapper<Element> {
     @Override
     boolean delete(String id);
 
-    @Select("SELECT elementId, elementName FROM pinggu_review_element WHERE projectId = #{project} AND deleteFlag = 0 ORDER BY elementSort")
+    @Select("SELECT elementId, elementName FROM pinggu_review_element WHERE projectId = #{projectId} AND deleteFlag = 0 ORDER BY elementSort")
     @Results({
             @Result(id = true, column = "elementId", property = "elementId"),
             @Result(column = "elementName", property = "elementName")
     })
     List<Element> selectProjectElements(String projectId);
+
+    @Select("SELECT pointId, pointName FROM pinggu_review_point WHERE elementId = #{elementId} AND deleteFlag = 0 ")
+    @Results({
+            @Result(id = true, column = "pointId", property = "pointId"),
+            @Result(column = "pointName", property = "pointName")
+    })
+    List<Point> selectElementProject(String elementId);
 }

@@ -1,19 +1,18 @@
 package com.zhulin.bus.mapper.file.support;
 
-import com.zhulin.bus.bean.RaterFile;
 import com.zhulin.bus.bean.SupportFile;
 import com.zhulin.bus.bean.SupportFileModify;
+import com.zhulin.bus.mapper.file.support.provider.SupportFileProvider;
 import com.zhulin.framework.mapper.ArcMapper;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
-public interface SupportFileMapperI extends ArcMapper<SupportFile>{
-    @Select("SELECT supportFileId, departmentId, userId, fileTypeFlag, supportFileCreateTime, pointId, dutyDepartmentId, leadDepartmentId, supportFileName, supportFileDbName, supportFilePath, supportFileRemark, projectId, elementId FROM pinggu_support_file WHERE deleteFlag=0")
+public interface SupportFileMapper extends ArcMapper<SupportFile>{
+    @SelectProvider(type = SupportFileProvider.class, method = "selectSupportFile")
     @Results({
             @Result(id = true, column = "supportFileId", property = "supportFileId"),
             @Result(column = "departmentId", property = "departmentId"),
@@ -30,7 +29,7 @@ public interface SupportFileMapperI extends ArcMapper<SupportFile>{
             @Result(column = "projectId", property = "projectId"),
             @Result(column = "elementId", property = "elementId")
     })
-    List<SupportFile> selectList(SupportFile supportFile);
+    List<SupportFile> selectList(@Param("supportFile") SupportFile supportFile);
 
     @Insert("INSERT INTO pinggu_support_file_modify (supportFileModifyId, userId, supportFileId, modifyFlag) VALUES (#{supportFileModifyId}, #{userId}, #{supportFileId}, 1)")
     boolean insertModify(SupportFileModify supportFileModify);

@@ -1,6 +1,8 @@
 package com.zhulin.bus.controller.element;
 
+
 import com.zhulin.bus.bean.Element;
+import com.zhulin.bus.bean.Point;
 import com.zhulin.bus.bean.Project;
 import com.zhulin.bus.service.element.ElementServiceI;
 import com.zhulin.bus.service.project.ProjectServiceI;
@@ -14,10 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/element")
@@ -111,5 +116,17 @@ public class ElementController extends ArcController<Element>{
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "增加审核要素信息失败");
         }
         return "redirect:/admin/element";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/points",method = RequestMethod.GET )
+    public Map<String,List<Point>> routeAdd(Element element) {
+        Map<String, List<Point>> map = new HashMap<>();
+
+        List<Point> points = elementService.queryPointByElementId(element.getElementId());
+
+        map.put("points",points);
+
+        return map;
     }
 }
