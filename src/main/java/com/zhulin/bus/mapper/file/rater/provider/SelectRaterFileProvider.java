@@ -14,11 +14,11 @@ public class SelectRaterFileProvider {
         builder.append("SELECT raterFileId, raterFileName, raterFileDbName, raterFilePath, departmentId, userId, fileTypeFlag, raterFileCreateTime, departmentTypeId, raterFileRemark, deleteFlag FROM pinggu_rater_file WHERE deleteFlag=0 ");
 
         if (raterFile.getDepartmentId() != null){
-            builder.append(" AND departmentId=" + raterFile.getDepartmentId());
+            builder.append(" AND departmentId=#{raterFile.getDepartmentId}");
         }
 
         if (raterFile.getDepartmentTypeId() != null) {
-            builder.append(" AND departmentTypeId=" + raterFile.getDepartmentTypeId());
+            builder.append(" AND departmentTypeId=#{raterFile.getDepartmentTypeId()}");
         }
 
         return builder.toString();
