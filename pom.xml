@@ -124,7 +124,7 @@
 				<configuration>
 					<fork>true</fork>
 				</configuration>
-				<addResources>true</addResources>
+				<!--<addResources>true</addResources>-->
 			</plugin>
 		</plugins>
 	</build>
