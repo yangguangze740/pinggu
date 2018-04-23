@@ -3,6 +3,7 @@ package com.zhulin.bus.service.lead.impl;
 import com.zhulin.bus.bean.Lead;
 import com.zhulin.bus.mapper.lead.LeadMapper;
 import com.zhulin.bus.service.lead.LeadServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@ClassRolePermission(group = "supportFile", name = "牵头部门管理", value = "leadDepartment:f", menuValue = "/admin/lead")
 @Service
 public class LeadServiceImpl implements LeadServiceI{
 

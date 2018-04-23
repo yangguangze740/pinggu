@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface PointServiceI extends ArcService<Point>{
     List<Element> queryElementByProjectId(String projectId);
+
+    List<Point> haveDutyDepartments(String id);
 }

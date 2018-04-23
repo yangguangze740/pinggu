@@ -9,7 +9,7 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, userUrl=${'/admin/user/general'}">
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/raterFile'}, userUrl=${'/admin/user/general'}">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -114,21 +114,25 @@
         // 前台验证
         $("#editForm").validate({
             rules: {
-                ruleName: {
+                userName: {
                     required: true
                 },
-                score: {
-                    required: true,
-                    shuzi: true
+                userPassword: {
+                    required: true
+                },
+                userAccount: {
+                    required: true
                 }
             },
             messages: {
-                ruleName: {
-                    required: "请填写规则名称"
+                userName: {
+                    required: "请填写姓名"
                 },
-                score: {
-                    required: "请填写分值",
-                    shuzi: "请填写数字"
+                userPassword: {
+                    required: "请填写密码"
+                },
+                userAccount: {
+                    required: "请填写登录名"
                 }
             }
         });

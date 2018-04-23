@@ -3,6 +3,7 @@ package com.zhulin.bus.service.project.impl;
 import com.zhulin.bus.bean.Project;
 import com.zhulin.bus.mapper.project.ProjectMapper;
 import com.zhulin.bus.service.project.ProjectServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@ClassRolePermission(group = "supportFile", name = "审核项目管理", value = "element:f", menuValue = "/admin/project")
 @Service
 public class ProjectServiceImpl implements ProjectServiceI{
 

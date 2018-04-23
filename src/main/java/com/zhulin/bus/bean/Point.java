@@ -20,6 +20,15 @@ public class Point {
     private List<String> dutyDepartmentIds;
     private String projectName;
     private String projectId;
+    private List<String> oldDutyIds;
+
+    public List<String> getOldDutyIds() {
+        return oldDutyIds;
+    }
+
+    public void setOldDutyIds(List<String> oldDutyIds) {
+        this.oldDutyIds = oldDutyIds;
+    }
 
     public int getPointSort() {
         return pointSort;

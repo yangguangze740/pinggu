@@ -9,7 +9,7 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/home/index'}, pointUrl=${'/admin/point'}">
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/raterFile'}, pointUrl=${'/admin/point'}">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -109,6 +109,31 @@
 
 <script th:inline="javascript">
     $(function () {
+        // 数字验证
+        jQuery.validator.addMethod("shuzi", function(value, point) {
+            return this.optional(point) || /^[0-9]+$/.test(value);
+        }, "请输入数字");
+
+        // 前台验证
+        $("#addForm").validate({
+            rules: {
+                elementName: {
+                    required: true
+                },
+                elementSort: {
+                    required: true
+                }
+            },
+            messages: {
+                elementName: {
+                    required: "请填写审核要素名"
+                },
+                elementSort: {
+                    required: "请填写排序键",
+                    shuzi: "请填写数字"
+                }
+            }
+        });
         $("#projectId").change(function () {
 
             var projectId = $("#projectId").val();

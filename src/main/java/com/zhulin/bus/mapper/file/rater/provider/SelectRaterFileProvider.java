@@ -1,5 +1,6 @@
 package com.zhulin.bus.mapper.file.rater.provider;
 
+import com.google.common.base.Strings;
 import com.zhulin.bus.bean.RaterFile;
 
 import java.text.MessageFormat;
@@ -13,12 +14,14 @@ public class SelectRaterFileProvider {
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT raterFileId, raterFileName, raterFileDbName, raterFilePath, departmentId, userId, fileTypeFlag, raterFileCreateTime, departmentTypeId, raterFileRemark, deleteFlag FROM pinggu_rater_file WHERE deleteFlag=0 ");
 
-        if (raterFile.getDepartmentId() != null){
-            builder.append(" AND departmentId=#{raterFile.getDepartmentId}");
+        String departmentId = raterFile.getDepartmentId();
+        if (!Strings.isNullOrEmpty(departmentId)){
+            builder.append(" AND departmentId=#{raterFile.departmentId}");
         }
 
-        if (raterFile.getDepartmentTypeId() != null) {
-            builder.append(" AND departmentTypeId=#{raterFile.getDepartmentTypeId()}");
+        String departmentTypeId = raterFile.getDepartmentTypeId();
+        if (!Strings.isNullOrEmpty(departmentTypeId)) {
+            builder.append(" AND departmentTypeId=#{raterFile.departmentTypeId}");
         }
 
         return builder.toString();

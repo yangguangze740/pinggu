@@ -23,7 +23,7 @@ public interface GeneralUserMapper extends ArcMapper<User>{
     @Override
     List<User> selectList(User user);
 
-    @Update("UPDATE pinggu_general_user SET departmentId = #{departmentId}, userName = #{userName}, userPassword = #{userPassword}}, userAccount = #{userAccount}} WHERE userId = #{userId}")
+    @Update("UPDATE pinggu_general_user SET departmentId = #{departmentId}, userName = #{userName}, userPassword = #{userPassword}, userAccount = #{userAccount} WHERE userId = #{userId}")
     @Override
     boolean update(User user);
 
