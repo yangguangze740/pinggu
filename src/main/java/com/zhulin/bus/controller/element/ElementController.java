@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/element")
-@ClassMenuURL(value = "/admin/point", group = "supportFile", name = "审核要素管理", groupName = "支撑文件")
+@ClassMenuURL(value = "/admin/element", group = "supportFile", name = "审核要素管理", groupName = "支撑文件")
 public class ElementController extends ArcController<Element>{
 
     @Autowired

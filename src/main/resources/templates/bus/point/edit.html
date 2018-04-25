@@ -124,7 +124,7 @@
 <script th:inline="javascript">
     $(function() {
         // 数字验证
-        jQuery.validator.addMethod("shuzi", function(value, point) {
+        /**jQuery.validator.addMethod("shuzi", function(value, point) {
             return this.optional(point) || /^[0-9]+$/.test(value);
         }, "请输入数字");
 
@@ -148,6 +148,7 @@
                 }
             }
         });
+         **/
         $("#projectId").change(function () {
 
             var projectId = $("#projectId").val();
