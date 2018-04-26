@@ -14,25 +14,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-@ClassRolePermission(group = "supportFile", name = "审查要点管理", value = "point:f", menuValue = "/admin/point")
+@ClassRolePermission(group = "supportFile", name = "审核要点管理", value = "point:f", menuValue = "/admin/point")
 @Service
 public class PointServiceImpl implements PointServiceI{
     @Autowired
     private PointMapper pointMapper;
 
-    @MethodRolePermission(group = "supportFile", name = "审查要点查看", value = "point:fr", groupName = "审查要点管理组")
+    @MethodRolePermission(group = "supportFile", name = "审核要点查看", value = "point:fr", groupName = "审核要点管理组")
     @Override
     public List<Point> appReadList(Point point) {
         return pointMapper.selectList(point);
     }
 
-    @MethodRolePermission(group = "supportFile", name = "审查要点详细", value = "point:fd", groupName = "审查要点管理组")
+    @MethodRolePermission(group = "supportFile", name = "审核要点详细", value = "point:fd", groupName = "审核要点管理组")
     @Override
     public Point appReadDetail(String id) {
         return pointMapper.selectDetail(id);
     }
 
-    @MethodRolePermission(group = "supportFile", name = "审查要点编辑", value = "point:fe", groupName = "审查要点管理组")
+    @MethodRolePermission(group = "supportFile", name = "审核要点编辑", value = "point:fe", groupName = "审核要点管理组")
     @Transactional
     @Override
     public boolean appUpdate(Point point) {
