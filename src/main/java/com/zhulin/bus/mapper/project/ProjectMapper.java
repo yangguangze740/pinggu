@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ProjectMapper extends ArcMapper<Project>{
 
-    @Select("SELECT projectId,projectName,projectCreateTime,deleteFlag,projectSort FROM pinggu_review_project where deleteFlag = 0")
+    @Select("SELECT projectId,projectName,projectCreateTime,deleteFlag,projectSort FROM pinggu_review_project where deleteFlag = 0 ORDER BY projectSort ASC")
     @Results({
             @Result(id = true, column = "projectId", property = "projectId"),
             @Result(column = "projectName", property = "projectName"),

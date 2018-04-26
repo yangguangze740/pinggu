@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface ElementMapper extends ArcMapper<Element> {
-    @Select("SELECT elementId,projectName,elementName,elementCreateTime,E.elementSort,E.deleteFlag FROM pinggu_review_element E LEFT JOIN pinggu_review_project P ON E.projectId = P.projectId WHERE E.deleteFlag = 0")
+    @Select("SELECT elementId,projectName,elementName,elementCreateTime,E.elementSort,E.deleteFlag FROM pinggu_review_element E LEFT JOIN pinggu_review_project P ON E.projectId = P.projectId WHERE E.deleteFlag = 0 ORDER BY elementSort ASC")
     @Results({
             @Result(id = true, column = "elementId", property = "elementId"),
             @Result(column = "projectName", property = "projectName"),
@@ -57,5 +57,5 @@ public interface ElementMapper extends ArcMapper<Element> {
             @Result(id = true, column = "pointId", property = "pointId"),
             @Result(column = "pointName", property = "pointName")
     })
-    List<Point> selectElementProject(String elementId);
+    List<Point> selectPointProject(String elementId);
 }

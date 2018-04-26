@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface PointMapper extends ArcMapper<Point>{
 
-    @Select("SELECT pointId,pointName,pointCreateTime,pointSort,P.deleteFlag,projectName,elementName,leadName FROM pinggu_review_point P LEFT JOIN pinggu_review_element E ON P.elementId = E.elementId LEFT JOIN pinggu_review_project D ON P.projectId = D.projectId LEFT JOIN pinggu_lead_department L ON P.leadDepartmentId = L.leadDepartmentId WHERE P.deleteFlag = 0 ORDER BY pointSort")
+    @Select("SELECT pointId,pointName,pointCreateTime,pointSort,P.deleteFlag,projectName,elementName,leadName FROM pinggu_review_point P LEFT JOIN pinggu_review_element E ON P.elementId = E.elementId LEFT JOIN pinggu_review_project D ON P.projectId = D.projectId LEFT JOIN pinggu_lead_department L ON P.leadDepartmentId = L.leadDepartmentId WHERE P.deleteFlag = 0 ORDER BY pointSort ASC")
     @Results({
             @Result(id = true, column = "pointId", property = "pointId"),
             @Result(column = "pointName", property = "pointName"),
@@ -28,7 +28,7 @@ public interface PointMapper extends ArcMapper<Point>{
     @Override
     List<Point> selectList(Point point);
 
-    @Update("UPDATE pinggu_review_point SET pointName = #{pointName},pointSort = #{pointSort},projectId = #{projectId},elementId = #{elementId} WHERE pointId = #{pointId}")
+    @Update("UPDATE pinggu_review_point SET pointName = #{pointName},pointSort = #{pointSort},projectId = #{projectId},elementId = #{elementId},leadDepartmentId = #{leadDepartmentId} WHERE pointId = #{pointId}")
     int updatePoint(Point point);
 
     @Select("SELECT pointId, pointName,pointSort, RP.projectId, RP.elementId, RE.elementName, leadDepartmentId FROM pinggu_review_point RP LEFT JOIN pinggu_review_element RE ON RE.elementId = RP.elementId WHERE pointId = #{value}")
@@ -39,7 +39,7 @@ public interface PointMapper extends ArcMapper<Point>{
             @Result(column = "projectId", property = "projectId"),
             @Result(column = "elementId", property = "elementId"),
             @Result(column = "elementName", property = "elementName"),
-            @Result(column = "leadDepartmentId", property = "leadDepartmentId")
+            @Result(column = "c", property = "leadDepartmentId")
     })
     @Override
     Point selectDetail(String id);

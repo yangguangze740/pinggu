@@ -63,6 +63,6 @@ public class ElementServiceImpl implements ElementServiceI{
 
     @Override
     public List<Point> queryPointByElementId(String elementId) {
-       return elementMapper.selectElementProject(elementId);
+       return elementMapper.selectPointProject(elementId);
     }
 }
