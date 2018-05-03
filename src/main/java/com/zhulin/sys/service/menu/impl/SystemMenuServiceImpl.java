@@ -75,6 +75,9 @@ public class SystemMenuServiceImpl implements SystemMenuServiceI {
         // 3.更新菜单的新的子菜单
         int updateMenuChildNum = systemMenuMapper.updateChildMenuParentId(menu.getMenuId(), menu.getChildMenuIds());
 
+        // 4.更新菜单
+        int updateMenu = systemMenuMapper.updateMenu(menu);
+
         return (updateMenuChildNum == menu.getChildMenuIds().size()) && (deleteChildMenuParentIdNum == menu.getOldChildMenuIds().size());
     }
 
