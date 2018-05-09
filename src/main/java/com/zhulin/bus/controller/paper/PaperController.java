@@ -1,11 +1,11 @@
-package com.zhulin.bus.controller.subject;
+package com.zhulin.bus.controller.paper;
 
 import com.zhulin.bus.bean.College;
 import com.zhulin.bus.bean.Discipline;
+import com.zhulin.bus.bean.Paper;
 import com.zhulin.bus.bean.Subject;
 import com.zhulin.bus.service.college.CollegeServiceI;
-import com.zhulin.bus.service.discipline.DisciplineServiceI;
-import com.zhulin.bus.service.subject.SubjectServiceI;
+import com.zhulin.bus.service.paper.PaperServiceI;
 import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
@@ -25,27 +25,24 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/subject")
-@ClassMenuURL(value = "/admin/subject", group = "paperFile", name = "课程管理", groupName = "试卷文件管理")
-public class SubjectController extends ArcController<Subject>{
+@RequestMapping("/admin/paper")
+@ClassMenuURL(value = "/admin/paper", group = "paperFile", name = "试卷管理", groupName = "试卷文件管理")
+public class PaperController extends ArcController<Paper>{
 
     @Autowired
-    private SubjectServiceI subjectServiceI;
+    private PaperServiceI paperServiceI;
 
     @Autowired
     private CollegeServiceI collegeServiceI;
 
-    @Autowired
-    private DisciplineServiceI disciplineServiceI;
-
     @Override
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String list(Subject subject, HttpServletRequest request, Model model) {
-        List<Subject> subjects = subjectServiceI.appReadList(subject);
+    public String list(Paper paper, HttpServletRequest request, Model model) {
+        List<Paper> papers = paperServiceI.appReadList(paper);
 
-        model.addAttribute("subjects", subjects);
+        model.addAttribute("papers", papers);
 
-        return "/bus/subject/index";
+        return "bus/paper/index";
     }
 
     @Override
@@ -57,46 +54,44 @@ public class SubjectController extends ArcController<Subject>{
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String query4Edit(@PathVariable String id, HttpServletRequest request, Model model) {
         List<College> colleges = collegeServiceI.appReadList(new College());
-        List<Discipline> disciplines = disciplineServiceI.appReadList(new Discipline());
-        Subject subject = subjectServiceI.appReadDetail(id);
+        Paper paper = paperServiceI.appReadDetail(id);
 
         model.addAttribute("colleges", colleges);
-        model.addAttribute("disciplines", disciplines);
-        model.addAttribute("subject", subject);
+        model.addAttribute("paper", paper);
 
-        return "bus/subject/edit";
+        return "bus/paper/edit";
     }
 
     @Override
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String update(Subject subject, HttpServletRequest request, Model model, RedirectAttributes message) {
-        boolean isEdit = subjectServiceI.appUpdate(subject);
+    public String update(Paper paper, HttpServletRequest request, Model model, RedirectAttributes message) {
+        boolean isEdit = paperServiceI.appUpdate(paper);
 
         if (isEdit){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "编辑课程成功");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "编辑试卷成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "编辑课程失败");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "编辑试卷失败");
         }
 
-        return "redirect:/admin/subject";
+        return "redirect:/admin/paper";
     }
 
     @Override
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable String id, HttpServletRequest request, Model model, RedirectAttributes message) {
-        boolean isDelete = subjectServiceI.appDelete(id);
+        boolean isDelete = paperServiceI.appDelete(id);
 
         if (isDelete){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除课程成功");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除试卷成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除课程失败");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "删除试卷失败");
         }
 
-        return "redirect:/admin/subject";
+        return "redirect:/admin/paper";
     }
 
     @Override
@@ -106,36 +101,36 @@ public class SubjectController extends ArcController<Subject>{
 
         model.addAttribute("colleges", colleges);
 
-        return "/bus/subject/add";
+        return "bus/paper/add";
     }
 
     @Override
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String saveAdd(Subject subject, HttpServletRequest request, Model model, RedirectAttributes message) {
+    public String saveAdd(Paper paper, HttpServletRequest request, Model model, RedirectAttributes message) {
         SystemUser user =(SystemUser) request.getSession().getAttribute(Constants.LOGIN_USER);
-        subject.setCreateUserId(user.getUserId());
+        paper.setCreateUserId(user.getUserId());
 
-        boolean isAdd = subjectServiceI.appCreate(subject);
+        boolean isAdd = paperServiceI.appCreate(paper);
 
         if (isAdd){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加课程成功");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加试卷成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加课程失败");
+            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加试卷失败");
         }
 
-        return "redirect:/admin/subject";
+        return "redirect:/admin/paper";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/discipline",method = RequestMethod.GET )
-    public Map<String,List<Discipline>> routeAdd(College college) {
-        Map<String,List<Discipline>> map = new HashMap<>();
+    @RequestMapping(value = "/subject",method = RequestMethod.GET )
+    public Map<String,List<Subject>> routeAdd(Discipline discipline) {
+        Map<String,List<Subject>> map = new HashMap<>();
 
-        List<Discipline> disciplines = subjectServiceI.queryDisciplineByCollegeId(college.getCollegeId());
+        List<Subject> subjects = paperServiceI.querySubjectByDisciplineId(discipline.getDisciplineId());
 
-        map.put("disciplines", disciplines);
+        map.put("subjects", subjects);
 
         return map;
     }

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head"></head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="layout/leftNav :: leftNav"></div>
+
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/raterFile'}, typeUrl=${'/admin/paperFile'}">
+        <div th:replace="layout/topHeader :: topHeader"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>基础信息管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a th:href="${homeUrl}">首页</a>
+                    </li>
+                    <li>
+                        <a th:href="${typeUrl}">试卷文件管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>试卷文件列表</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>查询</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form role="form" class="form-inline" method="post" action="/admin/paperFile/select">
+                                <div class="form-group">
+                                    <select class="form-control" id="collegeId" name="collegeId" placeholder="学院">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option th:each="college:${colleges}" th:value="${college.collegeId}" th:text="${college.collegeName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="disciplineId" name="disciplineId" placeholder="专业">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option th:each="discipline:${disciplines}" th:value="${discipline.disciplineId}" th:text="${discipline.disciplineName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="subjectId" name="subjectId" placeholder="课程">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option th:each="subject:${subjects}" th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="paperId" name="paperId" placeholder="试卷">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option th:each="paper:${papers}" th:value="${paper.paperId}" th:text="${paper.paperName}"></option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-white" type="submit" style="margin-bottom: 0;">查询</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>试卷文件列表</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th>学院</th>
+                                        <th>专业</th>
+                                        <th>课程</th>
+                                        <th>试卷</th>
+                                        <th>文件名</th>
+                                        <th>文件类型</th>
+                                        <th>上传时间</th>
+                                        <th>上传者</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="paperFile:${paperFiles}">
+                                        <td th:text="${paperFile.collegeName}"></td>
+                                        <td th:text="${paperFile.disciplineName}"></td>
+                                        <td th:text="${paperFile.subjectName}"></td>
+                                        <td th:text="${paperFile.paperName}"></td>
+                                        <td th:text="${paperFile.paperFileName}"></td>
+                                        <td th:text="${paperFile.fileTypeFlag}"></td>
+                                        <td th:text="${paperFile.paperFileCreateTime}"></td>
+                                        <td th:text="${paperFile.UserName}"></td>
+                                        <td>
+                                            <button type="button" th:fileName="${paperFile.paperFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${paperFile.fileTypeFlag} eq 'pdf'" th:id="${paperFile.paperFileId}">预览</button>
+                                            <a th:href="${'/admin/raterFile/downLoad?c=' + paperFile.paperFileId}">
+                                                <button type="button" class="btn btn-m btn-info" th:if="${paperFile.fileTypeFlag} ne 'pdf'" th:id="${paperFile.paperFileId}">下载</button>
+                                            </a>
+                                            <a th:href="${'/admin/paperFile/delete/' + paperFile.paperFileId}">
+                                                <!--<button type="button" class="btn btn-w-m btn-danger">删除</button>-->
+                                                <button class="btn btn-m btn-danger" data-toggle="confirmation"
+                                                        data-btn-ok-label="确定" data-btn-ok-class="btn-success"
+                                                        data-btn-ok-icon-class="material-icons" data-btn-ok-icon-content="check"
+                                                        data-btn-cancel-label="取消" data-btn-cancel-class="btn-danger"
+                                                        data-btn-cancel-icon-class="material-icons" data-btn-cancel-icon-content="close"
+                                                        data-title="确定删除?" data-content="注意操作不可回滚">
+                                                    删除
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>学院</th>
+                                        <th>专业</th>
+                                        <th>课程</th>
+                                        <th>试卷</th>
+                                        <th>文件名</th>
+                                        <th>文件类型</th>
+                                        <th>上传时间</th>
+                                        <th>上传者</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/bottomFooter :: bottomFooter"></div>
+
+        <!-- PDF文件预览-->
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-lg" id="pdfPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="pdfPreviewFileName"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="pdfiFrame" width='100%' height='700px' allowfullscreen webkitallowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $(function () {
+        $("#collegeId").change(function () {
+
+            var collegeId = $("#collegeId").val();
+
+            $.ajax({
+                type: 'get',
+                contentType: 'application/x-www-form-urlencoded',
+                dateType: 'json',
+                url: '/admin/subject/discipline?collegeId=' + collegeId,
+                success: function(result) {
+                    if (result) {
+                        $("#disciplineId").empty();
+
+                        $.each(result.disciplines, function (index, value) {
+                            console.log(value);
+                            $("#disciplineId").append(new Option(value.disciplineName, value.disciplineId));
+                        });
+                        $("#disciplineId").trigger("change");
+                    }
+                },
+                error: function (e) {
+                    console.log("error information");
+                }
+            })
+        });
+
+        $("#disciplineId").change(function () {
+            var disciplineId = $("#disciplineId").val();
+
+            $.ajax({
+                type: 'get',
+                contentType: 'application/x-www-form-urlencoded',
+                dateType: 'json',
+                url: '/admin/paper/subject?disciplineId=' + disciplineId,
+                success: function(result) {
+                    if (result) {
+                        $("#subjectId").empty();
+
+                        $.each(result.subjects, function (index, value) {
+                            console.log(value);
+                            $("#subjectId").append(new Option(value.subjectName, value.subjectId));
+                        });
+                        $("#subjectId").trigger("change");
+                    }
+                },
+                error: function (e) {
+                    console.log("error information");
+                }
+            })
+        });
+
+        $("#subjectId").change(function () {
+            var subjectId = $("#subjectId").val();
+
+            $.ajax({
+                type: 'get',
+                contentType: 'application/x-www-form-urlencoded',
+                dateType: 'json',
+                url: '/admin/paperFile/paper?subjectId=' + subjectId,
+                success: function(result) {
+                    if (result) {
+                        $("#paperId").empty();
+
+                        $.each(result.papers, function (index, value) {
+                            console.log(value);
+                            $("#paperId").append(new Option(value.paperName, value.paperId));
+                        });
+                    }
+                },
+                error: function (e) {
+                    console.log("error information");
+                }
+            })
+        });
+    });
+
+    $(function () {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": true,
+            "preventDuplicates": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        var msg = [[${message}]];
+        var msgCode = [[${msgCode}]];
+
+        console.log(msgCode + " : " + msg);
+
+        if (msgCode == 200) {
+            toastr.success(msg);
+        } else if (msgCode == 500) {
+            toastr.error(msg);
+        }
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+
+        // pdf预览
+        $(".pdfPreview").click(function () {
+            var fileId = $(this).attr("id");
+            var fileName = $(this).attr("fileName");
+
+            $("#pdfPreviewFileName").html(fileName);
+
+            var previewUrl = '/pdf/web/viewer.html?file=/admin/paperFile/preview/' + fileId;
+
+            $("#pdfiFrame").attr("src", previewUrl)
+        });
+    });
+</script>
+
+<!-- Page-Level Scripts -->
+<script th:src="@{/def/listPage.js}"></script>
+
+</body>
+
+</html>

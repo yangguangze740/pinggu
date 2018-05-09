@@ -2,6 +2,7 @@ package com.zhulin.bus.controller.college;
 
 import com.zhulin.bus.bean.College;
 import com.zhulin.bus.service.college.CollegeServiceI;
+import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/college")
+@ClassMenuURL(value = "/admin/college", group = "paperFile", name = "学院管理", groupName = "试卷文件管理")
 public class CollegeController extends ArcController<College>{
 
     @Autowired
