@@ -163,4 +163,7 @@ public interface SystemMenuMapper {
             @Result(id = true, column = "menuId", property = "menuId")
     })
     List<SystemRoleMenu> selectDBAllRoleMenus();
+
+    @Update("UPDATE system_menu SET menuName = #{menuName}, icon = #{icon} WHERE menuId = #{menuId}")
+    int updateMenu(Menu menu);
 }
