@@ -119,7 +119,7 @@
                                         <td th:text="${paperFile.UserName}"></td>
                                         <td>
                                             <button type="button" th:fileName="${paperFile.paperFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${paperFile.fileTypeFlag} eq 'pdf'" th:id="${paperFile.paperFileId}">预览</button>
-                                            <a th:href="${'/admin/raterFile/downLoad?c=' + paperFile.paperFileId}">
+                                            <a th:href="${'/admin/paperFile/downLoad?c=' + paperFile.paperFileId}">
                                                 <button type="button" class="btn btn-m btn-info" th:if="${paperFile.fileTypeFlag} ne 'pdf'" th:id="${paperFile.paperFileId}">下载</button>
                                             </a>
                                             <a th:href="${'/admin/paperFile/delete/' + paperFile.paperFileId}">
