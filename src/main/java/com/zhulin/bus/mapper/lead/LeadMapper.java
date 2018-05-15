@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface LeadMapper extends ArcMapper<Lead>{
+
     @Override
     @Select("SELECT leadDepartmentId, leadName, leadCreateTime, adminId, lockFlag FROM pinggu_lead_department WHERE deleteFlag=0")
     @Results({
