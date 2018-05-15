@@ -33,7 +33,7 @@ public interface QuestionMapper extends ArcMapper<Question>{
     @Delete("UPDATE pinggu_problem_list SET deleteFlag=1 WHERE problemListId=#{value}")
     boolean delete(String id);
 
-    @Select("SELECT problemListId, L.projectId, L.elementId, problemContent, problemShow, problemModifyMeasure, problemPlanSolveTime, L.departmentId, problemCreateTime, projectName, elementName, departmentName, createUserId, userName FROM pinggu_problem_list L LEFT JOIN pinggu_review_project P ON L.projectId=P.projectId LEFT JOIN pinggu_review_element E ON L.elementId=E.elementId LEFT JOIN pinggu_department D ON L.departmentId=D.departmentId LEFT JOIN pinggu_general_user U ON L.createUserId=U.userId WHERE L.problemListId=#{value}")
+    @Select("SELECT problemListId, L.projectId, L.elementId, problemContent, problemShow, problemModifyMeasure, problemPlanSolveTime, L.departmentId, problemCreateTime, projectName, elementName, departmentName, createUserId, userName, problemAnalysis, problemListRemark FROM pinggu_problem_list L LEFT JOIN pinggu_review_project P ON L.projectId=P.projectId LEFT JOIN pinggu_review_element E ON L.elementId=E.elementId LEFT JOIN pinggu_department D ON L.departmentId=D.departmentId LEFT JOIN pinggu_general_user U ON L.createUserId=U.userId WHERE L.problemListId=#{value}")
     @Results({
             @Result(id = true, column = "problemListId", property = "problemListId"),
             @Result(column = "projectId", property = "projectId"),
@@ -48,7 +48,9 @@ public interface QuestionMapper extends ArcMapper<Question>{
             @Result(column = "elementName", property = "elementName"),
             @Result(column = "departmentName", property = "departmentName"),
             @Result(column = "createUserId", property = "createUserId"),
-            @Result(column = "userName", property = "userName")
+            @Result(column = "userName", property = "userName"),
+            @Result(column = "problemAnalysis", property = "problemAnalysis"),
+            @Result(column = "problemListRemark", property = "problemListRemark")
     })
     Question selectDetail(String id);
 }

@@ -1,7 +1,7 @@
 package com.zhulin.bus.controller.dutyDepartment;
 
 import com.zhulin.bus.bean.DutyDepartment;
-import com.zhulin.bus.service.DutyDepartment.DutyDepartmentServiceI;
+import com.zhulin.bus.service.dutyDepartment.DutyDepartmentServiceI;
 import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;

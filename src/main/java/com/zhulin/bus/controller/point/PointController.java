@@ -1,7 +1,7 @@
 package com.zhulin.bus.controller.point;
 
 import com.zhulin.bus.bean.*;
-import com.zhulin.bus.service.DutyDepartment.DutyDepartmentServiceI;
+import com.zhulin.bus.service.dutyDepartment.DutyDepartmentServiceI;
 import com.zhulin.bus.service.element.ElementServiceI;
 import com.zhulin.bus.service.lead.LeadServiceI;
 import com.zhulin.bus.service.point.PointServiceI;

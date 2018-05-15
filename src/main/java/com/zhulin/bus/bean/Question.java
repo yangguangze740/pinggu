@@ -18,6 +18,24 @@ public class Question {
     private String departmentName;
     private String createUserId;
     private String userName;
+    private String problemAnalysis; // 问题原因分析
+    private String problemListRemark;
+
+    public String getProblemListRemark() {
+        return problemListRemark;
+    }
+
+    public void setProblemListRemark(String problemListRemark) {
+        this.problemListRemark = problemListRemark;
+    }
+
+    public String getProblemAnalysis() {
+        return problemAnalysis;
+    }
+
+    public void setProblemAnalysis(String problemAnalysis) {
+        this.problemAnalysis = problemAnalysis;
+    }
 
     public String getUserName() {
         return userName;
