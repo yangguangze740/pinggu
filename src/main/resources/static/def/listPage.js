@@ -39,7 +39,9 @@ $(document).ready(function(){
             //     sCharSet: 'utf-8'
             // },
 
-            {extend: '打印',
+            {
+                extend: 'pdf',
+                text: '打印',
                 customize: function (win){
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');
