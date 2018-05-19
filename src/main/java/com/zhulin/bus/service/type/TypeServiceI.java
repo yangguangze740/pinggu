@@ -10,4 +10,5 @@ public interface TypeServiceI extends ArcService<Type> {
     Map<String, List<Type>> readAllTypeByGroupName();
 
     List<Type> readHaveTypes(String id);
+
 }
