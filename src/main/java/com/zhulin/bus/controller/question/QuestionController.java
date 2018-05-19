@@ -1,11 +1,10 @@
 package com.zhulin.bus.controller.question;
 
 import com.zhulin.bus.bean.Question;
-import com.zhulin.bus.service.question.QuestionI;
+import com.zhulin.bus.service.question.QuestionServiceI;
 import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
-import org.apache.ibatis.annotations.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +22,12 @@ import java.util.List;
 public class QuestionController extends ArcController<Question>{
 
     @Autowired
-    private QuestionI questionI;
+    private QuestionServiceI questionServiceI;
 
     @Override
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Question question, HttpServletRequest request, Model model) {
-        List<Question> questions = questionI.appReadList(question);
+        List<Question> questions = questionServiceI.appReadList(question);
 
         model.addAttribute("questions", questions);
 
@@ -38,7 +37,7 @@ public class QuestionController extends ArcController<Question>{
     @Override
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable String id, HttpServletRequest request, Model model) {
-        Question question = questionI.appReadDetail(id);
+        Question question = questionServiceI.appReadDetail(id);
 
         model.addAttribute("question", question);
 
@@ -58,7 +57,7 @@ public class QuestionController extends ArcController<Question>{
     @Override
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable String id, HttpServletRequest request, Model model, RedirectAttributes message) {
-        boolean isDelete = questionI.appDelete(id);
+        boolean isDelete = questionServiceI.appDelete(id);
 
         if (isDelete){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);

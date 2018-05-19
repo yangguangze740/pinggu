@@ -97,7 +97,8 @@ public class GeneralUserController extends ArcController<User>{
     @Override
     public String saveAdd(User user, HttpServletRequest request, Model model, RedirectAttributes message) {
         boolean isAdded = userService.appCreate(user);
-        if(isAdded){
+
+        if (isAdded) {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "增加普通用户信息成功");
         } else {

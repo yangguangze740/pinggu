@@ -2,10 +2,9 @@ package com.zhulin.bus.service.question.impl;
 
 import com.zhulin.bus.bean.Question;
 import com.zhulin.bus.mapper.question.QuestionMapper;
-import com.zhulin.bus.service.question.QuestionI;
+import com.zhulin.bus.service.question.QuestionServiceI;
 import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
-import com.zhulin.framework.service.ArcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 @ClassRolePermission(group = "question", name = "问题清单管理角色", value = "question:m", menuValue = "/admin/question")
 @Service
-public class QuestionImpl implements QuestionI {
+public class QuestionServiceImpl implements QuestionServiceI {
 
     @Autowired
     private QuestionMapper questionMapper;

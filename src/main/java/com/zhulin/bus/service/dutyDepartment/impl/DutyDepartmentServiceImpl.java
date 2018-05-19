@@ -1,8 +1,8 @@
-package com.zhulin.bus.service.DutyDepartment.impl;
+package com.zhulin.bus.service.dutyDepartment.impl;
 
 import com.zhulin.bus.bean.DutyDepartment;
 import com.zhulin.bus.mapper.dutyDepartment.DutyDepartmentMapper;
-import com.zhulin.bus.service.DutyDepartment.DutyDepartmentServiceI;
+import com.zhulin.bus.service.dutyDepartment.DutyDepartmentServiceI;
 import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;

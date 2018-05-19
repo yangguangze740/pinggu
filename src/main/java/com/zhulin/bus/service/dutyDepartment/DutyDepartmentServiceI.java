@@ -1,4 +1,4 @@
-package com.zhulin.bus.service.DutyDepartment;
+package com.zhulin.bus.service.dutyDepartment;
 
 
 import com.zhulin.bus.bean.DutyDepartment;

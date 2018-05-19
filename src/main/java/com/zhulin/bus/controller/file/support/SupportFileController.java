@@ -1,7 +1,7 @@
 package com.zhulin.bus.controller.file.support;
 
 import com.zhulin.bus.bean.*;
-import com.zhulin.bus.service.DutyDepartment.DutyDepartmentServiceI;
+import com.zhulin.bus.service.dutyDepartment.DutyDepartmentServiceI;
 import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.element.ElementServiceI;
 import com.zhulin.bus.service.file.support.SupportFileServiceI;
