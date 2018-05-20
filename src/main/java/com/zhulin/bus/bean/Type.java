@@ -1,11 +1,11 @@
 package com.zhulin.bus.bean;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Type {
     private String typeId;
     private String typeName;
-    private Time typeCreateTime;
+    private Timestamp typeCreateTime;
     private String adminId;
     private int typeFileNumber;
     private int deleteFlag;
@@ -56,12 +56,11 @@ public class Type {
         this.adminId = adminId;
     }
 
-    public Time getTypeCreateTime() {
-
+    public Timestamp getTypeCreateTime() {
         return typeCreateTime;
     }
 
-    public void setTypeCreateTime(Time typeCreateTime) {
+    public void setTypeCreateTime(Timestamp typeCreateTime) {
         this.typeCreateTime = typeCreateTime;
     }
 
