@@ -42,4 +42,7 @@ public interface LeadMapper extends ArcMapper<Lead>{
     @Override
     @Update("UPDATE pinggu_lead_department SET deleteFlag=1 WHERE leadDepartmentId=#{value}")
     boolean delete(String id);
+
+    @Insert("INSERT INTO pinggu_lead_department (leadDepartmentId, leadName, adminId, leadAdd) VALUES (#{leadDepartmentId}, #{leadName}, #{adminId}, #{leadAdd})")
+    int insertDeparment(Lead department);
 }

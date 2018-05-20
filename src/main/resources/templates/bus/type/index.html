@@ -53,6 +53,7 @@
                                         <tr>
                                             <th>序号</th>
                                             <th>部门类别名</th>
+                                            <th>排序键</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -60,6 +61,7 @@
                                         <tr th:each="type, status:${types}">
                                             <td th:text="${status.index + 1}"></td>
                                             <td th:text="${type.typeName}"></td>
+                                            <td th:text="${type.typeSort}"></td>
                                             <td>
                                                 <a th:href="${'/admin/type/edit/' + type.typeId}">
                                                     <button type="button" class="btn btn-m btn-warning">编辑</button>

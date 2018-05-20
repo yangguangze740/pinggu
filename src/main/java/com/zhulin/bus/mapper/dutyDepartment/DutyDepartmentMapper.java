@@ -47,4 +47,7 @@ public interface DutyDepartmentMapper extends ArcMapper<DutyDepartment>{
             @Result(column = "dutyName", property = "dutyName"),
     })
     List<DutyDepartment> selectHaveDutyDepartments(String id);
+
+    @Insert("INSERT INTO pinggu_duty_department (dutyDepartmentId, dutyName,dutyCreateTime,adminId, dutyAdd) VALUES (#{dutyDepartmentId}, #{dutyName},#{dutyCreateTime},#{adminId},#{dutyAdd})")
+    int insertDepartment(DutyDepartment department);
 }

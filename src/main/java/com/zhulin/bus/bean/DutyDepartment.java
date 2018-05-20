@@ -11,6 +11,15 @@ public class DutyDepartment {
     private String deleteFlag;
     private String lockFlag;
     private String pointId;
+    private int dutyAdd;
+
+    public int getDutyAdd() {
+        return dutyAdd;
+    }
+
+    public void setDutyAdd(int dutyAdd) {
+        this.dutyAdd = dutyAdd;
+    }
 
     public String getPointId() {
         return pointId;

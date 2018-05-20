@@ -53,6 +53,7 @@
                                         <tr>
                                             <th>序号</th>
                                             <th>部门名称</th>
+                                            <th>排序键</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -60,6 +61,7 @@
                                         <tr th:each="department, status:${departments}">
                                             <td th:text="${status.index + 1}"></td>
                                             <td th:text="${department.departmentName}"></td>
+                                            <td th:text="${department.departmentSort}"></td>
                                             <td>
                                                 <a th:href="${'/admin/department/edit/' + department.departmentId}">
                                                     <button type="button" class="btn btn-m btn-warning">编辑</button>

@@ -11,6 +11,15 @@ public class Department {
     private int lockFlag;
     private List<String> typeIds;
     private List<String> problemIds;
+    private int departmentSort;
+
+    public int getDepartmentSort() {
+        return departmentSort;
+    }
+
+    public void setDepartmentSort(int departmentSort) {
+        this.departmentSort = departmentSort;
+    }
 
     public List<String> getProblemIds() {
         return problemIds;
