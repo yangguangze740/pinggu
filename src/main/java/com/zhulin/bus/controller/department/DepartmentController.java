@@ -1,8 +1,6 @@
 package com.zhulin.bus.controller.department;
 
-import com.zhulin.bus.bean.Department;
-import com.zhulin.bus.bean.Problem;
-import com.zhulin.bus.bean.Type;
+import com.zhulin.bus.bean.*;
 import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.problem.ProblemServiceI;
 import com.zhulin.bus.service.type.TypeServiceI;
@@ -10,8 +8,6 @@ import com.zhulin.common.annotation.menu.ClassMenuURL;
 import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/department")
@@ -126,6 +120,7 @@ public class DepartmentController extends ArcController<Department>{
     public String saveAdd(Department department, HttpServletRequest request, Model model, RedirectAttributes message) {
         SystemUser user = (SystemUser)request.getSession().getAttribute(Constants.LOGIN_USER);
         department.setAdminId(user.getUserId());
+
 
         if (department.getTypeIds()==null || department.getTypeIds().isEmpty()){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);

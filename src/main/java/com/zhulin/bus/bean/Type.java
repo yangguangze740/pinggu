@@ -9,6 +9,16 @@ public class Type {
     private String adminId;
     private int typeFileNumber;
     private int deleteFlag;
+    private int typeSort;
+
+    public int getTypeSort() {
+        return typeSort;
+    }
+
+    public void setTypeSort(int typeSort) {
+        this.typeSort = typeSort;
+    }
+
     private int lockFlag;
 
     public int getLockFlag() {

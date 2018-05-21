@@ -8,8 +8,17 @@ public class User {
     private String userName;
     private String userPassword;
     private String userAccount;
+    private String addUser;
     private String lockFlag;
     private String deleteFlag;
+
+    public String getAddUser() {
+        return addUser;
+    }
+
+    public void setAddUser(String addUser) {
+        this.addUser = addUser;
+    }
 
     public String getDepartmentName() {
         return departmentName;

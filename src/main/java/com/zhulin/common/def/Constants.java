@@ -68,4 +68,9 @@ public class Constants {
      */
     public static final String EXCEL_FILE_SUFFIX_1 = ".xls";
     public static final String EXCEL_FILE_SUFFIX_2 = ".xlsx";
+
+    /*
+    区分责任部门和牵头单位的添加方式
+     */
+    public static final int DEPARTMENTADD = 1;
 }

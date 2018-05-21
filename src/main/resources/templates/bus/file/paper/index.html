@@ -19,10 +19,10 @@
                         <a th:href="${homeUrl}">首页</a>
                     </li>
                     <li>
-                        <a th:href="${typeUrl}">试卷文件管理</a>
+                        <a th:href="${typeUrl}">试卷文档管理</a>
                     </li>
                     <li class="active">
-                        <strong>试卷文件列表</strong>
+                        <strong>试卷文档列表</strong>
                     </li>
                 </ol>
             </div>
@@ -80,7 +80,7 @@
                 <div class="col-md-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>试卷文件列表</h5>
+                            <h5>试卷文档列表</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -100,8 +100,8 @@
                                         <th>专业</th>
                                         <th>课程</th>
                                         <th>试卷</th>
-                                        <th>文件名</th>
-                                        <th>文件类型</th>
+                                        <th>文档名</th>
+                                        <th>文档类型</th>
                                         <th>上传时间</th>
                                         <th>上传者</th>
                                         <th>操作</th>
@@ -142,8 +142,8 @@
                                         <th>专业</th>
                                         <th>课程</th>
                                         <th>试卷</th>
-                                        <th>文件名</th>
-                                        <th>文件类型</th>
+                                        <th>文档名</th>
+                                        <th>文档类型</th>
                                         <th>上传时间</th>
                                         <th>上传者</th>
                                         <th>操作</th>
@@ -162,7 +162,7 @@
         </div>
         <div th:replace="layout/bottomFooter :: bottomFooter"></div>
 
-        <!-- PDF文件预览-->
+        <!-- PDF文档预览-->
         <!-- Modal -->
         <div class="modal fade bs-example-modal-lg" id="pdfPreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">

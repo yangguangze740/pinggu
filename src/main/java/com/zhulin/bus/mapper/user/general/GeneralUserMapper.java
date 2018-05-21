@@ -23,11 +23,11 @@ public interface GeneralUserMapper extends ArcMapper<User>{
     @Override
     List<User> selectList(User user);
 
-    @Update("UPDATE pinggu_general_user SET departmentId = #{departmentId}, userName = #{userName}, userPassword = #{userPassword}, userAccount = #{userAccount} WHERE userId = #{userId}")
+    @Update("UPDATE pinggu_general_user SET departmentId = #{departmentId}, userName = #{userName}, userPassword = #{userPassword}, userAccount = #{userAccount}, addUser = #{addUser} WHERE userId = #{userId}")
     @Override
     boolean update(User user);
 
-    @Select("SELECT userId, departmentId, userName, userPassword,userAccount,lockFlag,deleteFlag FROM pinggu_general_user WHERE userId = #{userId}")
+    @Select("SELECT userId, departmentId, userName, userPassword,userAccount,lockFlag,deleteFlag,addUser FROM pinggu_general_user WHERE userId = #{userId}")
     @Results({
             @Result(id = true, column = "userId", property = "userId"),
             @Result(column = "departmentId", property = "departmentId"),
@@ -35,12 +35,13 @@ public interface GeneralUserMapper extends ArcMapper<User>{
             @Result(column = "userPassword", property = "userPassword"),
             @Result(column = "userAccount", property = "userAccount"),
             @Result(column = "lockFlag", property = "lockFlag"),
-            @Result(column = "deleteFlag", property = "deleteFlag")
+            @Result(column = "deleteFlag", property = "deleteFlag"),
+            @Result(column = "addUser", property = "addUser")
     })
     @Override
     User selectDetail(String id);
 
-    @Insert("INSERT INTO pinggu_general_user (userId, departmentId, userName, userPassword, userAccount) VALUES (#{userId}, #{departmentId}, #{userName}, #{userPassword}, #{userAccount})")
+    @Insert("INSERT INTO pinggu_general_user (userId, departmentId, userName, userPassword, userAccount, addUser) VALUES (#{userId}, #{departmentId}, #{userName}, #{userPassword}, #{userAccount}, #{addUser})")
     @Override
     boolean insert(User user);
 

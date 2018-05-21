@@ -9,6 +9,15 @@ public class Lead {
     private String adminId;
     private int deleteFlag;
     private int lockFlag;
+    private int leadAdd;
+
+    public int getLeadAdd() {
+        return leadAdd;
+    }
+
+    public void setLeadAdd(int leadAdd) {
+        this.leadAdd = leadAdd;
+    }
 
     public int getLockFlag() {
         return lockFlag;

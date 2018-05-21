@@ -71,6 +71,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">添加用户权限</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="addUser" name="addUser" placeholder="请选择添加权限">
+                                            <option value="0">请选择</option>
+                                            <option  value="可添加" >可添加</option>
+                                            <option  value="不可添加" >不可添加</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-md-4 col-md-offset-1">
                                         <a th:href="${userUrl}">
                                             <button class="btn btn-white" type="button">返回</button>

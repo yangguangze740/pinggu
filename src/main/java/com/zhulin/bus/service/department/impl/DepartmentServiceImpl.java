@@ -1,21 +1,18 @@
 package com.zhulin.bus.service.department.impl;
 
-import com.zhulin.bus.bean.Department;
-import com.zhulin.bus.bean.DepartmentProblem;
-import com.zhulin.bus.bean.DepartmentType;
-import com.zhulin.bus.bean.Type;
+import com.zhulin.bus.bean.*;
 import com.zhulin.bus.mapper.department.DepartmentMapper;
+import com.zhulin.bus.mapper.dutyDepartment.DutyDepartmentMapper;
+import com.zhulin.bus.mapper.lead.LeadMapper;
 import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.common.annotation.permission.ClassRolePermission;
 import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
+import com.zhulin.common.def.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +22,10 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
 
     @Autowired
     private DepartmentMapper departmentMapper;
+    @Autowired
+    private DutyDepartmentMapper dutyDepartmentMapper;
+    @Autowired
+    private LeadMapper leadMapper;
 
     @MethodRolePermission(group = "department", name = "部门查看", value = "department:mr", groupName = "部门组")
     @Override
@@ -99,7 +100,22 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         int insertDepartmentNum = departmentMapper.insertDepartment(department);
         int insertDepartmentTypeNum = departmentMapper.insertDepartmentType(departmentTypes);
 
-        return ((insertDepartmentNum == 1)&&(insertDepartmentTypeNum == typeIds.size()));
+        DutyDepartment dutyDepartment = new DutyDepartment();
+        dutyDepartment.setDutyDepartmentId(departmentId);
+        dutyDepartment.setDutyName(department.getDepartmentName());
+        dutyDepartment.setAdminId(department.getAdminId());
+        dutyDepartment.setDutyAdd(Constants.DEPARTMENTADD);
+
+        Lead lead = new Lead();
+        lead.setLeadDepartmentId(departmentId);
+        lead.setLeadName(department.getDepartmentName());
+        lead.setAdminId(department.getAdminId());
+        lead.setLeadAdd(Constants.DEPARTMENTADD);
+
+        int insertDepartmentDuty = dutyDepartmentMapper.insertDepartment(dutyDepartment);
+        int insertLeadDepartment = leadMapper.insertDeparment(lead);
+
+        return ((insertDepartmentNum == 1)&&(insertDepartmentTypeNum == typeIds.size())&&(insertDepartmentDuty == 1)&&(insertLeadDepartment == 1));
     }
 
     @Transactional
