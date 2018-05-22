@@ -4,6 +4,7 @@ package com.zhulin.bus.mapper.user.general;
 import com.zhulin.bus.bean.User;
 import com.zhulin.framework.mapper.ArcMapper;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
 
@@ -23,11 +24,11 @@ public interface GeneralUserMapper extends ArcMapper<User>{
     @Override
     List<User> selectList(User user);
 
-    @Update("UPDATE pinggu_general_user SET departmentId = #{departmentId}, userName = #{userName}, userPassword = #{userPassword}, userAccount = #{userAccount}, addUser = #{addUser} WHERE userId = #{userId}")
+    @Update("UPDATE pinggu_general_user SET departmentId = #{departmentId}, userName = #{userName}, userPassword = #{userPassword}, userAccount = #{userAccount}, addUserFlag = #{addUserFlag} WHERE userId = #{userId}")
     @Override
     boolean update(User user);
 
-    @Select("SELECT userId, departmentId, userName, userPassword,userAccount,lockFlag,deleteFlag,addUser FROM pinggu_general_user WHERE userId = #{userId}")
+    @Select("SELECT userId, departmentId, userName, userPassword, userAccount, lockFlag, deleteFlag, addUserFlag FROM pinggu_general_user WHERE userId = #{userId}")
     @Results({
             @Result(id = true, column = "userId", property = "userId"),
             @Result(column = "departmentId", property = "departmentId"),
@@ -36,12 +37,12 @@ public interface GeneralUserMapper extends ArcMapper<User>{
             @Result(column = "userAccount", property = "userAccount"),
             @Result(column = "lockFlag", property = "lockFlag"),
             @Result(column = "deleteFlag", property = "deleteFlag"),
-            @Result(column = "addUser", property = "addUser")
+            @Result(column = "addUserFlag", property = "addUserFlag", jdbcType = JdbcType.TINYINT, javaType = Integer.class)
     })
     @Override
     User selectDetail(String id);
 
-    @Insert("INSERT INTO pinggu_general_user (userId, departmentId, userName, userPassword, userAccount, addUser) VALUES (#{userId}, #{departmentId}, #{userName}, #{userPassword}, #{userAccount}, #{addUser})")
+    @Insert("INSERT INTO pinggu_general_user (userId, departmentId, userName, userPassword, userAccount, addUserFlag) VALUES (#{userId}, #{departmentId}, #{userName}, #{userPassword}, #{userAccount}, #{addUserFlag})")
     @Override
     boolean insert(User user);
 

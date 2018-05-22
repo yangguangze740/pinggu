@@ -58,14 +58,16 @@ public class GeneralUserController extends ArcController<User>{
     @RequestMapping(value = "/edit",method = RequestMethod.POST )
     @Override
     public String update(User user, HttpServletRequest request, Model model, RedirectAttributes message) {
-        boolean isUpadate = userService.appUpdate(user);
-        if(isUpadate){
+        boolean isUpdateSuccess = userService.appUpdate(user);
+
+        if (isUpdateSuccess) {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 200);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "修改普通用户信息成功");
         } else {
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "修改普通用户信息失败");
         }
+
         return "redirect:/admin/user/general";
     }
 
