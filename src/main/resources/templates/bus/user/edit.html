@@ -75,10 +75,9 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">添加权限</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="addUser" name="addUser">
-                                            <option  th:text="${user.addUser}"></option>
-                                            <option  value="可添加" >可添加</option>
-                                            <option  value="不可添加" >不可添加</option>
+                                        <select class="form-control" id="addUserFlag" name="addUserFlag">
+                                            <option value="0" th:selected="${user.addUserFlag == 0}">不可添加</option>
+                                            <option value="1" th:selected="${user.addUserFlag == 1}">可添加</option>
                                         </select>
                                     </div>
                                 </div>
