@@ -4,17 +4,16 @@ import java.util.List;
 
 public class DepartmentNumber {
     private String name;
-    private String stack;
-    private List<ElementNumber> elementNumbers;
-    private List<ProjectNumber> projectNumbers;
-    private List<SupportFileNumber>supportFileNumbers;
+    private String stack = "总数";
+    private String type = "bar";
+    private List<SupportFileNumber> supportFileNumbers;
 
-    public List<ProjectNumber> getProjectNumbers() {
-        return projectNumbers;
+    public String getType() {
+        return type;
     }
 
-    public void setProjectNumbers(List<ProjectNumber> projectNumbers) {
-        this.projectNumbers = projectNumbers;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<SupportFileNumber> getSupportFileNumbers() {
@@ -40,14 +39,4 @@ public class DepartmentNumber {
     public void setStack(String stack) {
         this.stack = stack;
     }
-
-    public List<ElementNumber> getElementNumbers() {
-        return elementNumbers;
-    }
-
-    public void setElementNumbers(List<ElementNumber> elementNumbers) {
-        this.elementNumbers = elementNumbers;
-    }
-
-
 }

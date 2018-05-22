@@ -3,6 +3,7 @@ package com.zhulin.bus.mapper.department;
 import com.zhulin.bus.bean.Department;
 import com.zhulin.bus.bean.DepartmentProblem;
 import com.zhulin.bus.bean.DepartmentType;
+import com.zhulin.bus.bean.bi.DepartmentNumber;
 import com.zhulin.bus.mapper.department.provider.DepartmentInsertProvider;
 import com.zhulin.framework.mapper.ArcMapper;
 import org.apache.ibatis.annotations.*;
@@ -53,4 +54,11 @@ public interface DepartmentMapper extends ArcMapper<Department>{
 
     @InsertProvider(type = DepartmentInsertProvider.class, method = "insertDepartmentProblems")
     int insertDepartmentPro(List<DepartmentProblem> departmentProblems);
+
+    @Select("SELECT COUNT(1) AS number FROM pinggu_rater_file WHERE deleteFlag=0 group by departmentId")
+    @Results({
+            @Result(column = "departmentName", property = "name"),
+            @Result(column = "number", property = "number")
+    })
+    List<DepartmentNumber> selectDepartmemtList();
 }

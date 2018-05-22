@@ -4,10 +4,18 @@ package com.zhulin.bus.bean.bi;
 import java.util.List;
 
 public class ProjectNumber {
-
     private String name;
-    private String stack;
+    private String stack = "项目";
+    private String type = "bar";
     private List<SupportFileNumber> supportFileNumbers;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getName() {
         return name;
