@@ -98,11 +98,7 @@
                 minInterval : 1
             }
         ],
-        series : [{
-            name : [],
-            type : 'bar',
-            data : []
-        }]
+        series : []
     });
 
     $("#main").change(function () {
@@ -112,19 +108,54 @@
             dateType: 'json',
             url: '/bi/question/number',
             success: function(result) {
-                $.each(result.departmentName, function (index, value) {
-                    option.xAxis[0](value);
+                option.legend.data = result.types;
+                option.xAxis[0].data = result.departments;
+
+                var departmentNumber = result.departmentNumber;
+
+                var departmentNumberArr = [];
+
+                $.each(departmentNumber.data, function (index, value) {
+                    departmentNumberArr.push(value);
                 });
 
-                $.each(result.legends, function (index, value) {
-                    option.legend(value);
-                })
+                option.series.push({
+                    name: departmentNumber.name,
+                    stack: departmentNumber.stack,
+                    type: 'bar',
+                    data: departmentNumberArr
+                });
 
-                $.each(result.series, function (index, value) {
-                    $.each(value.data, function (index, value1) {
-                        option.series(value1);
-                    })
-                })
+                $.each(result.elementNumbers, function (index, value) {
+                    var elementNumberArr = [];
+
+                    $.each(value.data, function (index, value) {
+                        elementNumberArr.push(value);
+                    });
+
+                    option.series.push({
+                        name: value.name,
+                        stack: value.stack,
+                        type: 'bar',
+                        data: elementNumberArr
+                    });
+                });
+
+                $.each(result.projectNumbers, function (index, value) {
+
+                    var projectNumberArr = [];
+
+                    $.each(value.data, function (index, value) {
+                        projectNumberArr.push(value);
+                    });
+
+                    option.series.push({
+                        name: value.name,
+                        stack: value.stack,
+                        type: 'bar',
+                        data: projectNumberArr
+                    });
+                });
 
                 myChart.hideLoading();
                 myChart.setOption(option);

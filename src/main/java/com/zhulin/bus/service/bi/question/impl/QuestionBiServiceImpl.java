@@ -1,20 +1,41 @@
 package com.zhulin.bus.service.bi.question.impl;
 
+import com.zhulin.bus.bean.Department;
+import com.zhulin.bus.bean.Element;
+import com.zhulin.bus.bean.Project;
 import com.zhulin.bus.bean.Question;
 import com.zhulin.bus.bean.bi.QuestionNumber;
 import com.zhulin.bus.bean.bi.QuestionNumberBI;
 import com.zhulin.bus.mapper.bi.question.QuestionBiMapper;
+import com.zhulin.bus.mapper.department.DepartmentMapper;
+import com.zhulin.bus.mapper.element.ElementMapper;
+import com.zhulin.bus.mapper.project.ProjectMapper;
 import com.zhulin.bus.service.bi.question.QuestionBiServiceI;
+import com.zhulin.common.def.Constants;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionBiServiceImpl implements QuestionBiServiceI{
 
     @Autowired
     private QuestionBiMapper questionBiMapper;
+
+    @Autowired
+    private DepartmentMapper departmentMapper;
+
+    @Autowired
+    private ProjectMapper projectMapper;
+
+    @Autowired
+    private ElementMapper elementMapper;
 
     @Override
     public List<Question> appReadList(Question question) {
@@ -42,38 +63,69 @@ public class QuestionBiServiceImpl implements QuestionBiServiceI{
     }
 
     @Override
-    public List<QuestionNumber> readDepartmentList(QuestionNumber questionNumber) {
-        return questionBiMapper.selectDepartmentList(questionNumber);
-    }
+    public Map<String, Object> queryData(QuestionNumber questionNumber) {
+        Map<String, Object> map = new HashMap<>();
 
-    @Override
-    public List<QuestionNumber> readProjectList(QuestionNumber questionNumber) {
-        return questionBiMapper.selectProjectList(questionNumber);
-    }
+        List<Department> departments = departmentMapper.selectList(new Department());
+        List<Element> elements = elementMapper.selectList(new Element());
+        List<Project> projects = projectMapper.selectList(new Project());
 
-    @Override
-    public List<QuestionNumber> readElementList(QuestionNumber questionNumber) {
-        return questionBiMapper.selectElementList(questionNumber);
-    }
+        //xAix
+        map.put("departments", departments.stream().map(Department::getDepartmentName).collect(Collectors.toList()));
 
-    @Override
-    public List<QuestionNumberBI> readAllElement(QuestionNumberBI questionNumberBI) {
-        return questionBiMapper.selectAllElement(questionNumberBI);
-    }
+        //legend
+        List<String> types = new ArrayList<>();
 
-    @Override
-    public Integer queryDepartmentNumber(String departmentId) {
-        return questionBiMapper.selectDepartmentNumberById(departmentId);
-    }
+        types.add(Constants.BI_DEPARTMENT_SUPPORT_FILE_FILE_SUM);
+        types.addAll(projects.stream().map(Project::getProjectName).collect(Collectors.toList()));
+        types.addAll(elements.stream().map(Element::getElementName).collect(Collectors.toList()));
 
-    @Override
-    public List<Integer> queryProjectNumberById(String projectId) {
-        return questionBiMapper.selectProjectNumberById(projectId);
-    }
+        map.put("types", types);
 
-    @Override
-    public List<Integer> queryElementNumberById(String elementId) {
-        return questionBiMapper.selectElementNumberById(elementId);
+        //departmentNumberList
+        QuestionNumber departmentNumber = new QuestionNumber();
+
+        departmentNumber.setName(Constants.BI_DEPARTMENT_SUPPORT_FILE_FILE_SUM);
+        List<Integer> departmentNumbers = questionBiMapper.selectDepartmentNumberById();
+        departmentNumber.setStack("总数");
+        departmentNumber.setData(departmentNumbers);
+
+        map.put("departmentNumber", departmentNumber);
+
+        //projectNumberList
+        List<QuestionNumber> projectNumberList = new ArrayList<>();
+
+        for (Project project : projects){
+            QuestionNumber projectNumber = new QuestionNumber();
+
+            projectNumber.setName(project.getProjectName());
+            projectNumber.setStack("项目");
+
+            List<Integer> projectNumbers = questionBiMapper.selectProjectNumberById(project.getProjectId());
+            projectNumber.setData(projectNumbers);
+
+            projectNumberList.add(projectNumber);
+        }
+
+        //elementNumberList
+        List<QuestionNumber> elementNumberList = new ArrayList<>();
+
+        for (Element element : elements){
+            QuestionNumber elementNumber = new QuestionNumber();
+
+            elementNumber.setName(element.getElementName());
+            elementNumber.setStack("要素");
+
+            List<Integer> elementNumbers = questionBiMapper.selectElementNumberById(element.getElementId());
+            elementNumber.setData(elementNumbers);
+
+            elementNumberList.add(elementNumber);
+        }
+
+        map.put("projectNumbers", projectNumberList);
+        map.put("elementNumbers", elementNumberList);
+
+        return map;
     }
 
 }

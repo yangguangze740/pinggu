@@ -38,22 +38,12 @@ public interface QuestionBiMapper extends ArcMapper<Question>{
     })
     List<QuestionNumberBI> selectAllElement(QuestionNumberBI questionNumberBI);
 
-    @Select("SELECT COUNT(1) AS number FROM pinggu_problem_list WHERE departmentId=#{value} GROUP BY departmentId")
-    Integer selectDepartmentNumberById(String departmentId);
+    @Select("SELECT IFNULL(A.number, 0) AS number FROM (SELECT COUNT(1) AS number, SF.departmentId FROM pinggu_support_file SF LEFT JOIN pinggu_department D ON SF.departmentId = D.departmentId GROUP BY SF.departmentId ORDER BY D.departmentSort) AS A RIGHT JOIN pinggu_department AS B ON A.departmentId = B.departmentId ORDER BY b.departmentSort")
+    List<Integer> selectDepartmentNumberById();
 
-    @Select("SELECT IFNULL(a.a,0) AS num \n" +
-            "FROM (SELECT COUNT(*) AS a, a.departmentId AS b\n" +
-            "FROM pinggu_department AS a LEFT JOIN pinggu_problem_list AS b ON a.departmentId=b.departmentId \n" +
-            "WHERE b.projectId = #{projectId}\n" +
-            "GROUP BY a.departmentId) AS a RIGHT JOIN pinggu_department AS b ON a.b = b.departmentId\n" +
-            "ORDER BY b.departmentSort")
+    @Select("SELECT IFNULL(a.a,0) AS num FROM (SELECT COUNT(*) AS a, a.departmentId AS b FROM pinggu_department AS a LEFT JOIN pinggu_problem_list AS b ON a.departmentId=b.departmentId WHERE b.projectId = #{projectId} GROUP BY a.departmentId) AS a RIGHT JOIN pinggu_department AS b ON a.b = b.departmentId ORDER BY b.departmentSort")
     List<Integer> selectProjectNumberById(String projectId);
 
-    @Select("SELECT IFNULL(a.a,0) AS num \n" +
-            "FROM (SELECT COUNT(*) AS a, a.departmentId AS b\n" +
-            "FROM pinggu_department AS a LEFT JOIN pinggu_problem_list AS b ON a.departmentId=b.departmentId \n" +
-            "WHERE b.elementId = #{elementId}\n" +
-            "GROUP BY a.departmentId) AS a RIGHT JOIN pinggu_department AS b ON a.b = b.departmentId\n" +
-            "ORDER BY b.departmentSort")
+    @Select("SELECT IFNULL(a.a,0) AS num FROM (SELECT COUNT(*) AS a, a.departmentId AS b FROM pinggu_department AS a LEFT JOIN pinggu_problem_list AS b ON a.departmentId=b.departmentId WHERE b.elementId = #{elementId} GROUP BY a.departmentId) AS a RIGHT JOIN pinggu_department AS b ON a.b = b.departmentId ORDER BY b.departmentSort")
     List<Integer> selectElementNumberById(String elementId);
 }
