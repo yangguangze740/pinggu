@@ -16480,7 +16480,7 @@ function setText(textStyle, labelModel, defaultColor) {
         isEmphasis = true;
     }
     else {
-        // Support setting color as 'auto' to get visual color.
+        // support setting color as 'auto' to get visual color.
         opt.autoColor = defaultColor;
     }
     setTextStyleCommon(textStyle, labelModel, opt, isEmphasis);
@@ -16954,7 +16954,7 @@ function clipRectByRect(targetRect, rect) {
 }
 
 /**
- * @param {string} iconStr Support 'image://' or 'path://' or direct svg path.
+ * @param {string} iconStr support 'image://' or 'path://' or direct svg path.
  * @param {Object} [opt] Properties of `module:zrender/Element`, except `style`.
  * @param {Object} [rect] {x, y, width, height}
  * @return {module:zrender/Element} Icon path or image element.
@@ -17649,7 +17649,7 @@ function parsePercent$1(percent, all) {
 
 /**
  * (1) Fix rounding error of float numbers.
- * (2) Support return string to avoid scientific notation like '3.5e-7'.
+ * (2) support return string to avoid scientific notation like '3.5e-7'.
  *
  * @param {number} x
  * @param {number} [precision]
@@ -18907,7 +18907,7 @@ var ComponentModel = Model.extend({
     uid: null,
 
     /**
-     * Support merge layout params.
+     * support merge layout params.
      * Only support 'box' now (left/right/top/bottom/width/height).
      * @type {string|Object} Object can be {ignoreSize: true}
      * @readOnly
@@ -21289,7 +21289,7 @@ function parseRawOption(rawOption, optionPreprocessorFuncs, isNew) {
 
 /**
  * @see <http://www.w3.org/TR/css3-mediaqueries/#media1>
- * Support: width, height, aspectRatio
+ * support: width, height, aspectRatio
  * Can use max or min as prefix.
  */
 function applyMediaQuery(query, ecWidth, ecHeight) {
@@ -22381,7 +22381,7 @@ var dataFormatMixin = {
         else if (typeof formatter === 'string') {
             var str = formatTpl(formatter, params);
 
-            // Support 'aaa{@[3]}bbb{@product}ccc'.
+            // support 'aaa{@[3]}bbb{@product}ccc'.
             // Do not support '}' in dim name util have to.
             return str.replace(DIMENSION_LABEL_REG, function (origin, dim) {
                 var len = dim.length;
@@ -22495,7 +22495,7 @@ taskProto.perform = function (performArgs) {
         planResult = this._plan(this.context);
     }
 
-    // Support sharding by mod, which changes the render sequence and makes the rendered graphic
+    // support sharding by mod, which changes the render sequence and makes the rendered graphic
     // elements uniformed distributed when progress, especially when moving or zooming.
     var lastModBy = normalizeModBy(this._modBy);
     var lastModDataCount = this._modDataCount || 0;
@@ -22813,7 +22813,7 @@ var SeriesModel = ComponentModel.extend({
     visualColorAccessPath: 'itemStyle.color',
 
     /**
-     * Support merge layout params.
+     * support merge layout params.
      * Only support 'box' now (left/right/top/bottom/width/height).
      * @type {string|Object} Object can be {ignoreSize: true}
      * @readOnly
@@ -32386,7 +32386,7 @@ function symbolPathSetColor(color, innerColor) {
  *                            for path and image only.
  */
 function createSymbol(symbolType, x, y, w, h, color, keepAspect) {
-    // TODO Support image object, DynamicImage.
+    // TODO support image object, DynamicImage.
 
     var isEmpty = symbolType.indexOf('empty') === 0;
     if (isEmpty) {
@@ -62433,7 +62433,7 @@ function convertToCoordOnAxis(axis, value) {
     return axis.toGlobalCoord(axis.dataToCoord(axis.scale.parse(value)));
 }
 
-// Support ['100%', '100%']
+// support ['100%', '100%']
 function prepareSymbolSize(
     data, dataIndex, layout, symbolRepeat, symbolClip, boundingLength,
     pxSign, symbolPatternSize, opt, output

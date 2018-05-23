@@ -109,7 +109,9 @@
                 </ul>
             </li>
 
-
+            <li>
+                <a th:text="${'您好! ' + session.loginUser.username}"></a>
+            </li>
             <li th:with="logoutUrl=${'/logout'}">
                 <a th:href="${logoutUrl}">
                     <i class="fa fa-sign-out"></i> 退出

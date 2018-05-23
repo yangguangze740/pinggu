@@ -6,7 +6,6 @@ import com.zhulin.bus.bean.Type;
 import com.zhulin.bus.bean.bi.DepartmentTypeNumber;
 import com.zhulin.bus.bean.bi.TempTypeNumber;
 import com.zhulin.bus.bean.bi.TypeNumber;
-import com.zhulin.bus.mapper.type.TypeMapper;
 import com.zhulin.bus.service.bi.typeNumber.TypeNumberServiceI;
 import com.zhulin.bus.service.department.DepartmentServiceI;
 import com.zhulin.bus.service.type.TypeServiceI;

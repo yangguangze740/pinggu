@@ -11554,7 +11554,7 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
       this.save();
       var currentCtx = this.ctx;
       if (!group.isolated) {
-        (0, _util.info)('TODO: Support non-isolated groups.');
+        (0, _util.info)('TODO: support non-isolated groups.');
       }
       if (group.knockout) {
         (0, _util.warn)('Knockout groups not supported.');

@@ -8052,7 +8052,7 @@ var CanvasGraphics = (function CanvasGraphicsClosure() {
       // - remove background color:
       // colorNew = color - alphaNew *colorBackdrop /(1 - alphaNew)
       if (!group.isolated) {
-        info('TODO: Support non-isolated groups.');
+        info('TODO: support non-isolated groups.');
       }
 
       // TODO knockout - supposedly possible with the clever use of compositing
@@ -8689,7 +8689,7 @@ function getDocument(src, pdfDataRangeTransport,
                      passwordCallback, progressCallback) {
   var task = new PDFDocumentLoadingTask();
 
-  // Support of the obsolete arguments (for compatibility with API v1.0)
+  // support of the obsolete arguments (for compatibility with API v1.0)
   if (arguments.length > 1) {
     deprecated('getDocument is called with pdfDataRangeTransport, ' +
                'passwordCallback or progressCallback argument');

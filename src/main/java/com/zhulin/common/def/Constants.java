@@ -72,5 +72,8 @@ public class Constants {
     /*
     区分责任部门和牵头单位的添加方式
      */
-    public static final int DEPARTMENTADD = 1;
+    public static final int DEPARTMENT_ADD = 1;
+
+    /* 数据可视化中部门文件统计中的文件总数的名字 */
+    public static final String BI_DEPARTMENT_SUPPORT_FILE_FILE_SUM = "文件总数";
 }

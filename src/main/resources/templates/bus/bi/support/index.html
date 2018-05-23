@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/head :: head">
-</head>
+<head th:replace="layout/head :: head"></head>
 
 <body>
 
@@ -31,9 +30,7 @@
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-
-                    <div id="main" style="width: 1500px;height:800px;"></div>
-
+                <div id="main" style="width: 1500px;height:800px;"></div>
             </div>
         </div>
         <div th:replace="layout/bottomFooter :: bottomFooter"></div>
@@ -65,7 +62,7 @@
 
     var option = ({
         title:{
-           text: "部门类别文件数统计图"
+           text: "部门项目类别和要素类别支撑文件文件数统计图"
         },
         tooltip : {
             trigger: 'axis',
@@ -98,11 +95,7 @@
                 minInterval : 1
             }
         ],
-        series : [{
-            name : [],
-            type : 'bar',
-            data : []
-        }]
+        series : []
     });
 
     $("#main").change(function () {
@@ -110,37 +103,61 @@
             type: 'get',
             contentType: 'application/x-www-form-urlencoded',
             dateType: 'json',
-            url: '/bi/typeNumber/number',
+            url: '/bi/support/department',
             success: function(result) {
-                var departmentName = new Array();
-                var typeName = new Array();
-                var list = new Array();
+                console.log(result);
+                option.legend.data = result.types;
+                option.xAxis[0].data = result.departments;
 
-                $.each(result.tNumbers, function (index, value) {
-                    $.each(value.typeNumbers, function (index1, value1) {
-                        list.push(value1.numbers);
-                    })
+                var departmentNumber = result.departmentNumber;
+                var elementNumber = result.elementNumbers;
+                var projectNumber = result.projectNumbers;
+
+                var departmentNumberArr = [];
+
+                $.each(departmentNumber.supportFileNumbers, function (index, value) {
+                    departmentNumberArr.push(value.number);
                 });
 
-                $.each(result.departments, function (index, value) {
-                    departmentName.push(value.name);
-                })
+                option.series.push({
+                    name: departmentNumber.name,
+                    stack: departmentNumber.stack,
+                    type: 'bar',
+                    data: departmentNumberArr
+                });
 
-                $.each(result.types, function (index, value) {
-                    typeName.push(value.name);
-                })
+                $.each(result.elementNumbers, function (index, value) {
+                    var elementNumberArr = [];
 
-                option.legend.data = typeName;
-                option.xAxis[0].data = departmentName;
-
-                console.log(departmentName);
-                for (var i=0; i<typeName.length; i++){
-                    option.series.push({
-                        name : typeName[i],
-                        type : 'bar',
-                        data : list[i]
+                    $.each(value.supportFileNumbers, function (index, value) {
+                        elementNumberArr.push(value.number);
                     });
-                }
+
+                    option.series.push({
+                        name: value.name,
+                        stack: value.stack,
+                        type: 'bar',
+                        data: elementNumberArr
+                    });
+                });
+
+                $.each(result.projectNumbers, function (index, value) {
+
+                    var projectNumberArr = [];
+
+                    $.each(value.supportFileNumbers, function (index, value) {
+                        projectNumberArr.push(value.number);
+                    });
+
+                    option.series.push({
+                        name: value.name,
+                        stack: value.stack,
+                        type: 'bar',
+                        data: projectNumberArr
+                    });
+                });
+
+                console.log(option);
 
                 myChart.hideLoading();
                 myChart.setOption(option);
