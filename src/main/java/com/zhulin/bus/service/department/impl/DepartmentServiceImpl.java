@@ -1,6 +1,7 @@
 package com.zhulin.bus.service.department.impl;
 
 import com.zhulin.bus.bean.*;
+import com.zhulin.bus.bean.bi.DepartmentNumber;
 import com.zhulin.bus.mapper.department.DepartmentMapper;
 import com.zhulin.bus.mapper.dutyDepartment.DutyDepartmentMapper;
 import com.zhulin.bus.mapper.lead.LeadMapper;
@@ -104,13 +105,13 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         dutyDepartment.setDutyDepartmentId(departmentId);
         dutyDepartment.setDutyName(department.getDepartmentName());
         dutyDepartment.setAdminId(department.getAdminId());
-        dutyDepartment.setDutyAdd(Constants.DEPARTMENTADD);
+        dutyDepartment.setDutyAdd(Constants.DEPARTMENT_ADD);
 
         Lead lead = new Lead();
         lead.setLeadDepartmentId(departmentId);
         lead.setLeadName(department.getDepartmentName());
         lead.setAdminId(department.getAdminId());
-        lead.setLeadAdd(Constants.DEPARTMENTADD);
+        lead.setLeadAdd(Constants.DEPARTMENT_ADD);
 
         int insertDepartmentDuty = dutyDepartmentMapper.insertDepartment(dutyDepartment);
         int insertLeadDepartment = leadMapper.insertDeparment(lead);
@@ -141,5 +142,10 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
         int insertDepartmentTypeNum = departmentMapper.insertDepartmentPro(departmentProblems);
 
         return (deleteProNum >= 0)&&(insertDepartmentTypeNum == problemIds.size());
+    }
+
+    @Override
+    public List<DepartmentNumber> selectDepartmentFileNumber() {
+        return departmentMapper.selectDepartmemtList();
     }
 }
