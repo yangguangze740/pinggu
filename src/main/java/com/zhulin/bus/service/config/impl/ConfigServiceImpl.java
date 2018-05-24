@@ -1,6 +1,6 @@
 package com.zhulin.bus.service.config.impl;
 
-import com.zhulin.bus.bean.Config;
+import com.zhulin.bus.bean.BusConfig;
 import com.zhulin.bus.mapper.config.ConfigMapper;
 import com.zhulin.bus.service.config.ConfigServiceI;
 import com.zhulin.common.annotation.permission.ClassRolePermission;
@@ -20,17 +20,17 @@ public class ConfigServiceImpl implements ConfigServiceI{
     private ConfigMapper configMapper;
 
     @Override
-    public List<Config> appReadList(Config config) {
+    public List<BusConfig> appReadList(BusConfig busConfig) {
         return null;
     }
 
     @Override
-    public Config appReadDetail(String id) {
+    public BusConfig appReadDetail(String id) {
         return null;
     }
 
     @Override
-    public boolean appUpdate(Config config) {
+    public boolean appUpdate(BusConfig busConfig) {
         return false;
     }
 
@@ -40,38 +40,38 @@ public class ConfigServiceImpl implements ConfigServiceI{
     }
 
     @Override
-    public boolean appCreate(Config config) {
+    public boolean appCreate(BusConfig busConfig) {
         return false;
     }
 
     @MethodRolePermission(group = "config", name = "配置查看", value = "config:mr", groupName = "配置组")
     @Override
-    public Config readConfig() {
+    public BusConfig readConfig() {
         return configMapper.selectConfig();
     }
 
-    @MethodRolePermission(group = "config", name = "配置编辑", value = "config:mr", groupName = "配置组")
+    @MethodRolePermission(group = "busConfig", name = "配置编辑", value = "busConfig:mr", groupName = "配置组")
     @Transactional
     @Override
-    public boolean updateConfig(Config config) {
+    public boolean updateConfig(BusConfig busConfig) {
         //开始评审时间加一天
         Calendar cal = Calendar.getInstance();
 
-        cal.setTime(config.getConfigStartTime());
+        cal.setTime(busConfig.getConfigReviewStartDay());
         cal.add(Calendar.DATE, 1);
         java.util.Date utilStartDate = cal.getTime();
         java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
 
-        config.setConfigStartTime(sqlStartDate);
+        busConfig.setConfigReviewStartDay(sqlStartDate);
 
         //结束评审时间加一天
-        cal.setTime(config.getConfigEndTime());
+        cal.setTime(busConfig.getConfigReviewEndDay());
         cal.add(Calendar.DATE, 1);
         java.util.Date utilEndDate = cal.getTime();
         java.sql.Date sqlEndDate = new java.sql.Date(utilEndDate.getTime());
 
-        config.setConfigEndTime(sqlEndDate);
+        busConfig.setConfigReviewEndDay(sqlEndDate);
 
-        return configMapper.updateConfig(config);
+        return configMapper.updateConfig(busConfig);
     }
 }

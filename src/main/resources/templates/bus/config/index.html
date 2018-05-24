@@ -7,6 +7,7 @@
 <link th:href="@{/template/css/plugins/dropzone/dropzone.css}" rel="stylesheet">
 <link th:href="@{/template/css/plugins/jasny/jasny-bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/template/css/plugins/codemirror/codemirror.css}" rel="stylesheet">
+<link th:href="@{/template/css/plugins/datepicker/datepicker3.css}" rel="stylesheet">
 
 <body>
 
@@ -14,17 +15,17 @@
 
     <div th:replace="layout/leftNav :: leftNav"></div>
 
-    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/raterFile'}, typeUrl=${'/admin/config'}">
+    <div id="page-wrapper" class="gray-bg">
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>系统初始化设置</h2>
+                <h2>评估业务配置管理 </h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a th:href="${homeUrl}">首页</a>
+                        <a th:href="${'/'}">首页</a>
                     </li>
                     <li>
-                        <a th:href="${typeUrl}">系统设置</a>
+                        <a th:href="${'/admin/config'}">评估业务配置</a>
                     </li>
                     <li class="active">
                         <strong>设置</strong>
@@ -37,7 +38,7 @@
                 <div class="col-md-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>设置系统信息</h5>
+                            <h5>评估业务配置</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -47,32 +48,32 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="ibox-content" th:with="actionUrl=${'/admin/config'}">
-                            <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
+                        <div class="ibox-content">
+                            <form id="editForm" method="post" class="form-horizontal" th:action="${'/admin/config'}">
                                 <input type="hidden" name="configId" th:value="${config.configId}">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">可读级别</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" id="rconfigLevel" name="configLevel" placeholder="请选择可读级别">
-                                            <option value=0 th:text="用户可读"></option>
-                                            <option value=1 th:text="部门可读"></option>
+                                    <label class="col-sm-5 control-label">开始评审日</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="configReviewStartDay" id="configReviewStartDay" th:value="${config.configReviewStartDay}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">结束评审日</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="configReviewEndDay" id="configReviewEndDay" th:value="${config.configReviewEndDay}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">前台用户阅读列表数据级别</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control" id="configFrontReadLevel" name="configFrontReadLevel">
+                                            <option value="0" th:text="自身级列表" th:selected="${config.configFrontReadLevel == 0}"></option>
+                                            <option value="1" th:text="部门级列表"  th:selected="${config.configFrontReadLevel == 1}"></option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">开始评审时间</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="configStartTime" id="configStartTime"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">结束评审时间</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="configEndTime" id="configEndTime"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-4 col-md-offset-1">
+                                    <div class="col-md-4 col-md-offset-8">
                                         <button class="btn btn-white" type="button">返回</button>
                                         <button class="btn btn-primary" type="submit">保存</button>
                                     </div>
@@ -84,35 +85,35 @@
                 <div class="col-md-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>设置系统信息</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
+                            <h5>评估业务配置</h5>
+                            <!--<div class="ibox-tools">-->
+                                <!--<a class="collapse-link">-->
+                                    <!--<i class="fa fa-chevron-up"></i>-->
+                                <!--</a>-->
+                                <!--<a class="close-link">-->
+                                    <!--<i class="fa fa-times"></i>-->
+                                <!--</a>-->
+                            <!--</div>-->
                         </div>
                         <div class="ibox-content">
                             <form method="post" class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">可读级别</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" th:if="${config.configLevel}==0" value="用户可读" readonly/>
-                                        <input type="text" class="form-control" th:if="${config.configLevel}==1" value="部门可读" readonly/>
+                                    <label class="col-sm-5 control-label">开始评审日</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" th:value="${config.configReviewStartDay}" readonly/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">开始评审时间</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" th:value="${config.configStartTime}" readonly/>
+                                    <label class="col-sm-5 control-label">结束评审日</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" th:value="${config.configReviewEndDay}" readonly/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">结束评审时间</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" th:value="${config.configEndTime}" readonly/>
+                                    <label class="col-sm-5 control-label">前台用户阅读列表数据级别</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" th:if="${config.configFrontReadLevel}==0" value="自身级列表" readonly/>
+                                        <input type="text" class="form-control" th:if="${config.configFrontReadLevel}==1" value="部门级列表" readonly/>
                                     </div>
                                 </div>
                             </form>
@@ -126,10 +127,10 @@
     </div>
 </div>
 
-<script th:src="@{/template/js/plugins/datepicker/bootstrap-datepicker.js}"></script>
 <script th:src="@{/def/listPage.js}"></script>
 <script th:src="@{/template/js/plugins/jquery-ui/jquery-ui.min.js}"></script>
 <script th:src="@{/template/js/plugins/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/template/js/plugins/datepicker/bootstrap-datepicker.js}"></script>
 
 <script th:inline="javascript">
     $(function () {
@@ -163,31 +164,52 @@
             rootSelector: '[data-toggle=confirmation]'
             // other options
         });
-    });
 
-    $(function() {
-        $('#configStartTime').datepicker({
-            dateFormat:'yy-mm-dd'
+        $.fn.datepicker.dates['en'] = {
+            days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+            daysShort: ["日", "一", "二", "三", "四", "五", "六"],
+            daysMin: ["日", "一", "二", "三", "四", "五", "六"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            today: "今日",
+            clear: "清空",
+            format: "yyyy-mm-dd",
+            titleFormat: "yyyy MM", /* Leverages same syntax as 'format' */
+            weekStart: 0
+        };
+
+        $('#configReviewStartDay').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
         });
-        $('#configEndTime').datepicker({
-            dateFormat:'yy-mm-dd'
+        $('#configReviewEndDay').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'yyyy-mm-dd'
         });
 
         $('#editForm').validate({
             rules: {
-                configStartTime: {
+                configReviewStartDay: {
                     required: true
                 },
-                configEndTime: {
+                configReviewEndDay: {
                     required: true
                 }
             },
             messages: {
-                configStartTime: {
-                    required: "请填写评审开始时间"
+                configReviewStartDay: {
+                    required: "请填写评审开始日"
                 },
-                configEndTime: {
-                    required: "请填写评审结束时间"
+                configReviewEndDay: {
+                    required: "请填写评审结束日"
                 }
             }
         })
