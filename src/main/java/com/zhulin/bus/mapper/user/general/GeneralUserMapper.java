@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface GeneralUserMapper extends ArcMapper<User>{
 
-    @Select("SELECT userId,departmentName,userName,userPassword,userAccount,U.lockFlag,U.deleteFlag FROM pinggu_general_user U LEFT JOIN pinggu_department D ON U.departmentId = D.departmentId where U.deleteFlag = 0")
+    @Select("SELECT userId,departmentName,userName,userPassword,userAccount,U.lockFlag,U.deleteFlag FROM pinggu_general_user U LEFT JOIN pinggu_department D ON U.departmentId = D.departmentId WHERE U.deleteFlag = 0 ORDER BY departmentName DESC, userName DESC")
     @Results({
             @Result(id = true, column = "userId", property = "userId"),
             @Result(column = "departmentName", property = "departmentName"),
