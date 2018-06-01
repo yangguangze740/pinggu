@@ -12,6 +12,24 @@ public class Department {
     private List<String> typeIds;
     private List<String> problemIds;
     private int departmentSort;
+    private int typeFlag;
+    private String typeFlagName;
+
+    public String getTypeFlagName() {
+        return typeFlagName;
+    }
+
+    public void setTypeFlagName(String typeFlagName) {
+        this.typeFlagName = typeFlagName;
+    }
+
+    public int getTypeFlag() {
+        return typeFlag;
+    }
+
+    public void setTypeFlag(int typeFlag) {
+        this.typeFlag = typeFlag;
+    }
 
     public int getDepartmentSort() {
         return departmentSort;

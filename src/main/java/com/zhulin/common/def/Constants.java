@@ -76,4 +76,8 @@ public class Constants {
 
     /* 数据可视化中部门文件统计中的文件总数的名字 */
     public static final String BI_DEPARTMENT_SUPPORT_FILE_FILE_SUM = "文件总数";
+
+    /* 部门类型中的部门类型标识 */
+    public static final String DEPARTMENT_TYPE_FLAG_ZHINENGBUMEN = "职能部门";
+    public static final String DEPARTMENT_TYPE_FALG_JIAOXUEDANWEI = "教学单位";
 }

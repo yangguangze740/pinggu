@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('.dataTables-example').DataTable({
-        pageLength: 25,
+        pageLength: 50,
         responsive: true,
         dom: '<"html5buttons"B>lTfgitp',
         oLanguage : {

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ClassRolePermission(group = "problem", name = "问题管理", value = "problem:m", menuValue = "/admin/department")
 @Service
@@ -31,7 +32,24 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
     @MethodRolePermission(group = "department", name = "部门查看", value = "department:mr", groupName = "部门组")
     @Override
     public List<Department> appReadList(Department department) {
-        return departmentMapper.selectList(department);
+        List<Department> departments = departmentMapper.selectList(department);
+
+        departments.stream().map((d) -> {
+            int typeFlag = d.getTypeFlag();
+
+            switch (typeFlag) {
+                case 1:
+                    d.setTypeFlagName(Constants.DEPARTMENT_TYPE_FLAG_ZHINENGBUMEN);
+                    break;
+                case 2:
+                    d.setTypeFlagName(Constants.DEPARTMENT_TYPE_FALG_JIAOXUEDANWEI);
+                    break;
+            }
+
+            return d;
+        }).collect(Collectors.toList());
+
+        return departments;
     }
 
     @MethodRolePermission(group = "department", name = "部门详细", value = "department:mr", groupName = "部门组")
@@ -124,7 +142,7 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
     public boolean updateProblem(Department department) {
         String departmentId = department.getDepartmentId();
 
-        int deleteProNum = departmentMapper.deleteDepartmentPro(departmentId);
+        int deleteProNum = departmentMapper.deleteDepartmentProblems(departmentId);
 
         List<DepartmentProblem> departmentProblems = new ArrayList<>();
 
@@ -139,13 +157,13 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
             departmentProblems.add(departmentProblem);
         }
 
-        int insertDepartmentTypeNum = departmentMapper.insertDepartmentPro(departmentProblems);
+        int insertDepartmentTypeNum = departmentMapper.insertDepartmentProblems(departmentProblems);
 
         return (deleteProNum >= 0)&&(insertDepartmentTypeNum == problemIds.size());
     }
 
     @Override
     public List<DepartmentNumber> selectDepartmentFileNumber() {
-        return departmentMapper.selectDepartmemtList();
+        return departmentMapper.selectDepartmentList();
     }
 }

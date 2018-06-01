@@ -58,6 +58,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">部门标识</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="addUserFlag" name="typeFlag">
+                                            <option value="2" th:selected="${department.typeFlag == 2}">教学单位</option>
+                                            <option value="1" th:selected="${department.typeFlag == 1}">职能部门</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3 control-label">已有类别</label>
                                     <div class="col-sm-8">
                                         <div>

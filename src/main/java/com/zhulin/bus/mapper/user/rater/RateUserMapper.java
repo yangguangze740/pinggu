@@ -11,7 +11,7 @@ import java.util.List;
 public interface RateUserMapper extends ArcMapper<RateUser> {
 
 
-    @Select("SELECT raterUserId,raterUserName,raterUserPassword,raterUserAccount,lockFlag,deleteFlag FROM pinggu_rater_user where deleteFlag = 0")
+    @Select("SELECT raterUserId, raterUserName, raterUserPassword, raterUserAccount, lockFlag, deleteFlag FROM pinggu_rater_user where deleteFlag = 0 ORDER BY raterUserName DESC")
     @Results({
             @Result(id = true, column = "raterUserId", property = "raterUserId"),
             @Result(column = "raterUserName", property = "raterUserName"),

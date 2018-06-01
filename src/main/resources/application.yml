@@ -63,3 +63,7 @@ file:
       location: /var/pinggu/archive/support
     paper:
       location: /var/pinggu/archive/paper
+server:
+  servlet:
+    session:
+      timeout: 6000

@@ -49,7 +49,7 @@ public class DepartmentController extends ArcController<Department>{
     }
 
     @Override
-    @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String query4Edit(@PathVariable String id, HttpServletRequest request, Model model) {
         List<Type> types = typeServiceI.appReadList(new Type());
 
@@ -65,7 +65,7 @@ public class DepartmentController extends ArcController<Department>{
     }
 
     @Override
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String update(Department department, HttpServletRequest request, Model model, RedirectAttributes message) {
         List<String> typeList = department.getTypeIds();
 
@@ -90,7 +90,7 @@ public class DepartmentController extends ArcController<Department>{
     }
 
     @Override
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable String id, HttpServletRequest request, Model model, RedirectAttributes message) {
         boolean isDelete = departmentServiceI.appDelete(id);
 
@@ -106,7 +106,7 @@ public class DepartmentController extends ArcController<Department>{
     }
 
     @Override
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String routeAdd(HttpServletRequest request, Model model) {
         List<Type> types = typeServiceI.appReadList(new Type());
 
@@ -116,7 +116,7 @@ public class DepartmentController extends ArcController<Department>{
     }
 
     @Override
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String saveAdd(Department department, HttpServletRequest request, Model model, RedirectAttributes message) {
         SystemUser user = (SystemUser)request.getSession().getAttribute(Constants.LOGIN_USER);
         department.setAdminId(user.getUserId());
@@ -142,7 +142,7 @@ public class DepartmentController extends ArcController<Department>{
         return "redirect:/admin/department";
     }
 
-    @RequestMapping(value = "editPro/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/editPro/{id}", method = RequestMethod.GET)
     public String route2EditPro(@PathVariable String id, HttpServletRequest request, Model model){
         List<Problem> haveProblems = problemServiceI.readDepartmentProblem(id);
         List<Problem> problems = problemServiceI.appReadList(new Problem());
@@ -155,7 +155,7 @@ public class DepartmentController extends ArcController<Department>{
         return "bus/department/editPro";
     }
 
-    @RequestMapping(value = "editPro", method = RequestMethod.POST)
+    @RequestMapping(value = "/editPro", method = RequestMethod.POST)
     public String updatePro(Department department, HttpServletRequest request, Model model, RedirectAttributes message){
         List<String> list = department.getProblemIds();
 
