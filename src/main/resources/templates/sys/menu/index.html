@@ -51,6 +51,7 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example" >
                                     <thead>
                                         <tr>
+                                            <th>序号</th>
                                             <th>分组名</th>
                                             <th>分组值</th>
                                             <th>icon</th>
@@ -60,7 +61,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="menu:${menus}">
+                                        <tr th:each="menu, menuStat:${menus}">
+                                            <td th:text="${menuStat.index + 1}"></td>
                                             <td th:text="${menu.menuGroupName}"></td>
                                             <td th:text="${menu.menuGroupValue}"></td>
                                             <td>
@@ -91,6 +93,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th>序号</th>
                                             <th>分组名</th>
                                             <th>分组值</th>
                                             <th>icon</th>
