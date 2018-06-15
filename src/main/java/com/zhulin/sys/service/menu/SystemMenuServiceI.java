@@ -20,4 +20,5 @@ public interface SystemMenuServiceI {
     Map<String, List<Menu>> readListGroupByParent();
     List<Menu> readRoleMenuList(String id);
     Map<Menu, List<Menu>> readUserMenus(String userId);
+    boolean appendSystemMenuAndRoleAndPermission(List<Menu> menus, List<ClassRole> roles);
 }

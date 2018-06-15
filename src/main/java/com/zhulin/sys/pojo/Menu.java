@@ -167,6 +167,10 @@ public class Menu {
     public boolean equals(Object object) {
         Menu menu = (Menu) object;
 
+        if (this.getMenuId() == null || menu.getMenuId() == null) {
+            return this.getMenuURL().equals(menu.getMenuURL());
+        }
+
         return this.getMenuId().equals(menu.getMenuId());
     }
 }

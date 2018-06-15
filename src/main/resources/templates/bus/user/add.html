@@ -13,7 +13,7 @@
         <div th:replace="layout/topHeader :: topHeader"></div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>基础信息管理</h2>
+                <h2>添加普通用户</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a th:href="${homeUrl}">首页</a>
@@ -22,7 +22,7 @@
                         <a th:href="${userUrl}">普通用户管理</a>
                     </li>
                     <li class="active">
-                        <strong>普通用户添加</strong>
+                        <strong>添加普通用户</strong>
                     </li>
                 </ol>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>普通用户添加</h5>
+                            <h5>创建新用户</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -45,25 +45,25 @@
                         <div class="ibox-content" th:with="actionUrl=${'/admin/user/general/add'}">
                             <form id="addForm" method="post" class="form-horizontal" th:action="${actionUrl}">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">普通用户名</label>
+                                    <label class="col-sm-3 control-label">真实姓名</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="userName" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">普通用户登录名</label>
+                                    <label class="col-sm-3 control-label">用户名</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="userAccount" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">普通用户密码</label>
+                                    <label class="col-sm-3 control-label">密码</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="userPassword" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">部门科室</label>
+                                    <label class="col-sm-3 control-label">单位</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" id="departmentId" name="departmentId" placeholder="请选择部门科室">
                                             <option  th:each="department:${departments}" th:value="${department.departmentId}" th:text="${department.departmentName}"></option>

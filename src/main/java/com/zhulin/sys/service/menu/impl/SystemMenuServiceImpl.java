@@ -11,12 +11,12 @@ import com.zhulin.sys.mapper.menu.SystemMenuMapper;
 import com.zhulin.sys.mapper.permission.SystemPermissionMapper;
 import com.zhulin.sys.mapper.role.SystemRoleMapper;
 import com.zhulin.sys.service.menu.SystemMenuServiceI;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +27,11 @@ import java.util.Map;
 @Service
 public class SystemMenuServiceImpl implements SystemMenuServiceI {
 
-    @Autowired
+    @Resource
     private SystemMenuMapper systemMenuMapper;
-    @Autowired
+    @Resource
     private SystemRoleMapper systemRoleMapper;
-    @Autowired
+    @Resource
     private SystemPermissionMapper systemPermissionMapper;
 
     @MethodRolePermission(group = "menu", name = "菜单删除", value = "menu:md", groupName = "菜单组")
@@ -486,5 +486,111 @@ public class SystemMenuServiceImpl implements SystemMenuServiceI {
         map.put(noParentMenuMapKey, noParentMenus);
 
         return map;
+    }
+
+    /**
+     * 追加系统新添加的菜单,需要与系统现在的菜单对比
+     * @param menus 系统的所有菜单,包含原来的和新添加的
+     * @param roles 系统的所有角色,包含原来的和新添加的
+     */
+    @Transactional
+    @Override
+    public boolean appendSystemMenuAndRoleAndPermission(List<Menu> menus, List<ClassRole> roles) {
+        // 1. 筛选出新扫描的菜单,与数据库菜单不一样的菜单
+        List<Menu> dbMenus = systemMenuMapper.selectAllChildMenus();
+
+        // 需要新添加的菜单
+        List<Menu> newMenus = new ArrayList<>();
+
+        for (Menu menu : menus) {
+            if (!dbMenus.contains(menu)) {
+                menu.setMenuId(PrimaryKeyUtil.uuidPrimaryKey());
+
+                newMenus.add(menu);
+            }
+        }
+
+        // 2. 筛选出新扫描的角色,与数据库角色不一样的角色
+        List<ClassRole> dbRoles = systemRoleMapper.selectDBAllRoleRecords();
+
+        // 新的角色权限关联
+        List<RolePermission> rolePermissions = new ArrayList<>();
+        // 新的权限
+        List<MethodPermission> methodPermissions = new ArrayList<>();
+        // 新的角色菜单
+        List<SystemRoleMenu> roleMenus = new ArrayList<>();
+
+        // 需要新添加的角色
+        List<ClassRole> newRoles = new ArrayList<>();
+
+        for (ClassRole role : roles) {
+            if (!dbRoles.contains(role)) {
+                String roleId = PrimaryKeyUtil.uuidPrimaryKey();
+
+                role.setRoleId(roleId);
+
+                List<MethodPermission> tmpPermissions = role.getMethodPermissions();
+
+                // 权限
+                for (MethodPermission permission : tmpPermissions) {
+                    String permissionId = PrimaryKeyUtil.uuidPrimaryKey();
+
+                    permission.setPermissionId(permissionId);
+
+                    methodPermissions.add(permission);
+
+                    // 角色权限
+                    RolePermission rolePermission = new RolePermission();
+
+                    rolePermission.setRoleId(roleId);
+                    rolePermission.setPermissionId(permissionId);
+
+                    rolePermissions.add(rolePermission);
+                }
+
+                // 角色菜单
+                SystemRoleMenu roleMenu = new SystemRoleMenu();
+                roleMenu.setRoleId(roleId);
+
+                for (Menu menu : newMenus) {
+                    if (menu.getMenuURL().equals(role.getMenuValue())) {
+                        roleMenu.setMenuId(menu.getMenuId());
+                    }
+                }
+
+                if (!Strings.isNullOrEmpty(roleMenu.getMenuId())) {
+                    roleMenus.add(roleMenu);
+                }
+
+                newRoles.add(role);
+            }
+        }
+
+        if (!newMenus.isEmpty()) {
+            // 添加新菜单
+            int insertNewMenuNumber = systemMenuMapper.insertNewMenuToMenuTable(newMenus);
+        }
+
+        if (!newRoles.isEmpty()) {
+            // 添加新角色
+            int insertNewRoleNumber = systemRoleMapper.insertNewRolesToRoleTable(newRoles);
+        }
+
+        if (!methodPermissions.isEmpty()) {
+            // 添加新权限
+            int insertNewPermissionNumber = systemPermissionMapper.insertNewPermissionsToPermissionTable(methodPermissions);
+        }
+
+        if (!rolePermissions.isEmpty()) {
+            // 添加新角色权限关系
+            int insertRolePermissionNumber = systemRoleMapper.insertNewRolePermissionsToRolePermissionTable(rolePermissions);
+        }
+
+        if (!roleMenus.isEmpty()) {
+            // 添加新角色菜单关系
+            int insertRoleMenuNumber = systemRoleMapper.insertBatchRoleMenu(roleMenus);
+        }
+
+        return true;
     }
 }

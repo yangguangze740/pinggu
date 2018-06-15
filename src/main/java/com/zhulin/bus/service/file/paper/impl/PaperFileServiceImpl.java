@@ -12,13 +12,14 @@ import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @ClassRolePermission(group = "paperFile", name = "试卷文件管理", value = "paperFile:m", menuValue = "/admin/paperFile")
 public class PaperFileServiceImpl implements PaperFileServiceI{
 
-    @Autowired
+    @Resource
     private PaperFileMapper paperFileMapper;
 
     @MethodRolePermission(group = "paperFile", name = "试卷文件查看", value = "paperFile:mr", groupName = "试卷文件组")

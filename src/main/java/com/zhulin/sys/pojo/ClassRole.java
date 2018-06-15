@@ -85,4 +85,15 @@ public class ClassRole {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        ClassRole role = (ClassRole) obj;
+
+        if (this.getRoleId() == null || role.getRoleId() == null) {
+            return this.getValue().equals(role.getValue());
+        }
+
+        return this.getRoleId().equals(role.getRoleId());
+    }
 }

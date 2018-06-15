@@ -10,13 +10,14 @@ import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @ClassRolePermission(group = "file", name = "文件管理", value = "file:m", menuValue = "/admin/raterFile")
 @Service
 public class RaterFileServiceImpl implements RaterFileServiceI {
 
-    @Autowired
+    @Resource
     private RaterFileMapperI raterFileMapperI;
 
     @MethodRolePermission(group = "rater", name = "自评问件查看", value = "rater:mr", groupName = "自评文件组")
