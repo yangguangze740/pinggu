@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +27,13 @@ import java.util.Map;
 @RequestMapping("/bi/typeNumber")
 public class TypeNumberController {
 
-    @Autowired
+    @Resource
     private TypeNumberServiceI typeNumberServiceI;
 
-    @Autowired
+    @Resource
     private DepartmentServiceI departmentServiceI;
 
-    @Autowired
+    @Resource
     private TypeServiceI typeServiceI;
 
     @RequestMapping(value = "", method = RequestMethod.GET)

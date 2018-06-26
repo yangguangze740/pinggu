@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/bi/support")
 public class DepartmentSupportFileBiController {
 
-    @Autowired
+    @Resource
     private DepartmentSupportFileBiServiceI supportBiService;
-    @Autowired
-    private DepartmentServiceI departmentService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(){

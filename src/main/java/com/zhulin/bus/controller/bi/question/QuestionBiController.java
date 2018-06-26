@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -26,7 +27,7 @@ import java.util.*;
 @RequestMapping("/bi/question")
 public class QuestionBiController extends ArcController<QuestionNumber> {
 
-    @Autowired
+    @Resource
     private QuestionBiServiceI questionBiServiceI;
 
     @Override

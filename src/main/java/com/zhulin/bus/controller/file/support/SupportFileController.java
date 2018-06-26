@@ -14,12 +14,12 @@ import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -32,53 +32,45 @@ import java.util.Map;
 @ClassMenuURL(value = "/admin/supportFile", name = "支撑文件管理", group = "file", groupName = "文件管理")
 public class SupportFileController extends ArcController<SupportFile>{
 
-    @Autowired
+    @Resource
     private SupportFileServiceI supportFileServiceI;
-
-    @Autowired
+    @Resource
     private DepartmentServiceI departmentServiceI;
-
-    @Autowired
+    @Resource
     private GeneralUserServiceI generalUserServiceI;
-
-    @Autowired
+    @Resource
     private PointServiceI pointServiceI;
-
-    @Autowired
+    @Resource
     private DutyDepartmentServiceI dutyDepartmentServiceI;
-
-    @Autowired
+    @Resource
     private LeadServiceI leadServiceI;
-
-    @Autowired
+    @Resource
     private ElementServiceI elementServiceI;
-
-    @Autowired
+    @Resource
     private ProjectServiceI projectServiceI;
-
-    @Autowired
+    @Resource
     private PointServiceI pointService;
 
     @Override
     @RequestMapping(value = "")
     public String list(SupportFile supportFile, HttpServletRequest request, Model model) {
         List<SupportFile> supportFiles = supportFileServiceI.appReadList(supportFile);
-        List<Department> departments = departmentServiceI.appReadList(new Department());
+//        List<Department> departments = departmentServiceI.appReadList(new Department());
         List<Point> points = pointServiceI.appReadList(new Point());
-        List<DutyDepartment> dutyDepartments = dutyDepartmentServiceI.appReadList(new DutyDepartment());
-        List<Lead> leads = leadServiceI.appReadList(new Lead());
+//        List<DutyDepartment> dutyDepartments = dutyDepartmentServiceI.appReadList(new DutyDepartment());
+//        List<Lead> leads = leadServiceI.appReadList(new Lead());
         List<Element> elements = elementServiceI.appReadList(new Element());
         List<Project> projects = projectServiceI.appReadList(new Project());
-        List<User> users = generalUserServiceI.appReadList(new User());
+//        List<User> users = generalUserServiceI.appReadList(new User());
 
         model.addAttribute("supportFiles", supportFiles);
-        model.addAttribute("departments", departments);
+//        model.addAttribute("departments", departments);
         model.addAttribute("points", points);
-        model.addAttribute("dutyDepartments", dutyDepartments);
-        model.addAttribute("leads", leads);
+//        model.addAttribute("dutyDepartments", dutyDepartments);
+//        model.addAttribute("leads", leads);
         model.addAttribute("elements", elements);
         model.addAttribute("projects", projects);
-        model.addAttribute("users", users);
+//        model.addAttribute("users", users);
 
         return "bus/file/support/index";
     }

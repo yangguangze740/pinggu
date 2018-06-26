@@ -27,7 +27,19 @@ public interface SupportFileMapper extends ArcMapper<SupportFile>{
             @Result(column = "supportFilePath", property = "supportFilePath"),
             @Result(column = "supportFileRemark", property = "supportFileRemark"),
             @Result(column = "projectId", property = "projectId"),
-            @Result(column = "elementId", property = "elementId")
+            @Result(column = "elementId", property = "elementId"),
+            @Result(column = "elementName", property = "elementName"),
+            @Result(column = "projectName", property = "projectName"),
+            @Result(column = "pointName", property = "pointName"),
+            @Result(column = "leadName", property = "leadName"),
+            @Result(column = "dutyName", property = "dutyName"),
+            @Result(column = "createUserName", property = "createUserName"),
+            @Result(column = "modifyUserName", property = "modifyUserName"),
+            @Result(column = "createUserId", property = "createUserId"),
+            @Result(column = "modifyUserId", property = "modifyUserId"),
+            @Result(column = "departmentName", property = "departmentName"),
+            @Result(column = "createTime", property = "createTime", javaType = Timestamp.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "modifyTime", property = "modifyTime", javaType = Timestamp.class, jdbcType = JdbcType.TIMESTAMP)
     })
     List<SupportFile> selectList(@Param("supportFile") SupportFile supportFile);
 

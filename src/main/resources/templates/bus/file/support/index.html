@@ -64,7 +64,9 @@
                                     <option th:each="point:${points}" th:value="${point.pointId}" th:text="${point.pointName}"></option>
                                 </select>
                             </div>
-                            <button class="btn btn-white" type="submit">查询</button>
+                            <div class="form-group">
+                                <button class="btn btn-white" type="submit">查询</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -98,25 +100,36 @@
                                         <th>责任部门</th>
                                         <th>牵头部门</th>
                                         <th>部门</th>
-                                        <th>用户</th>
+                                        <th>添加用户</th>
+                                        <th>上传时间</th>
+                                        <th>修改用户</th>
+                                        <th>最后修改时间</th>
                                         <th>文件名</th>
                                         <th>文件类型</th>
-                                        <th>上传时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="supportFile:${supportFiles}">
-                                        <td th:each="project:${projects}" th:if="${project.projectId}==${supportFile.projectId}" th:text="${project.projectName}"></td>
-                                        <td th:each="element:${elements}" th:if="${element.elementId}==${supportFile.elementId}" th:text="${element.elementName}"></td>
-                                        <td th:each="point:${points}" th:if="${point.pointId}==${supportFile.pointId}" th:text="${point.pointName}"></td>
-                                        <td th:each="dutyDepartment:${dutyDepartments}" th:if="${dutyDepartment.dutyDepartmentId}==${supportFile.dutyDepartmentId}" th:text="${dutyDepartment.dutyName}"></td>
-                                        <td th:each="lead:${leads}" th:if="${lead.leadDepartmentId}==${supportFile.leadDepartmentId}" th:text="${lead.leadName}"></td>
-                                        <td th:each="department:${departments}" th:if="${department.departmentId}==${supportFile.departmentId}" th:text="${department.departmentName}"></td>
-                                        <td th:each="user:${users}" th:if="${user.userId}==${supportFile.userId}" th:text="${user.userName}"></td>
+                                        <!--<td th:each="project:${projects}" th:if="${project.projectId}==${supportFile.projectId}" th:text="${project.projectName}"></td>-->
+                                        <!--<td th:each="element:${elements}" th:if="${element.elementId}==${supportFile.elementId}" th:text="${element.elementName}"></td>-->
+                                        <!--<td th:each="point:${points}" th:if="${point.pointId}==${supportFile.pointId}" th:text="${point.pointName}"></td>-->
+                                        <!--<td th:each="dutyDepartment:${dutyDepartments}" th:if="${dutyDepartment.dutyDepartmentId}==${supportFile.dutyDepartmentId}" th:text="${dutyDepartment.dutyName}"></td>-->
+                                        <!--<td th:each="lead:${leads}" th:if="${lead.leadDepartmentId}==${supportFile.leadDepartmentId}" th:text="${lead.leadName}"></td>-->
+                                        <!--<td th:each="department:${departments}" th:if="${department.departmentId}==${supportFile.departmentId}" th:text="${department.departmentName}"></td>-->
+                                        <!--<td th:each="user:${users}" th:if="${user.userId}==${supportFile.userId}" th:text="${user.userName}"></td>-->
+                                        <td th:text="${supportFile.projectName}"></td>
+                                        <td th:text="${supportFile.elementName}"></td>
+                                        <td th:text="${supportFile.pointName}"></td>
+                                        <td th:text="${supportFile.dutyName}"></td>
+                                        <td th:text="${supportFile.leadName}"></td>
+                                        <td th:text="${supportFile.departmentName}"></td>
+                                        <td th:text="${supportFile.createUserName}"></td>
+                                        <td th:text="${supportFile.createTime}"></td>
+                                        <td th:text="${supportFile.modifyUserName}"></td>
+                                        <td th:text="${supportFile.modifyTime}"></td>
                                         <td th:text="${supportFile.supportFileName}"></td>
                                         <td th:text="${supportFile.fileTypeFlag}"></td>
-                                        <td th:text="${supportFile.supportFileCreateTime}"></td>
                                         <td>
                                             <button type="button" th:fileName="${supportFile.supportFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${supportFile.fileTypeFlag} eq 'pdf'" th:id="${supportFile.supportFileId}">预览</button>
                                             <a th:href="${'/admin/supportFile/downLoad?c=' + supportFile.supportFileId}">
@@ -138,16 +151,18 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>部门</th>
                                         <th>审核项目</th>
                                         <th>审核要素</th>
                                         <th>审核要点</th>
                                         <th>责任部门</th>
                                         <th>牵头部门</th>
-                                        <th>用户</th>
+                                        <th>部门</th>
+                                        <th>添加用户</th>
+                                        <th>上传时间</th>
+                                        <th>修改用户</th>
+                                        <th>最后修改时间</th>
                                         <th>文件名</th>
                                         <th>文件类型</th>
-                                        <th>上传时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </tfoot>
@@ -156,9 +171,6 @@
 
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-
                 </div>
             </div>
         </div>
