@@ -86,21 +86,29 @@
                                     <tr>
                                         <th>部门</th>
                                         <th>类别</th>
-                                        <th>用户</th>
                                         <th>文件名</th>
                                         <th>文件类型</th>
+                                        <th>上传用户</th>
                                         <th>上传时间</th>
+                                        <th>修改用户</th>
+                                        <th>最后修改时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="raterFile:${raterFiles}">
-                                        <td th:each="department:${departments}" th:if="${department.departmentId}==${raterFile.departmentId}" th:text="${department.departmentName}"></td>
-                                        <td th:each="type:${types}" th:if="${type.typeId}==${raterFile.departmentTypeId}" th:text="${type.typeName}"></td>
-                                        <td th:each="user:${users}" th:if="${user.userId}==${raterFile.userId}" th:text="${user.userName}"></td>
+                                        <!--<td th:each="department:${departments}" th:if="${department.departmentId}==${raterFile.departmentId}" th:text="${department.departmentName}"></td>-->
+                                        <!--<td th:each="type:${types}" th:if="${type.typeId}==${raterFile.departmentTypeId}" th:text="${type.typeName}"></td>-->
+                                        <!--<td th:each="user:${users}" th:if="${user.userId}==${raterFile.userId}" th:text="${user.userName}"></td>-->
+
+                                        <td th:text="${raterFile.departmentName}"></td>
+                                        <td th:text="${raterFile.departmentTypeName}"></td>
                                         <td th:text="${raterFile.raterFileName}"></td>
                                         <td th:text="${raterFile.fileTypeFlag}"></td>
-                                        <td th:text="${raterFile.raterFileCreateTime}"></td>
+                                        <td th:text="${raterFile.createTime}"></td>
+                                        <td th:text="${raterFile.createUserName}"></td>
+                                        <td th:text="${raterFile.modifyTime}"></td>
+                                        <td th:text="${raterFile.modifyUserName}"></td>
                                         <td>
                                             <button type="button" th:fileName="${raterFile.raterFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${raterFile.fileTypeFlag} eq 'pdf'" th:id="${raterFile.raterFileId}">预览</button>
                                             <a th:href="${'/admin/raterFile/downLoad?c=' + raterFile.raterFileId}">
@@ -124,10 +132,12 @@
                                     <tr>
                                         <th>部门</th>
                                         <th>类别</th>
-                                        <th>用户</th>
                                         <th>文件名</th>
                                         <th>文件类型</th>
+                                        <th>上传用户</th>
                                         <th>上传时间</th>
+                                        <th>修改用户</th>
+                                        <th>最后修改时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </tfoot>

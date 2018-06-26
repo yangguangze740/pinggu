@@ -26,7 +26,13 @@ public interface RaterFileMapperI extends ArcMapper<RaterFile>{
             @Result(column = "fileTypeFlag", property = "fileTypeFlag"),
             @Result(column = "raterFileCreateTime", property = "raterFileCreateTime", jdbcType = JdbcType.TIMESTAMP, javaType = Timestamp.class),
             @Result(column = "departmentTypeId", property = "departmentTypeId"),
-            @Result(column = "raterFileRemark", property = "raterFileRemark")
+            @Result(column = "raterFileRemark", property = "raterFileRemark"),
+            @Result(column = "createUserName", property = "createUserName"),
+            @Result(column = "modifyUserName", property = "modifyUserName"),
+            @Result(column = "departmentName", property = "departmentName"),
+            @Result(column = "typeName", property = "departmentTypeName"),
+            @Result(column = "createTime", property = "createTime", jdbcType = JdbcType.TIMESTAMP, javaType = Timestamp.class),
+            @Result(column = "modifyTime", property = "modifyTime", jdbcType = JdbcType.TIMESTAMP, javaType = Timestamp.class)
     })
     List<RaterFile> selectList(@Param("raterFile") RaterFile raterFile);
 

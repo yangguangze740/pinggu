@@ -10,14 +10,12 @@ import com.zhulin.common.def.Constants;
 import com.zhulin.framework.controller.ArcController;
 import com.zhulin.sys.pojo.SystemUser;
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -30,30 +28,32 @@ import java.util.Map;
 @ClassMenuURL(value = "/admin/raterFile", group = "file", name = "评审文件管理", groupName = "文件管理")
 public class RaterFileController extends ArcController<RaterFile>{
 
-    @Autowired
+    @Resource
     private RaterFileServiceI raterFileServiceI;
 
-    @Autowired
+    @Resource
     private DepartmentServiceI departmentServiceI;
 
-    @Autowired
+    @Resource
     private TypeServiceI typeServiceI;
 
-    @Autowired
+    @Resource
     private GeneralUserServiceImpl generalUserService;
 
     @Override
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(RaterFile raterFile, HttpServletRequest request, Model model) {
+
         List<RaterFile> raterFiles = raterFileServiceI.appReadList(raterFile);
+
         List<Department> departments = departmentServiceI.appReadList(new Department());
         List<Type> types = typeServiceI.appReadList(new Type());
-        List<User> users = generalUserService.appReadList(new User());
+//        List<User> users = generalUserService.appReadList(new User());
 
         model.addAttribute("raterFiles", raterFiles);
         model.addAttribute("departments", departments);
         model.addAttribute("types", types);
-        model.addAttribute("users", users);
+//        model.addAttribute("users", users);
 
         return "bus/file/rater/index";
     }

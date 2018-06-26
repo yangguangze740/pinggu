@@ -31,7 +31,7 @@ public class SupportFileProvider {
         builder.append(" LEFT JOIN pinggu_duty_department DD ON PSF.dutyDepartmentId = DD.dutyDepartmentId");
         builder.append(" LEFT JOIN pinggu_lead_department LD ON PSF.leadDepartmentId = LD.leadDepartmentId");
         builder.append(" LEFT JOIN pinggu_department D ON PSF.departmentId = D.departmentId");
-        builder.append(" WHERE PSF.deleteFlag = 0");
+        builder.append(" WHERE PSF.deleteFlag = 0 ORDER BY RP.projectSort, RE.elementSort, REP.pointSort");
 
         String projectId = supportFile.getProjectId();
         if(!Strings.isNullOrEmpty(projectId)){
