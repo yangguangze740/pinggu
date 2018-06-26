@@ -20,6 +20,60 @@ public class PaperFile {
     private String disciplineName;
     private String collegeName;
     private String UserName;
+    private String createUserName;
+    private String modifyUserName;
+    private String createUserId;
+    private String modifyUserId;
+    private Timestamp createTime;
+    private Timestamp modifyTime;
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getModifyUserName() {
+        return modifyUserName;
+    }
+
+    public void setModifyUserName(String modifyUserName) {
+        this.modifyUserName = modifyUserName;
+    }
+
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public String getModifyUserId() {
+        return modifyUserId;
+    }
+
+    public void setModifyUserId(String modifyUserId) {
+        this.modifyUserId = modifyUserId;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Timestamp modifyTime) {
+        this.modifyTime = modifyTime;
+    }
 
     public String getUserName() {
         return UserName;

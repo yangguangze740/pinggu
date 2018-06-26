@@ -34,7 +34,11 @@ public interface PaperFileMapper extends ArcMapper<PaperFile>{
             @Result(column = "subjectName", property = "subjectName"),
             @Result(column = "disciplineName", property = "disciplineName"),
             @Result(column = "collegeName", property = "collegeName"),
-            @Result(column = "userName", property = "userName")
+            @Result(column = "userName", property = "userName"),
+            @Result(column = "createUserName", property = "createUserName"),
+            @Result(column = "modifyUserName", property = "modifyUserName"),
+            @Result(column = "createTime", property = "createTime", jdbcType = JdbcType.TIMESTAMP, javaType = Timestamp.class),
+            @Result(column = "modifyTime", property = "modifyTime", jdbcType = JdbcType.TIMESTAMP, javaType = Timestamp.class)
     })
     List<PaperFile> selectList(@Param("paperFile") PaperFile paperFile);
 

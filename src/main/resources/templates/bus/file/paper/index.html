@@ -104,6 +104,8 @@
                                         <th>文档类型</th>
                                         <th>上传时间</th>
                                         <th>上传者</th>
+                                        <th>修改用户</th>
+                                        <th>最后修改时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -115,8 +117,10 @@
                                         <td th:text="${paperFile.paperName}"></td>
                                         <td th:text="${paperFile.paperFileName}"></td>
                                         <td th:text="${paperFile.fileTypeFlag}"></td>
-                                        <td th:text="${paperFile.paperFileCreateTime}"></td>
-                                        <td th:text="${paperFile.UserName}"></td>
+                                        <td th:text="${paperFile.createTime}"></td>
+                                        <td th:text="${paperFile.createUserName}"></td>
+                                        <td th:text="${paperFile.modifyTime}"></td>
+                                        <td th:text="${paperFile.modifyUserName}"></td>
                                         <td>
                                             <button type="button" th:fileName="${paperFile.paperFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${paperFile.fileTypeFlag} eq 'pdf'" th:id="${paperFile.paperFileId}">预览</button>
                                             <a th:href="${'/admin/paperFile/downLoad?c=' + paperFile.paperFileId}">
@@ -146,6 +150,8 @@
                                         <th>文档类型</th>
                                         <th>上传时间</th>
                                         <th>上传者</th>
+                                        <th>修改用户</th>
+                                        <th>最后修改时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </tfoot>

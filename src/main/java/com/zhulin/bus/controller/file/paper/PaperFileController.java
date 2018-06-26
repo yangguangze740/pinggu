@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -29,25 +30,22 @@ import java.util.Map;
 @ClassMenuURL(value = "/admin/paperFile", group = "paperFile", name = "试卷文件管理", groupName = "试卷文件管理")
 public class PaperFileController extends ArcController<PaperFile>{
 
-    @Autowired
+    @Resource
     private PaperFileServiceI paperFileServiceI;
-
-    @Autowired
+    @Resource
     private CollegeServiceI collegeServiceI;
-
-    @Autowired
+    @Resource
     private DisciplineServiceI disciplineServiceI;
-
-    @Autowired
+    @Resource
     private SubjectServiceI subjectServiceI;
-
-    @Autowired
+    @Resource
     private PaperServiceI paperServiceI;
 
     @Override
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(PaperFile paperFile, HttpServletRequest request, Model model) {
         List<PaperFile> paperFiles = paperFileServiceI.appReadList(paperFile);
+
         List<College> colleges = collegeServiceI.appReadList(new College());
         List<Discipline> disciplines = disciplineServiceI.appReadList(new Discipline());
         List<Subject> subjects = subjectServiceI.appReadList(new Subject());
