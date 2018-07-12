@@ -105,10 +105,10 @@
                                         <td th:text="${raterFile.departmentTypeName}"></td>
                                         <td th:text="${raterFile.raterFileName}"></td>
                                         <td th:text="${raterFile.fileTypeFlag}"></td>
-                                        <td th:text="${raterFile.createTime}"></td>
                                         <td th:text="${raterFile.createUserName}"></td>
-                                        <td th:text="${raterFile.modifyTime}"></td>
+                                        <td th:text="${raterFile.createTime}"></td>
                                         <td th:text="${raterFile.modifyUserName}"></td>
+                                        <td th:text="${raterFile.modifyTime}"></td>
                                         <td>
                                             <button type="button" th:fileName="${raterFile.raterFileName}" class="pdfPreview btn btn-m btn-info" data-toggle="modal" data-target="#pdfPreviewModal" th:if="${raterFile.fileTypeFlag} eq 'pdf'" th:id="${raterFile.raterFileId}">预览</button>
                                             <a th:href="${'/admin/raterFile/downLoad?c=' + raterFile.raterFileId}">
