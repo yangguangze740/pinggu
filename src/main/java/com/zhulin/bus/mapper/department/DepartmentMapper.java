@@ -3,6 +3,7 @@ package com.zhulin.bus.mapper.department;
 import com.zhulin.bus.bean.Department;
 import com.zhulin.bus.bean.DepartmentProblem;
 import com.zhulin.bus.bean.DepartmentType;
+import com.zhulin.bus.bean.Type;
 import com.zhulin.bus.bean.bi.DepartmentNumber;
 import com.zhulin.bus.mapper.department.provider.DepartmentInsertProvider;
 import com.zhulin.framework.mapper.ArcMapper;
@@ -63,4 +64,25 @@ public interface DepartmentMapper extends ArcMapper<Department>{
             @Result(column = "number", property = "number")
     })
     List<DepartmentNumber> selectDepartmentList();
+
+    @Select("SELECT departmentId, departmentName FROM pinggu_department WHERE departmentId IN (SELECT departmentId FROM pinggu_rater_file_user_department WHERE fileUserId = #{value}) AND deleteFlag=0")
+    @Results({
+            @Result(id = true, column = "departmentId", property = "departmentId"),
+            @Result(column = "departmentName", property = "departmentName")
+    })
+    List<Department> selectHaveList(String id);
+
+    @Select("SELECT departmentId, departmentName FROM pinggu_department WHERE departmentId IN (SELECT departmentId FROM pinggu_support_file_user_department WHERE fileUserId = #{value}) AND deleteFlag=0")
+    @Results({
+            @Result(id = true, column = "departmentId", property = "departmentId"),
+            @Result(column = "departmentName", property = "departmentName")
+    })
+    List<Department> selectHaveSupportDepartments(String id);
+
+    @Select("SELECT typeId, typeName FROM pinggu_type WHERE typeId IN (SELECT typeId FROM pinggu_rater_file_user_type WHERE fileUserId = #{value}) AND deleteFlag=0")
+    @Results({
+            @Result(id = true, column = "typeId", property = "typeId"),
+            @Result(column = "typeName", property = "typeName")
+    })
+    List<Type> selectHaveTypes(String id);
 }

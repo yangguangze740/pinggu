@@ -119,8 +119,8 @@ public class DepartmentController extends ArcController<Department>{
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String saveAdd(Department department, HttpServletRequest request, Model model, RedirectAttributes message) {
         SystemUser user = (SystemUser)request.getSession().getAttribute(Constants.LOGIN_USER);
-        department.setAdminId(user.getUserId());
 
+        department.setAdminId(user.getUserId());
 
         if (department.getTypeIds()==null || department.getTypeIds().isEmpty()){
             message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);

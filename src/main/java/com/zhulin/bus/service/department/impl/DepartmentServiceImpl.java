@@ -166,4 +166,19 @@ public class DepartmentServiceImpl implements DepartmentServiceI{
     public List<DepartmentNumber> selectDepartmentFileNumber() {
         return departmentMapper.selectDepartmentList();
     }
+
+    @Override
+    public List<Department> readHaveDepartments(String id) {
+        return departmentMapper.selectHaveList(id);
+    }
+
+    @Override
+    public List<Department> readHaveSupportDepartments(String id) {
+        return departmentMapper.selectHaveSupportDepartments(id);
+    }
+
+    @Override
+    public List<Type> readHaveTypes(String id) {
+        return departmentMapper.selectHaveTypes(id);
+    }
 }

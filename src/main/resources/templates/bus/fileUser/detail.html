@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head"></head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="layout/leftNav :: leftNav"></div>
+
+    <div id="page-wrapper" class="gray-bg" th:with="homeUrl=${'/admin/raterFile'}, typeUrl=${'/admin/file/user'}">
+        <div th:replace="layout/topHeader :: topHeader"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>系统配置管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a th:href="${homeUrl}">首页</a>
+                    </li>
+                    <li>
+                        <a th:href="${typeUrl}">用户管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>用户列表</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户详情</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content" th:with="actionUrl=${'/admin/department/edit'}">
+                            <form id="editForm" method="post" class="form-horizontal" th:action="${actionUrl}">
+                                <input type="hidden" name="fileUserId" th:value="${fileUser.fileUserId}">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">用户名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="fileUserName" th:value="${fileUser.fileUserName}"readonly/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">真名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="trueName" th:value="${fileUser.trueName}"readonly/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">密码</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="password" th:value="${fileUser.password}"readonly/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">已有评审文件部门</label>
+                                    <div class="col-sm-8">
+                                        <div>
+                                            <ul class="tag-list" style="padding: 0">
+                                                <li th:each="haveDepartment:${haveDepartments}">
+                                                    <a th:text="${haveDepartment.departmentName}"></a>
+                                                    <input type="hidden" name="oldPermissionIds" th:value="${haveDepartment.departmentId}" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">已有支撑文件部门</label>
+                                    <div class="col-sm-8">
+                                        <div>
+                                            <ul class="tag-list" style="padding: 0">
+                                                <li th:each="haveSupportDepartment:${haveSupportDepartments}">
+                                                    <a th:text="${haveSupportDepartment.departmentName}"></a>
+                                                    <input type="hidden" name="oldPermissionIds" th:value="${haveSupportDepartment.departmentId}" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">已有评审文件文件类别</label>
+                                    <div class="col-sm-8">
+                                        <div>
+                                            <ul class="tag-list" style="padding: 0">
+                                                <li th:each="haveType:${haveTypes}">
+                                                    <a th:text="${haveType.typeName}"></a>
+                                                    <input type="hidden" name="oldPermissionIds" th:value="${haveType.typeId}" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <a th:href="${typeUrl}">
+                                            <button class="btn btn-white" type="button">返回</button>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="layout/bottomFooter :: bottomFooter"></div>
+
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script th:src="@{/template/js/jquery-3.1.1.min.js}"></script>
+<script th:src="@{/template/js/bootstrap.min.js}"></script>
+<script th:src="@{/template/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/template/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/template/js/plugins/validate/jquery.validate.min.js}"></script>
+
+<script th:src="@{/template/js/plugins/dataTables/datatables.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/template/js/inspinia.js}"></script>
+<script th:src="@{/template/js/plugins/pace/pace.min.js}"></script>
+
+<script th:inline="javascript">
+    $(function() {
+        // 前台验证
+        $("#editForm").validate({
+            rules: {
+                departmentName: {
+                    required: true
+                }
+            },
+            messages: {
+                departmentName: {
+                    required: "请填写部门名称"
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>
