@@ -6,17 +6,21 @@ import com.zhulin.bus.bean.FileType;
 import com.zhulin.bus.bean.FileUser;
 import com.zhulin.bus.mapper.fileuser.FileUserMapper;
 import com.zhulin.bus.service.fileuser.FileUserServiceI;
+import com.zhulin.common.annotation.permission.ClassRolePermission;
+import com.zhulin.common.annotation.permission.MethodRolePermission;
 import com.zhulin.common.db.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 @Service
+@ClassRolePermission(group = "fileuser", name = "文件阅览用户管理", value = "fileuser:m", menuValue = "/admin/file/user")
 public class FileUserServiceImpl implements FileUserServiceI{
 
-    @Autowired
+    @Resource
     private FileUserMapper fileUserMapper;
 
     @Override
@@ -25,21 +29,27 @@ public class FileUserServiceImpl implements FileUserServiceI{
         return fileUserMapper.selectList(fileUser );
     }
 
+    @MethodRolePermission(group = "fileuser", name = "阅览用户详细", value = "fileuser:md", groupName = "阅览用户组")
     @Override
     public FileUser appReadDetail(String id) {
         return fileUserMapper.selectDetail(id);
     }
 
+    @MethodRolePermission(group = "fileuser", name = "阅览用户更新", value = "fileuser:mu", groupName = "阅览用户组")
+    @Transactional
     @Override
     public boolean appUpdate(FileUser fileUser) {
         return false;
     }
 
+    @MethodRolePermission(group = "fileuser", name = "阅览用户删除", value = "fileuser:mde", groupName = "阅览用户组")
+    @Transactional
     @Override
     public boolean appDelete(String id) {
         return fileUserMapper.delete(id);
     }
 
+    @MethodRolePermission(group = "fileuser", name = "阅览用户添加", value = "fileuser:md", groupName = "阅览用户组")
     @Transactional
     @Override
     public boolean appCreate(FileUser fileUser) {
