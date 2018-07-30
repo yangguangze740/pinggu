@@ -58,49 +58,68 @@ public class FileUserServiceImpl implements FileUserServiceI{
         fileUser.setFileUserId(fileUserId);
 
         List<FileDepartment> fileDepartments = new ArrayList<>();
-        List<String> departmentIds = fileUser.getDepartmentIds();
 
-        for(String departmentId : departmentIds){
+        if (null != fileUser.getDepartmentIds()) {
+            List<String> departmentIds = fileUser.getDepartmentIds();
 
-            FileDepartment fileDepartment = new FileDepartment();
+            for(String departmentId : departmentIds){
 
-            fileDepartment.setDepartmentId(departmentId);
-            fileDepartment.setFileUserId(fileUserId);
+                FileDepartment fileDepartment = new FileDepartment();
 
-            fileDepartments.add(fileDepartment);
+                fileDepartment.setDepartmentId(departmentId);
+                fileDepartment.setFileUserId(fileUserId);
+
+                fileDepartments.add(fileDepartment);
+            }
         }
 
+
         List<FileDepartment> supportFileDepartments = new ArrayList<>();
-        List<String> supportDepartmentIds = fileUser.getSupportDepartmentIds();
 
-        for(String supportDepartmentId : supportDepartmentIds){
+        if (null != fileUser.getSupportDepartmentIds()) {
+            List<String> supportDepartmentIds = fileUser.getSupportDepartmentIds();
 
-            FileDepartment fileDepartment =  new FileDepartment();
+            for(String supportDepartmentId : supportDepartmentIds){
 
-            fileDepartment.setSupportDepartmentId(supportDepartmentId);
-            fileDepartment.setFileUserId(fileUserId);
+                FileDepartment fileDepartment =  new FileDepartment();
 
-            supportFileDepartments.add(fileDepartment);
+                fileDepartment.setSupportDepartmentId(supportDepartmentId);
+                fileDepartment.setFileUserId(fileUserId);
+
+                supportFileDepartments.add(fileDepartment);
+            }
         }
 
         List<FileType> fileTypes = new ArrayList<>();
-        List<String> typeIds = fileUser.getTypeIds();
 
-        for (String typeId : typeIds) {
+        if (null != fileUser.getTypeIds()) {
+            List<String> typeIds = fileUser.getTypeIds();
 
-            FileType fileType = new FileType();
+            for (String typeId : typeIds) {
 
-            fileType.setFileUserId(fileUserId);
-            fileType.setTypeId(typeId);
+                FileType fileType = new FileType();
 
-            fileTypes.add(fileType);
+                fileType.setFileUserId(fileUserId);
+                fileType.setTypeId(typeId);
+
+                fileTypes.add(fileType);
+            }
         }
 
         int insertFileNum = fileUserMapper.insertFileUser(fileUser);
-        int insertFileDepartmentNum = fileUserMapper.insertRaterDepartment(fileDepartments);
-        int insertFileTypeNum = fileUserMapper.inFileType(fileTypes);
-        int insertSupportDepartmentNum =  fileUserMapper.insertSupportDepartment(supportFileDepartments);
+        if (!fileDepartments.isEmpty()) {
+            int insertFileDepartmentNum = fileUserMapper.insertRaterDepartment(fileDepartments);
+        }
 
-        return (insertFileNum == 1) && (insertFileDepartmentNum == departmentIds.size()) && (insertFileTypeNum == typeIds.size());
+        if (!fileTypes.isEmpty()) {
+            int insertFileTypeNum = fileUserMapper.inFileType(fileTypes);
+        }
+
+        if (!supportFileDepartments.isEmpty()) {
+            int insertSupportDepartmentNum =  fileUserMapper.insertSupportDepartment(supportFileDepartments);
+        }
+
+//        return (insertFileNum == 1) && (insertFileDepartmentNum == departmentIds.size()) && (insertFileTypeNum == typeIds.size());
+        return insertFileNum == 1;
     }
 }

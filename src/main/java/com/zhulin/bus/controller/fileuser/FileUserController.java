@@ -103,26 +103,26 @@ public class FileUserController extends ArcController<FileUser>{
 
         fileUser.setCreateUserId(user.getUserId());
 
-        if (fileUser.getTypeIds() == null || fileUser.getTypeIds().isEmpty()){
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加用户失败");
-
-            return "redirect:/admin/file/user";
-        }
-
-        if (fileUser.getSupportDepartmentIds() == null || fileUser.getSupportDepartmentIds().isEmpty()){
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加用户失败");
-
-            return "redirect:/admin/file/user";
-        }
-
-        if (fileUser.getDepartmentIds() == null || fileUser.getDepartmentIds().isEmpty()){
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
-            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加用户失败");
-
-            return "redirect:/admin/file/user";
-        }
+//        if (fileUser.getTypeIds() == null || fileUser.getTypeIds().isEmpty()){
+//            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
+//            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加用户失败");
+//
+//            return "redirect:/admin/file/user";
+//        }
+//
+//        if (fileUser.getSupportDepartmentIds() == null || fileUser.getSupportDepartmentIds().isEmpty()){
+//            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
+//            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加用户失败");
+//
+//            return "redirect:/admin/file/user";
+//        }
+//
+//        if (fileUser.getDepartmentIds() == null || fileUser.getDepartmentIds().isEmpty()){
+//            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_CODE, 500);
+//            message.addFlashAttribute(Constants.REDIRECT_MESSAGE_KEY, "添加用户失败");
+//
+//            return "redirect:/admin/file/user";
+//        }
 
         boolean isAdded = fileUserService.appCreate(fileUser);
 
